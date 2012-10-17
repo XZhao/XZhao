@@ -1,0 +1,314 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{makeidx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\long\def\remove#1{}
+\newcommand{\dom}{\mbox{dom}}
+
+\newcommand{\vp}{\varphi}
+
+
+\newcommand{\coNP}{\mbox{coNP}}
+
+\newcommand{\NP}{\mbox{NP}}
+\newcommand{\DP}{\mbox {D}^P}
+
+\newcommand{\LeKl}{\mbox{$\sqcup$ }}
+\newcommand{\card}[1]{\mbox{\#}(#1)}
+
+\newcommand{\sss}{\mbox{\bf S}}
+\newcommand{\jjj}{\mbox{\bf J}}
+
+\newcommand{\QR}[1]{\mbox{$\ \mid\!\!\!\frac{#1}{\
+    \stackrel{\mbox{\scriptsize\it Q-Res}}{\ }\ }\ $}}
+\newcommand{\QUR}[1]{\mbox{$\ \mid\!\!\!\frac{#1}{\
+    \stackrel{\mbox{\scriptsize\it Q-Pos-Unit-Res}}{\ }\ }\ $}}
+%\baselineskip 0.2in
+
+
+\newcommand{\pbox}{\hbox to 6pt{\leaders\hrule width 6pt height 6pt\hfill}}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newenvironment{proof}{\parindent=0pt{\bf Proof: }}{
+   \hspace*{\fill}\hbox to 6pt{\leaders\hrule width 6pt height 6pt\hfill}\par}
+
+
+\pagestyle{plain}
+
+\begin{document}
+
+
+\title{
+}
+
+\author{
+Xishun Zhao \footnote{Corresponding author. Tel: 0086-20-84114036,
+Fax:0086-20-84110298.}
+%\thanks{This research was partially supported by the NSFC project
+%under grant number: 60970040 and a MOE project
+%under grant number: 05JJD72040122. }\\
+%Institute of Logic and Cognition,
+%\\ Sun Yat-sen
+%University\\ 510275 Guangzhou, (P.R. China)\\
+%{Email: hsszxs@mail.sysu.edu.cn}
+}
+
+
+%\authorrunning{X. Zhao, H. Kleine B\"{u}ning}
+
+
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+%%%%%%%%%%%%%%%%%%%
+
+{\bf Key words:} \\
+
+Let $Prop$ be the set of all propositional variables.
+\vskip 2mm
+
+A model
+is a triple
+${\cal S}=(S,\mu,\pi)$ such that
+\begin{itemize}
+\item $S$ is a countable set of symbols representing states.
+\item $\mu: \mathbb{N}\rightarrow S$ is a bijection.
+\item $\pi: S\rightarrow {\cal P}(Prop)$ is a mapping which induces a propositional assignment of $Prop$ for each state.
+\item In many literature, $\mu$ is just written as a sequence $s_0,s_1,\cdots,$.
+\end{itemize}
+
+
+In fact same as following definition\\
+
+A linear-time structure is a mapping $\pi:\mathbb{N}\rightarrow 2^{Prop}$, where $2^{Prop}$ is the power set of $Prop$ which is the set propositional variables. \\
+
+Given $x\in Prop$, two models $\pi_1$ and $\pi_2$. We say $\pi_1$ is an $x$-variant if for any $i\in\mathbb{N}$ we have $\pi_1(i)\setminus\{x\}=\pi_2(i)\setminus\{x\}$.
+%i.e. $\pi_1(i)$ and $\pi_2(i)$ differs at most at $y$.
+
+\begin{itemize}
+\item $\textsf{X}$ for next ( or $\bigcirc$) .
+\item $\textsf{F}$ for future, i.e., eventually holds (or $\lozenge$)
+\item $\textsf{U}$ for until
+\item $\textsf{U}^-$ for flat until, $A\mathbf{U}^-B$ implicitly means that $A$ is just a propositional formula without temporal operators.
+
+\item $\textsf{F}A$ iff $\top\mathbf{U}A$
+
+\item $\textsf{G}$ (or $\square$) for always hold in the future.
+\item $\textsf{G}A$ iff $\neg \textsf{F}\neg A$.
+\end{itemize}
+
+Satisfaction Relation
+\begin{itemize}
+\item $\pi, i\models p$, for $p\in Prop$, iff $p\in \pi(i)$
+ \item $\pi, i\models \textsf{X}A$ iff $\pi,i+1\models A$
+ \item $\pi,i\models \textsf{F}A$ iff there is $j\geq i$ such that $\pi,j\models A$
+ \item $\pi,i\models A\textsf{U} B$ iff there is $j\geq i$ such that $\pi,j\models B$ and $\pi,j'\models A$ for $i\leq j'<j$
+\item we write $\pi\models A$ if $\pi,0\models A$.
+
+\item SAT for LTL($\cdots$): determining whether a given formula $A$ in LTL$(\cdots)$ is satisfiable, i.e.,there is a linear-time structure $\pi$ such that $\pi\models A$.
+
+\end{itemize}
+
+
+
+
+
+\begin{itemize}
+\item SAT for LTL$(\textsf{X, F})$ is PSPACE-complete.
+
+\item SAT for LTL$(\textsf{U})$ is PSPACE-complete
+
+\item LTL($\textsf{F}$) is nothing but S4.3Dum (also called S4.3.1 or D)
+SAT for S4.3Dum is NP-complete by H. Ono and A. nakamura in 1980 [Studia Logic 39(4), 325-333, 1980]
+
+\item LTL($\textsf{X}$) is KDAlt$_1$. SAT for LTL$(\textsf{X})$ is studied in  P. Y. Schobbens and J.F. Raskin. [The Logic of "initially" and "next": complete axiomatization and complexity. IPL 69(5), 221-225,1999]
+\end{itemize}
+
+\begin{itemize}
+\item Prop($A)$ is the set of propositional variables occurring in $A$.
+
+\item th$(A)$, the temporal height of $A$, is the maximum number of nested temporal operators.
+
+\item LTL$^k_m(\cdots)$ denotes the class of  formulas $A\in$L$(\cdots)$ such that th$(A)\leq m$ and $A$ has at most $m$ variables.
+\item Likewise for LTL$^k(\cdots)$ and LTL$_m(\cdots)$.
+\item Example $(p\rightarrow \textsf{XF}q)\textsf{U}(\neg\textsf{X}p)\in$LTL$_2^3(\textsf{X,U,F})$
+\end{itemize}
+
+
+Model Checking Problem.
+
+\begin{itemize}
+\item A Kripke structure $T=(S, R,\epsilon)$: $S$ is a non-empty set of states; $R\subseteq S\times S$ is a {\em total} relation, i.e., for any $s_1\in S$ there is at leat one $s_2\in S$ such that $s_1Rs_2$; and $\epsilon: S\rightarrow {\cal P}(Prop)$
+\item A path in $T$ is an infinite sequence $s_0, s_1,\cdots,$ such that $s_iRs_{i+1}$ for each $i$.
+
+\item A path in $T$, together with $\epsilon$, is nothing but a linear time structure. And inversely, a linear-time structure is a (simple) Kripke structure.
+
+\item path$(T)$ is the set of all pathes in $T$.
+
+\item (Traditionally) $T\models A$ if and only if $\pi\models A$ for all $\pi\in path(T)$.
+\item (Traditionaly) $T,s\models A$ iff $\pi\models A$ {\bf for all} $\pi\in path(T)$ starting from $s$.
+
+\item (But this paper) $T,s\models A$ iff $\pi\models A$ {\bf for some} $\pi\in path(T)$ starting from $s$.
+
+\item MC(LTL$(\cdots)$) is the problem of determining whether $T,s\models A$ for a given Kripke structure $T$, a state $s\in T$ and a formula $A\in$ LTL($\cdots$).
+\end{itemize}
+
+%%ֲ
+Tiling Problem:
+
+\begin{itemize}
+\item A set of colors $C=\{c_1,\cdots, c_l\}$.
+
+\item A set of tile type $D\subseteq C^4$. each $d\in D$ has the form $(c_{up},c_{right}, c_{down},c_{left}\}$.
+
+\item A tile is a unit square with a type $d$ (left side colored by $c_{left}$, $\cdots$,). Please note that we can not rotated
+
+\item A region ${\cal R}\subseteq \mathbb{Z}^2$. My understanding, $(i,j)$ represents the grid with vertices $(i,j), (i,j+1), (i+1,j+1), (i+1,j)$.
+
+\item Two grid $(i_1,j_1)$ and $(i_2,j_2)$ are neighboring if they share an edge, that is,  if $$((i_1=i_2)\wedge (|j_1-j_2|=1)) \mbox{xor} ((j_1=j_2)\wedge |i_1-i_2|=1).$$
+
+\item A tiling for a region ${\cal R}$ is a map $t: R\rightarrow D$ such that any two neighboring tiles have matching colors on the shared edge.
+
+\item Informally, $t(i,j)=d$ means that the grid $(i,j)$ is paved by a tile with type $d$.
+
+\item TILING PROBLEM: Instance: $D$ and two colors $c_0, c_1\in C$. Query: does there exists $m$ and a tiling for the region $n\times m$ such that the bottom line of the region is colored with $c_0$, and the top line is colored with $c_1$, here $n=|D|$, i.e., the number of types in $D$. %$n\times m=\{(i,j)\mid i,j=0,\cdots,n-1\}$
+
+\item Tiling Problem is PSPACE-complete, where is the citation?
+\end{itemize}
+
+Reduction from tiling problem to MC(LTL).
+
+$D=\{d_1,\cdots, d_n\}$, $C$, $c_0$, $c_1$. Define
+$$Prop=\{lmost, rmost, end\}\cup\{x=c\mid x\in\{up, right, down, left\}, c\in C\}$$
+%
+%
+$$\begin{array}{lll}S_D&=&\{s(0), s(n+1), s(e)\}\cup\{s{(d,i)}\mid d\in D, i=1,\cdots,n\}\\
+
+R&=&\{(s(0),s(d,1))\mid d\in D\}\cup\{(s(d,n), s(n+1))\mid d\in D\}\cup\\ &&\{(s(n+1),s(e)), (s(e),s(e))\}\cup\\ && \{(s(d',i),s(d,i+1))\mid d',d\in D, i=1,\cdots,n-1\}\\
+\epsilon(s(0))&=&\{lmost\},\\ \epsilon(s(n+1))&=&\{rmost\},\\ \epsilon(s(e))&=&\{end\},\\
+\epsilon(s(d,i))&=&\{up=c_{up}, right=c_{right}, down=c_{down}, left=c_{letf}\mid \\ &&\mbox{ if }d=(c_{up}, c_{right}, c_{down}, c_{left}).
+\end{array}$$
+%
+Bottom line has color $c_0$ can be expressed as
+$$ \bigwedge_{k=1}^n \textsf{X}^k(down=c_0)$$
+Top line should have color $c_1$. %please not we do know where should be the last line,so use \textsf{F}.
+
+$$\textsf{F}\left(lmost\wedge \left(\bigwedge_{k=1}^k \textsf{X}^k(up=c_1)\right)\wedge \textsf{X}^{n+2}end
+\right)$$
+
+Neighboring tilts should have matching edges. %note that we put tiles  left-right and bottom-up
+
+$$\textsf{G}\left(\begin{array}{l}
+(right=c\rightarrow \textsf{X}(rmost\vee left=c))\wedge\\
+(up=c\rightarrow \textsf{X}^{n+2}(end\vee down=c))\end{array}
+\right)$$
+
+
+Theorem: MC(LTL) is PSPACE-hard.
+% why membership in PSPACE?
+
+%Given a Kripke structure $T$. let $n=|T|$
+
+%$(T,s)\models^{a} A$
+
+%$(T,s)\models^e A$.
+
+%tautology
+
+Natural Deduction System
+
+$$\vdash\textsf{X}A\vee \textsf{X}\neg A,\ \ \vdash A\textsf{U}\neg A$$
+
+$${B}\vdash {A\textsf{U} B}, \ \ A\wedge (A\textsf{U}B)\vdash \textsf{F}B$$
+
+$$(\textsf{X}^nB)\wedge \left(\bigwedge^{n-1}_{k=0}\textsf{X}^kA\right)\vdash A\textsf{U}B,\ \ n\geq 1, $$ %$\textsf{X}^0A$ is A
+
+$$(\textsf{X}^n(\neg A\wedge\neg B))\wedge \left(\bigwedge^{n-1}_{k=0}\textsf{X}^kA\right)\vdash \neg (A\textsf{U}B),\ \ n\geq 1, $$ %$\textsf{X}^0A$ is A $$
+
+
+$${A\wedge \textsf{X}(A\textsf{U}B)}\vdash {A\textsf{U}B}$$
+
+$$\textsf{X}(A\circ B)\vdash\dashv \textsf{X}A\circ\textsf{X}B,\ \ \circ\in\{\wedge,\vee\}$$
+
+$$\textsf{F}(A\vee B)\vdash \dashv \textsf{F}A\vee\textsf{F}B$$ % inverse in not true
+
+$$\textsf{F}(A\wedge B)\vdash \dashv \textsf{F}A\wedge\textsf{F}B$$ % inverse in not true
+
+$${A\wedge\textsf{X}A\wedge (A\textsf{U}B)}\vdash {\textsf{X}(A\textsf{U}B)}$$
+
+$${A}\vdash {\textsf{F}A},\ \ {\textsf{X}A}\vdash {\textsf{F}A},\ \ {\textsf{FF}A}\vdash {\textsf{F}A}$$
+
+$$\frac{A\vdash B}{\textsf{X}A\vdash \textsf{X}B},\ \ \frac{A\vdash B}{\textsf{F}A\vdash \textsf{F}B}  $$
+
+$$\frac{A\vdash C, B\vdash D}{(A\textsf{U}B)\vdash (C\textsf{U}D)}$$
+
+$$\frac{\vdash A}{\vdash \textsf{F}A}, \ \ \frac{\vdash A}{\vdash \neg \textsf{F}\neg A},\ \ \frac{\vdash A}{\vdash \textsf{X}^nA},\ \ n\geq 1$$
+
+
+%%%%%%%%%%%%%%%2012-10-17
+\ \\ \ \\
+
+Non-deterministic finite $\omega$-automata
+
+$$M=(Q,\Sigma,\delta,q_0, Acc)$$
+
+
+\begin{enumerate}
+\item \ 
+\item \ 
+\item $\delta:Q\times\Sigma\rightarrow\mbox{Pow}(Q)$ transition function
+\item \ 
+\item $Acc$ acceptance component given as.
+\begin{itemize}
+\item $F\subseteq Q$, or
+\item ${\cal F}\subseteq\mbox{Pow}(Q)$, or 
+\item $\Omega=\{(E_i,F_i)\mid E_i, F_i\subseteq Q, i=1,\cdots,n\}$ 
+\end{itemize}
+\end{enumerate}
+
+A run of $M$ on $\alpha=a_1a_2\cdots\in\Sigma^{\omega}$ is an infinite sequence of states $\mathbf{r}=r_0r_1r_2\cdots\in Q^{\omega}$ such that
+
+$r_0=q_0$
+
+$r_{i+1}\in \delta(q_i,a_{i+1})$
+\ \\
+
+%%%buchi
+
+B\"{u}chi automata $M=(Q,\Sigma,\delta, q_0, F)$ with $F\subseteq Q$.
+
+We say $M$ accept $\alpha$  iff there is a run $\mathbf{r}$ of $M$ on $\alpha$ such that there is a state $q\in F$ such that it occurs in $\mathbf{r}$ infinitely often. 
+
+$$L(M):=\{\alpha\mid M \mbox{ accept } \alpha\}$$ 
+
+is called the language recognized by $M$. 
+
+A $\omega$-language) $A\subseteq \Sigma^{\omega}$ is called regular if there is a B\"{u}chi automata $M$ such that $A=L(M)$.  
+
+
+
+\begin{enumerate}
+\item If $A\subseteq\Sigma^*$ is a regular language then $A^{\omega}$ is a regular $\omega$-language.
+
+\item (B\"{u}chi Characterization Theorem) Every regular $\omega$-language $A$ is of the form $$A=\bigcup_{i=1}^nA_iB_i^{\omega}$$
+where $A_i, B_i\subseteq \Sigma^*$ are regular languages. 
+\end{enumerate}
+
+
+
+
+
+
+
+
+\end{document} 
