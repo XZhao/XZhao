@@ -254,6 +254,32 @@ $$\frac{A\vdash C, B\vdash D}{(A\textsf{U}B)\vdash (C\textsf{U}D)}$$
 
 $$\frac{\vdash A}{\vdash \textsf{F}A}, \ \ \frac{\vdash A}{\vdash \neg \textsf{F}\neg A},\ \ \frac{\vdash A}{\vdash \textsf{X}^nA},\ \ n\geq 1$$
 
+\ \\
+%%%%%%%%%%complexity
+
+SAT(LTL$_n(H_1,\cdots))\leq_{\text{logs}}\mbox{MC(LTL}_n(H_1,\cdots))$
+
+Consider $\varphi\in$ LTL$_n(\cdots)$ s.t.Prop$(\varphi)\subseteq\{A_1,\cdots, A_n)$.
+
+Define $T:=(N, R, \epsilon)$ 
+
+\begin{itemize}
+\item $N=$ Pow$(\{A_1,\cdots, A_n\})$
+
+\item $R$ is the full relation, i.e. $N\times N$.
+
+\item $\epsilon(s)$ is the valuation determined by $s$.
+\end{itemize}
+
+$\varphi$ is SAT  $\Longleftrightarrow$ $\exists s\in N$ s.t. $T,s\models \varphi$. Pick some $s_0$ we have
+
+$$(\exists s\in N,\ T,s\models \varphi) \Longleftrightarrow T,s_0\models \textsf{X}\varphi\Longleftrightarrow T,s_0\models\textsf{F}\varphi$$
+
+
+
+
+
+
 
 %%%%%%%%%%%%%%%2012-10-17
 \ \\ \ \\
