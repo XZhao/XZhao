@@ -3,6 +3,7 @@
 \usepackage{makeidx}
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage{color}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \long\def\remove#1{}
@@ -275,6 +276,119 @@ $\varphi$ is SAT  $\Longleftrightarrow$ $\exists s\in N$ s.t. $T,s\models \varph
 
 $$(\exists s\in N,\ T,s\models \varphi) \Longleftrightarrow T,s_0\models \textsf{X}\varphi\Longleftrightarrow T,s_0\models\textsf{F}\varphi$$
 
+
+MC(LTL($\cdots))\leq_{\text{logs}}$ MC(LTL$_2(\textsf{U}))$ 
+%%%proof
+
+Consider an arbitrary structure $T(N,R,\epsilon)$ and a formula $\varphi\in$ LTL$(\cdots)$. Suppose $varphi$ contains $n$ propositional atoms $P_1,\cdots, P_n$. 
+We shall define a new structure $D_n(T):=(N',R',\epsilon')$ over $\{A,B\}$.
+
+$$\begin{array}{l}
+N':=\{(s,i)\mid s\in N, 1\leq i\leq 2n+2\}\\
+
+(s,i)R'(t,j) \Longleftrightarrow\left\{\begin{array}{l}
+s=t \mbox{ and } j=i+1, \mbox{ or }\\
+sRt \mbox{ and } i=2n+2, j=1
+\end{array}\right.\\
+\epsilon'((s,1)):=\{A,B\}\\
+\epsilon((s,2))=\{\ \}\\
+\epsilon((s,2i+1))=\{A\}\\
+\epsilon((s,2i+2))=\left\{\begin{array}{ll}
+\{B\} & \mbox{if } Pi\in \epsilon(s)\\
+\{\ \} & \mbox{otherwise}
+\end{array}\right.
+\end{array}
+$$
+
+$(s,2i+1), s(s,2i+2)$ together encode the truth of $P_i$ in $\epsilon(s)$. 
+%
+$A, \neg B$ always hold in $(s,2i+1)$. $\neg A$ always holds in $(s,2i+2)$. Whether $B$ holds in $(s,2i+2)$ depends whether $P_i$ holds in $s$. \\
+
+
+Let $At_D$ be $A\wedge B$. Define 
+
+$$\begin{array}{l}
+Alt^0_n:=At_D=A\wedge B\\
+Alt^1_n:=\neg B\wedge A\wedge\left(A\textsf{U}^-\left(\neg A\wedge\left(\neg A\textsf{U}^-Alt_n^0\right)\right)\right)\\
+Alt^{k+1}_n:=\neg B\wedge A\wedge\left(A\textsf{U}^-\left(\neg A\wedge\left(\neg A\textsf{U}^-Alt_n^k\right)\right)\right)
+\end{array}$$
+%
+For $k\geq 1$, $Alt^k_n$ means there remain exactly $k$ many ``$A-\neg A$" alternations before the next state satisfying $A\wedge B$.\\
+
+Define $D_n(\varphi)$ inductively. 
+
+$$\begin{array}{l}
+D_n(P_i):=A\textsf{U}^-\left(\neg At_D\wedge \neg At_D\textsf{U}^-\left(Alt^{n+1-i}_n\wedge (A\textsf{U}^-B)\right)\right)\\
+D(\neg \varphi)=\neg D_n(\varphi)\\
+D_n(\varphi\wedge\psi):=D_n(\varphi)\wedge D_n(\psi)\\
+D_n(\textsf{X}\varphi):=At_D\textsf{U}^-\left(\neg A\wedge\neg B\wedge\left(
+\neg At_D\textsf{U}^-(At_D\wedge D_n(\varphi)\right)\right)\\
+D_n(\textsf{F}\varphi):=F(At_D\wedge D_n(\varphi))\\
+D_n(\varphi\textsf{U}^-\psi):=(At_D\rightarrow D_n(\varphi))\textsf{U}(At_D\wedge D_n(\psi))
+\end{array}$$
+%
+\color{red} Model checking for LTL$_2(\textsf{U}^-)$ is PSPACE-complete since MC(LTL$(\textsf{X,F}))$ is PSPACE-complete. 
+\color{black}
+
+\ \\
+
+MC(LTL$(\cdots))\leq_{\text{logs}} \mbox{MC(LTL}_1(\textsf{X},\cdots))$. 
+
+%%%%%%%%proof
+
+Given a Kripke structure $T=(N,R,\epsilon)$ and a formula $\varphi\in \mbox{ LTL}(\cdots)$ with propositions $P_1,\cdots, P_n$. Define $C_n:=(N',R',\epsilon')$ as follows.
+
+$$\begin{array}{l}
+N':=\{(s,i)\mid s\in N, 1\leq i\leq 2n+2\}\\
+
+(s,i)R'(t,j) \Longleftrightarrow \left(\begin{array}{l} s=t, j=i+1, \mbox{ or}\\
+                                 sRt, i=2n+2, j=1 
+\end{array}\right)\\
+
+\epsilon'((s,1))=\epsilon'(s,2):=\{A\}\\
+
+\epsilon'((s,2i+1)):=\{ \ \}\\
+
+\epsilon'((s,2i+2)):=\left\{\begin{array}{ll}
+\{A\} & \mbox{ if }P_i\in \epsilon(s)\\
+\{\ \} & \mbox{ otherwise }  
+\end{array}\right.
+\end{array}
+$$
+%
+For $i\geq 1$, we use truth values of $A$ in $(s,2i+1)$ and $(s,2i+2)$ to encode the truth of $P_i$ in $s$. $\neg A-\neg A$ means $\neg P_i$, and $\neg A-A$ means $P_i$. That is, $A$ never holds in $(s,2i+1)$. 
+
+Let $At_C:=A\wedge\textsf{X}A\wedge \textsf{X}^2\neg A$. Define
+
+$$\begin{array}{l}
+C_n(P_i):=\textsf{X}^{2i+1}A \\ 
+C_n(\neg \varphi):=\neg C_n(\varphi) \\ 
+C_n(\varphi\wedge\psi):=C_n(\varphi)\wedge C_n(\psi) \\ 
+C_n(\textsf{X}\varphi):=\textsf{X}^{2n+2}C_n(\varphi)\\
+C_n(\textsf{F}\varphi):=\textsf{F}(At_C\wedge C_n(\varphi))\\
+C_n(\varphi\textsf{U}\psi):=
+(At_C\rightarrow C_n(\varphi))\textsf{U}(At_C\wedge C_n(\psi)) 
+\end{array}
+$$
+We have $$ (T,s\models \varphi)\Longleftrightarrow (C_n(T), (s,1)\models C_n(\varphi))$$
+%
+\color{red}
+Model checking for LTL$_1(\textsf{X,F}))$ is PSPACE-complete.
+\color{black}
+
+
+We have the similar results for SAT.
+
+MC(LTL$(\cdots))\leq_{\text{logs}} \mbox{MC(LTL}_1(\textsf{X},\cdots))$. 
+
+MC(LTL($\cdots))\leq_{\text{logs}}$ MC(LTL$_2(\textsf{U}))$ 
+
+SAT(LTL$_2(\textsf{U}))$ is PSPACE-complete
+
+SAT(LTL$_1(\textsf{X,F}))$ is PSPACE-complete
+
+
+%%%%%% NP-hardness
 
 
 
