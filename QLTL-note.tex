@@ -385,10 +385,75 @@ MC(LTL($\cdots))\leq_{\text{logs}}$ MC(LTL$_2(\textsf{U}))$
 
 SAT(LTL$_2(\textsf{U}))$ is PSPACE-complete
 
-SAT(LTL$_1(\textsf{X,F}))$ is PSPACE-complete
+SAT(LTL$_1(\textsf{X,F}))$ is PSPACE-complete \\ 
 
 
 %%%%%% NP-hardness
+
+SAT$\leq_{\text{logs}}$ LTL$_2(\textsf{F})$
+
+
+We say a model $S$ has $n$ $A$-alternatons if and only if 
+there exist positions $0=i_1<i'_1<i_2<i'_2<\cdots<i_{n+1}<i'_{n+1}=\omega$ 
+such that  
+
+$S,j\models \neg A$ if and only if $i'_k\leq j<i_{i+1}$. 
+
+1 $A$-alternation: it is the patten $(A\cdot\neg A)\cdot AAAA\cdots$
+
+2 $A$-alter: $(A\cdot\neg A\cdot A\cdot\neg A)\cdot AAAAA\cdots$.  
+
+
+Define 
+
+$$\begin{array}{l}
+\varphi_0:=\textsf{G}(\neg A\vee \textsf{G}A)\wedge \textsf{F}A\\
+
+\theta_0(\varphi):=\top\\
+
+\theta_1[\varphi]:=A\wedge \textsf{F}(\neg A\wedge \varphi)\\
+
+\theta_{i+1}:=\theta_1[\textsf{F}\theta_i[\varphi]]=A
+\wedge \textsf{F}(\neg A\wedge \textsf{F}\theta_i[\varphi]), \mbox{ for }i\geq 1
+
+\end{array}
+$$
+
+$$\theta_1(\varphi_0)=A\wedge \textsf{F}(\neg A\wedge\varphi_0)=A\wedge\textsf{F}(\neg A\wedge (\textsf{G}(\neg A\vee \textsf{G}A)\wedge \textsf{F}A))$$ 
+means $S$ has $k$ $A$-alternation for some $k\geq 1$.
+
+$$\theta_2(\varphi_0):=A\wedge \textsf{F}(\neg A\wedge \textsf{F}\theta_1[\varphi_0])$$
+means $S$ has $k$ $A$-alternations for some $k\geq$.
+
+Generally, $\theta_n[\varphi_0]$ means $S$ has $k$ $A$-alternations for some $k\geq n$. Then 
+
+$$\mbox{AL}_n:=\theta_n[\varphi_0]\wedge\neg\theta_{n+1}[\varphi_0]$$
+means that $S$ has exactly $n$ $A$-alternations.  
+
+
+
+An $A$-alternation is like $A\cdots\neg A$.
+
+Genrally, $\theta_n[\psi]$ means that ...
+
+Suppose $S$ has exactly $n$ $A$ alternations. we can view it as the encoding of a valuation $v_S$ of $\{P_1,\cdots,P_n\}$ by saying that $P_k$ holds if and only if $B$ and $\neg B$ can be found in the $K$-th $\neg A$ segment. 
+
+Now we can encode a propositional formula $\psi$ over $\{P_1,\cdots, P_n\}$ into $f_n(\psi$, an LTL$(\textsf{F})$ formula with
+
+$$\begin{array}{l}f_n(P_i):=\theta_i(B\wedge \textsf{F}\theta_{n-i}[\varphi_0]]\wedge \theta_i[\neg B\wedge \theta_{n-i}[\varphi_0]]\\
+
+f_n(\neg \psi):=\neg f_n(\psi)\\
+
+f_n(\psi_1\wedge\psi_2):=f_n(\psi_1)\wedge f_n(\psi_2)
+
+\end{array}$$
+ 
+
+We can see $\psi$ is SAT iff $f_n(\psi)\wedge\mbox{AL}_n$ is SAT
+
+
+
+
 
 
 
