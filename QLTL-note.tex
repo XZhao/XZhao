@@ -140,7 +140,7 @@ SAT for S4.3Dum is NP-complete by H. Ono and A. nakamura in 1980 [Studia Logic 3
 
 \item th$(A)$, the temporal height of $A$, is the maximum number of nested temporal operators.
 
-\item LTL$^k_m(\cdots)$ denotes the class of  formulas $A\in$L$(\cdots)$ such that th$(A)\leq m$ and $A$ has at most $m$ variables.
+\item LTL$^k_m(\cdots)$ denotes the class of  formulas $A\in$LTL$(\cdots)$ such that th$(A)\leq k$ and $A$ has at most $m$ variables.
 \item Likewise for LTL$^k(\cdots)$ and LTL$_m(\cdots)$.
 \item Example $(p\rightarrow \textsf{XF}q)\textsf{U}(\neg\textsf{X}p)\in$LTL$_2^3(\textsf{X,U,F})$
 \end{itemize}
@@ -450,13 +450,91 @@ f_n(\psi_1\wedge\psi_2):=f_n(\psi_1)\wedge f_n(\psi_2)
  
 
 We can see $\psi$ is SAT iff $f_n(\psi)\wedge\mbox{AL}_n$ is SAT
+\\ \ \\
+%%%%%%%%%%%%%%%%
+
+3SAT$\leq_{\text{logs}}\mbox{ MC(LTL}2(\textsf{F}))$
 
 
+Consider a 3CNF formula $\theta:=C_1\wedge\cdots\wedge C_m$. and each $C_i:=L_{i,1}\vee L_{i,2}\vee L_{i,3}$
+
+The variables of $\theta$ is $X:=\{x_1,\cdots, x_n\}$. and var$(L_{i,j})=x_{r(i,j)}$.
+
+Define $T_n=(N,R,\epsilon)$ as follows
+
+$N:=\{s_0, s_1,s_2,\cdots s_n\}\cup\{t_1, u_1\cdots t_n, u_n\}$
+
+$s_iR t_{i+1}, s_iRu_{i+1}, \ i=0,1,2,\cdots,n-1$
+
+$s_n R s_n$
+
+$t_iR s_{i}, u_{i}R s_{i}, \ \i=1,2,\cdots,n$
 
 
+$\epsilon(s_i)=\{ \ \}, \ i=0,1,2,\cdots,n$
+
+$\epsilon(t_i)=\{A\},\ i=1,2,\cdots,n$
+
+$\epsilon(u_i)=\{B\}, \ i=1,2,\cdots,n$
+%%%
+\ \\
+
+In $T_n$ a path $\pi$ from $s_0$ can encode a valuation $v_S:X\rightarrow\{0,1\}$: $v_s(x_r)=1$ if and only if $\pi$ passes $t_r$. \\
+
+Define $$\varphi_i^{n+1}:=\neg \textsf{F}(A\vee B)$$
+And for $r=1,\cdots,n$, defined inductively
+
+$$\varphi^r_i:=\left\{
+\begin{array}{ll}
+\neg(A\vee B)\wedge \textsf{F}(B\wedge\textsf{F}\varphi_i^{r+1}) & \mbox{if }x_r\in C_i\\
+\neg(A\vee B)\wedge \textsf{F}(A\wedge\textsf{F}\varphi_i^{r+1}) & \mbox{if }\neg x_r\in C_i\\
+\neg(A\vee B)\wedge \textsf{F}((A\vee B)\wedge\textsf{F}\varphi_i^{r+1}) & \mbox{otherwise}
+\end{array}\right.
+$$
+
+$$\pi\models\varphi^1_i\Longleftrightarrow v_S\not\models C_i$$
+
+\ \\
+
+MC(LTL$_2(\textsf{F}))$ and SAT(LTL$_2(\textsf{F}))$ are NP-complete.
 
 
+%%%%%% fragment with only one proposition
 
+Wrt equivalence mudulo stuttering, a model with one has one of the following patterns for some $n\geq 1$.
+
+$$\begin{array}{lll}
+S^n_1:=(A\cdot \neg A)^n\cdot A^{\omega}, & S^n_2:=\neg A\cdot (A\cdot\neg A)^n\cdot A^n, & S_3:=(A\cdot\neg A)^\omega,\\
+
+S^n_4:=(\neg A\cdot A)^n\cdot (\neg A)^{\omega}, & S^n_5:=A\cdot (\neg A\cdot A)^n\cdot (\neg A)^n, & S_6:=(\neg A\cdot A)^\omega
+\end{array}
+$$
+
+Lemma: For $\varphi\in $ LTL$_1(\textsf{U,X})$ with $n=$ th$(\varphi)$,
+
+$$S^{n+1}_i\models \varphi \Longleftrightarrow S_i^n\models\varphi$$
+
+
+We can prove the lemma simultaneously for $i=1,\cdots,6$ by induction on $n$. 
+
+$n=0$. clearly it is true.
+
+Suppose the assertion is true for $n$
+
+$\varphi=\textsf{X}\psi$. 
+
+$$S_1^{n+2}\models \varphi\Longleftrightarrow \left( 
+\begin{array}{l}
+S_1^{n+2}\models \psi, \mbox{ or}\\
+S_2^{n+1}\models \psi
+\end{array}
+\right)\Longleftrightarrow \left(\begin{array}{l}
+S_1^{n+1}\models \psi, \mbox{ or}\\
+S_2^{n}\models \psi
+\end{array}
+\right)\Longleftrightarrow S_1^{n+1}\models \varphi$$ 
+
+For other proof, similar.\\
 
 
 
@@ -508,7 +586,19 @@ A $\omega$-language) $A\subseteq \Sigma^{\omega}$ is called regular if there is 
 \item (B\"{u}chi Characterization Theorem) Every regular $\omega$-language $A$ is of the form $$A=\bigcup_{i=1}^nA_iB_i^{\omega}$$
 where $A_i, B_i\subseteq \Sigma^*$ are regular languages. 
 \end{enumerate}
+\ \\
+%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+Lemma: For $i=1,\cdots,6$, and $n$, there is a B\"{u}chi automaton ${\cal A}_i^{=n}$ and B\"{u}chi automaton ${\cal A}^{\geq n}_i$ such that
+\begin{itemize}
+\item ${\cal A}_i^{=n}$ accepts a model $S$ iff $S$ is equivalent to $S^n_i$ modulo stuttering
+\item ${\cal A}^{\geq n}_i$ accepts a model $S$ iff $S$ is equivalent to $S^m_i$ for some $m\geq n$.
+\end{itemize}
+\ \\
+
+Theorem: Molde checking for LTL$^\omega_1(\textsf{U}))$ is PTIME solvable.
+
+ 
 
 
 
