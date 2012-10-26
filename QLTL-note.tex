@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{color}
+\usepackage[all]{xy}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \long\def\remove#1{}
@@ -72,6 +73,13 @@ Fax:0086-20-84110298.}
 
 \end{abstract}
 %%%%%%%%%%%%%%%%%%%
+
+%\xymatrix{
+%A &*+[F]{\sum_{i=n}^m {i^2}} \\
+%   & {\bullet} & D \ar[ul]             }
+
+
+%%%%%%%%%
 
 {\bf Key words:} \\
 
@@ -255,6 +263,8 @@ $$\frac{A\vdash C, B\vdash D}{(A\textsf{U}B)\vdash (C\textsf{U}D)}$$
 
 $$\frac{\vdash A}{\vdash \textsf{F}A}, \ \ \frac{\vdash A}{\vdash \neg \textsf{F}\neg A},\ \ \frac{\vdash A}{\vdash \textsf{X}^nA},\ \ n\geq 1$$
 
+
+$$\frac{\textsf{X}\neg A}{\neg \textsf{X}A}$$
 \ \\
 %%%%%%%%%%complexity
 
@@ -598,9 +608,101 @@ Lemma: For $i=1,\cdots,6$, and $n$, there is a B\"{u}chi automaton ${\cal A}_i^{
 
 Theorem: Molde checking for LTL$^\omega_1(\textsf{U}))$ is PTIME solvable.
 
+input Kripke structure $T=(N,R,\epsilon)$ and some state $s_0\in N$ and a formula $\varphi\in $ LTL$_1(\textsf{U})$. 
+
+$$T,s_0\models \varphi  \Longleftrightarrow \exists i,n \mbox{ such that }S_i^n\models \varphi \mbox{ and }\exists \mbox{ a path $S$ from $s_0$ s. t. }S\approx S^n_i$$ 
+
+We need to check whether $T$ contains such a path in polynomial time. We consider all $S^k_i$ for $k<$ th$(\varphi)$. $S^k_i\models \varphi$ can be checked in time $O(k|\varphi|)$. $\exists $ a path from $s_0$ equivalent to $S^k_i$ can be ckecked in time $O(k|T|)$. We need consider $k=$ th$(\varphi)$. We need to check whether exists a path from $s_0$ equivalent $S^k_i$ or equivalent to $S^{k+m}_i$ for some $m$. Then check $S^k_i\models\varphi$.\\
+
+
+%%%%%%%%%%%%LTL_1(X)
+
+SAT for LTL$(\textsf{X})$ is in NP. For $\varphi$ in LTL$(X)$ with temporal height $k$.  It is eough to guess the first $k$ states of a candidate model $S$. 
+
+MC for LTL$(\textsf{X})$ is also in NP for the same reason.
+
+
+SAT for LTL$_1(\textsf{X})$ is NP-hard. 
+
+We use the states $s_1,\cdots, s_n$ to encode a truth assignmment on propositional atoms $P_1,\dots, P_n$. More precisely, for $i=1,\cdots, n$, the truth of $A$ in $s_i$ is the truth of $P_i$. 
+
+For a propositional formula $\varphi$ over $\{P_1,\cdots, P_n\}$ replace each $P_i$ by $X^iA$. The rsulting formula is SAT iff $\varphi$ is.\\
+
+
+%%%%%%%%%%%%%%% LTL^k_n(U,X)
+
+
+For fixed $k,n$, SAT for LTL$_n^k(\textsf{U,X})$ is in LOGSPACE
+
+Clealy, LTL$^0_n$ has only finitely many formuals. Consider CNF formulas.
+
+$J_n^0$ be the CNF formulas of LTL$^0_n$
+
+For $J_n^{k+1}$ first consider
+%
+$$J_n^k\cup\{\textsf{X}\theta\mid \theta\in J_n^k\}\cup\{\theta\textsf{U}\theta'\mid \theta,\theta'\in J^k_n\}$$
+
+$J_n^{k+1}$ is nothing but the set of CNF formulas constructed from formulas in the above set which are consider atoms.
+
+
+Clearly, $J_n^k$ can be considered in a fixed time.
+
+For a formula $\varphi$ compute its representitive in $J^k_n$ can be done in LOGSPACE.
+
+
+$\varphi$ is SAT if its representive is not $\bot$.
+\\
+
+
+For fixed $n,k$, model checking for LTL$_n^k(\textsf{U,X})$ is in NLOGSPACE
+
+
+checking whether $T,s\models \varphi$ can be done in nondeterminsitic space. 
+\\ \ \\
+
+
+%%%%%%%%%% QBF to MC(LTL(X,F))
+
+
+
+$$\Phi:=Q_1x_1\cdots Q_n\bigwedge_{i=1}^m \left(L_{i,1}\vee L_{i,2}\vee L_{i,3}\right)$$
+
+Define $T_{\Phi}:(N,R,\epsilon)$ as follows.
+
+
+$$\begin{array}{ll}N:=&
+\{s_0, s_1,\cdots, s_n; t_1,s_1,\cdots, t_n,s_n; w_1,\cdots, w_m\}\cup\\ & \{v_{i,j}\mid 1\leq i\leq m, j=1,2,3\}\end{array}$$
+
+
+$s_iR t_{i+1}, s_iRu_{i+1}$, for $i=0,\cdots,n-1$
+
+$s_nR v_{1,j}, v_{i,j}Rw_i, w_iRv_{i+1,j}$ for $i=1,\cdots,m-1$, 
+
+$w_mRs_0$ \\
+
+
+Propositions
+
+$$\{x_1^F, x_1^T, \cdots, x_n^F, x_n^T, L_1^j,\cdots, L_m^j\}$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
-
-
 
 
 
