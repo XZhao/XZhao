@@ -1,0 +1,138 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{makeidx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\long\def\remove#1{}
+\newcommand{\dom}{\mbox{dom}}
+
+\newcommand{\vp}{\varphi}
+
+
+\newcommand{\coNP}{\mbox{coNP}}
+
+\newcommand{\NP}{\mbox{NP}}
+\newcommand{\DP}{\mbox {D}^P}
+
+\newcommand{\LeKl}{\mbox{$\sqcup$ }}
+\newcommand{\card}[1]{\mbox{\#}(#1)}
+
+\newcommand{\sss}{\mbox{\bf S}}
+\newcommand{\jjj}{\mbox{\bf J}}
+
+\newcommand{\QR}[1]{\mbox{$\ \mid\!\!\!\frac{#1}{\
+    \stackrel{\mbox{\scriptsize\it Q-Res}}{\ }\ }\ $}}
+\newcommand{\QUR}[1]{\mbox{$\ \mid\!\!\!\frac{#1}{\
+    \stackrel{\mbox{\scriptsize\it Q-Pos-Unit-Res}}{\ }\ }\ $}}
+%\baselineskip 0.2in
+
+\newcommand{\AK}{\mbox{${\cal{A}}_K$}}
+
+\newcommand{\pbox}{\hbox to 6pt{\leaders\hrule width 6pt height 6pt\hfill}}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{remark}{Remark}[section]
+\newenvironment{proof}{\parindent=0pt{\bf Proof: }}{
+   \hspace*{\fill}\hbox to 6pt{\leaders\hrule width 6pt height 6pt\hfill}\par}
+
+
+\pagestyle{plain}
+
+\begin{document}
+
+Hyper graph $G=(V,E)$ tr$(G)$ the set of minimal transversals of $G$.
+
+If $G=(V, G)$ then $E(G)=E$.
+
+\section{Greedoid}
+
+in Section 2 of the full report\\
+
+greedoid is a hypergraph $(V,G)$ with the following properties:
+
+\begin{enumerate}
+\item $E$ is not empty.
+
+\item $E$ is accessible (to the empty edge), for each $H\in E$ s.t. $H\not=\emptyset$, there is $v\in V$ such that $(H-\{v\})\in E$ 
+
+\item $E$ is augmentable (shorter edges can be made longer). for two edges $A,B$ with $|A|<|B|$, there is $v\in B-A$ such that $A\cup\{v\}\in E$.
+\end{enumerate}
+
+
+A basis is maximal super edge  in $E$ wrt set-inclusion. Clearly, all basis have the same length due the aumenttability. A basis is edges with longest length.\\
+
+
+A matiod is a heredatary greedoid, if $H$ is an edge then its any subset also is an edge. \\
+
+
+interval greedoid $G=(V,E)$: For edges $A,B,C$ and vertex $x$, $$A\subseteq B\subseteq C\mbox{ and }A\cup\{x\}, C\cup\{x\}\in E \Longrightarrow B\cup \{x\}\in E$$ 
+
+
+antigreedoid $G=(V,E)$: For edges $A,B$ and vertex $x$, $$A\subseteq B\mbox{ and }A\cup\{x\}\in E \Longrightarrow B\cup \{x\}\in E$$
+
+antigreedoid is an interval one\\
+
+Gaussian greedoid $G=(V,E)$: For $X, Y$ with $|X|=|Y|+1$, 
+$$X, Y\in E \Longrightarrow \exists x\in X-Y, \mbox{ s.t. }X-\{x\}, Y\cup\{x\}\in E$$
+
+
+\section{singular Tuples}
+
+in Section 5.2 of the full report.\\
+
+
+singular tuple $(v_1,\cdots, v_m)$ for $F$.
+
+$v_1$ is singular in $F$ and, $v_{i+1}$ is singular in DP$_{v_1,\cdots,v_i}(F)$.
+
+segment of a singular tuple is also singular.
+
+1-singular (once positive and once negative)  $m$-singular (non-1-singular)
+
+$(v_1,\cdots, v_n)$ is 1-singular if every $v_i$ is 1-singular
+
+is non-1-singular if every $v_i$ is non-1-singular.\\
+
+
+Totally singular tuple $(v_1,\cdots, v_n)$ if for every permutation $\pi$, $(v_{\pi(1)},\cdots, v_{\pi(n)})$ is also a singular tuple.
+
+about totally singular see Subsection 5.4
+
+Conjecture: If $(v_1,\cdots, v_n)$ is non-1-singular then it is totally singular.\\
+
+More question see 5.27, 5.37.
+
+\section{Hypergraph of singular sets}
+
+
+%%%section 5.5
+
+
+ssh$(F)$ the hypergraph of singular sets of $F$.
+
+
+vertices are variables, 
+
+edges are $\{v_1,\cdots,v_n\}$ such that $(v_1,\cdots, v_n)$ is a singular tuple. that is, an edge can be a singular tuple by rearrange the order. 
+\\
+
+mss$(F)$ the hypergraph of maximal singular sets. 
+consists of longest edges of ssh$(F)$. i.e. $H$ with $|H|=\mbox{si}(F)$\\
+
+
+singular variable hypergraph svh$(F)$:
+
+edges: $\{\mbox{var}(x)\mid x\in C \mbox{ and }x \mbox{ is singular in }F\}$ for all $C\in F$ with this set non-empty.
+
+
+
+
+
+\end{document}  
