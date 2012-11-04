@@ -1,0 +1,159 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{makeidx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\long\def\remove#1{}
+\newcommand{\dom}{\mbox{dom}}
+
+\newcommand{\vp}{\varphi}
+
+
+\newcommand{\coNP}{\mbox{coNP}}
+
+\newcommand{\NP}{\mbox{NP}}
+\newcommand{\DP}{\mbox {D}^P}
+
+\newcommand{\LeKl}{\mbox{$\sqcup$ }}
+\newcommand{\card}[1]{\mbox{\#}(#1)}
+
+\newcommand{\sss}{\mbox{\bf S}}
+\newcommand{\jjj}{\mbox{\bf J}}
+
+\newcommand{\QR}[1]{\mbox{$\ \mid\!\!\!\frac{#1}{\
+    \stackrel{\mbox{\scriptsize\it Q-Res}}{\ }\ }\ $}}
+\newcommand{\QUR}[1]{\mbox{$\ \mid\!\!\!\frac{#1}{\
+    \stackrel{\mbox{\scriptsize\it Q-Pos-Unit-Res}}{\ }\ }\ $}}
+%\baselineskip 0.2in
+
+\newcommand{\AK}{\mbox{${\cal{A}}_K$}}
+
+\newcommand{\pbox}{\hbox to 6pt{\leaders\hrule width 6pt height 6pt\hfill}}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{remark}{Remark}[section]
+\newenvironment{proof}{\parindent=0pt{\bf Proof: }}{
+   \hspace*{\fill}\hbox to 6pt{\leaders\hrule width 6pt height 6pt\hfill}\par}
+
+
+\pagestyle{plain}
+
+\begin{document}
+
+
+
+\section{General Problems}
+
+
+Configuration and Specification (Sets)\\ \ \\
+
+{\bf Equivalence Problem}\\
+
+Input: $C=\{\alpha_1,\cdots,\alpha_n\}$
+
+Query: Whether $\exists K\subseteq C: K\equiv \beta$\\
+
+
+\ \\
+
+{\bf Retricted Equivalence}(R-equivalence\\
+
+Input: $C=\{\alpha_1,\cdots,\alpha_n\}$, $beta$, and a set $V$ of variables
+
+Query: Whether $\exists K\subseteq C: K\equiv^V \beta$\\ 
+
+\ \ \\
+
+{\bf Implication Problem}\\
+
+Input: $C=\{\alpha_1,\cdots,\alpha_n\}$, $beta$
+
+Query: Whether $\exists K\subseteq C: K\models \beta$\\ 
+
+
+\ \\ 
+
+Note: In all problems $K$ is demanded satisfiable.
+
+$$\alpha \equiv_V \beta \Longleftrightarrow \forall \gamma \mbox{ over } V, (\alpha\models \gamma \Leftrightarrow \beta\models \gamma) $$
+
+$$\alpha \models_V \beta \Longleftrightarrow \forall \gamma \mbox{ over } V, (\beta\models \gamma \Longrightarrow \alpha\models \gamma) $$
+
+
+%%%%%%%
+
+Euivalence Problem is in P$^{\mbox{NP[log]}}$
+
+R-Equivalence Problem same as above
+
+Implication  $\Sigma_2^P$?
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Resticted to DHORN}
+
+$C$: set of DHORN, $\beta$: DHORN \\
+
+{\bf Equivalence problem is in PTIME}\\
+
+Idea: Let $$\mbox{IMP}(C,\beta):=\{\alpha\mid \alpha\in C \mbox{ and }\beta\models \alpha\}$$
+Then
+$$\exists K\subseteq  C(K\equiv \beta)\Longleftrightarrow\mbox{IMP}(C,\beta)\models \beta$$
+
+%%%
+
+\ \\
+
+{\bf Implication problem is trivial} \\ 
+
+The existence of $K$ is equivalent to $C\models\beta$\\
+
+\ \\
+
+
+{\bf The $V$-equivalence problem}\\
+
+IMP$(C,\beta,V):=\{\alpha\in C\mid \beta\models_V \alpha\}$\\
+
+The existence of $K\equiv_V \beta$ is equivalent to IMP$(C,\beta, V)\equiv_V\beta$.\\
+
+we guess it is co-NP complete.
+
+See Hans's book page 251
+
+
+\section{Restricted to HORN}
+
+
+Equivalence Problem: same as the DHORN case.\\
+
+iff IMP$(C,\beta)$ is satisfiable and IMP($C,\beta)\models \beta$\\ 
+
+\ \\
+
+V-Equivalence Problem: idea Same as DHORN but coNP-complete\\ 
+
+iff IMP$(C, \beta, V)$ is sat and IMP$(C,\beta,V)\models_V \beta$ \\
+
+\ \\
+
+Implication Problem
+
+NP-complete  
+
+
+
+
+\end{document}
