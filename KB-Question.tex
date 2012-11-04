@@ -137,21 +137,108 @@ See Hans's book page 251
 \section{Restricted to HORN}
 
 
-Equivalence Problem: same as the DHORN case.\\
+Equivalence Problem: same as the DHORN case (PTIME).\\
 
 iff IMP$(C,\beta)$ is satisfiable and IMP($C,\beta)\models \beta$\\ 
 
 \ \\
 
-V-Equivalence Problem: idea Same as DHORN but coNP-complete\\ 
+V-Equivalence Problem: idea Same as DHORN but $\Sigma_2^P$-complete\\ 
 
-iff IMP$(C, \beta, V)$ is sat and IMP$(C,\beta,V)\models_V \beta$ \\
+
+$$\Phi:=\exists y_1,\cdots, y_k \forall x_1,\cdots, x_m \left(c_1\vee\cdots\vee c_n \right)$$
+%
+Where $c_i$ is a conjunction of literals.\\
+
+for each variable $z$, introduce a new variable $\pi(\neg z)$. Let $\pi(z)=z$.\\
+
+introduce $U$.\\
+
+for a clause $c=L_1\wedge\cdots\wedge L_s$, we write 
+$\pi(c):=\pi(L_1)\wedge\cdots\wedge \pi(L_s)$
+
+
+
+
+
+$$\begin{array}{ll}C:=&\{\pi(c_i)\rightarrow U\mid i=1,\cdots,n\}\cup\\ 
+&\{\neg \pi(\neg x_j)\vee \neg x_j\mid j=1,\cdots,m\}\cup\\
+
+&\{\neg \pi(\neg y_i)\vee \neg y_i\mid i=1,\cdots, k\}\cup\\
+&\{y_i,\pi(\neg y_i)\mid i=1,\cdots,k\}\end{array}$$
+
+
+$$\beta:= U\vee \left(\bigvee_{j=1}^k (\neg \pi(\neg x_j)\wedge \neg x_j)\right)$$
+
+
+(Remark: using Tsting algorithm) \\
+
+Let $$V:=\{U\}\cup\{x_1,\cdots,x_m\}$$
+
+$(\exists K\subseteq C$ such that $K\equiv_V \beta)$ if and only if $\Phi$ is true.
+
+\ \\
 
 \ \\
 
 Implication Problem
 
 NP-complete  
+
+Given a 3CNF  $F$
+
+$$\bigwedge_{i=1}^m (L_{i,1}\vee L_{i,2}\vee L_{i,3}) \ \mbox{ over } x_1,\cdots, x_n$$
+
+For each $i=1,\cdots,m$, pick a new variable $z_i$. For each $j=1,\cdots, n$ we pick a new variable $\pi(\neg x_j)$. For convenience, we also write $x_j$ as $\pi(x_j)$. 
+
+Define $C$ 
+
+$$\begin{array}{ll}C:=&
+\bigcup_{i=1}^m\{\pi(L_{i,1})\rightarrow z_i, \pi(L_{i,2})\rightarrow z_i, \pi(L_{i,3})\rightarrow z_i\}\cup\\ & \bigcup_{j=1}^n\{\rightarrow x_j, \rightarrow \pi(\neg x_j\} \cup\\ &
+\{z_1\wedge\cdots\wedge z_m\rightarrow z\}\end{array}$$
+
+Define 
+
+$$\beta:=z\wedge\bigwedge (\neg \pi(\neg x_j)\vee \neg x_j)$$
+
+
+Impliation problem iff $F$ is satisfiable \\
+
+
+\ \\
+
+
+Specification Problem\\
+
+Given a partial configuration $K$, demand $\beta$, a set of variables $V,W$
+
+Looking for $\sigma$ over $W$ such that
+
+\begin{enumerate}
+\item $K\wedge \sigma(W)\equiv \beta$
+
+\item $K\wedge\sigma(W) \equiv_V\beta$
+
+\item $K\wedge\sigma(W)\models \beta$
+\end{enumerate}
+
+
+Query Learning 
+
+black box $\alpha$   
+
+equivalence query. Guess a $\beta$ ask whether $\alpha\equiv \beta$. If the answer is no, output a truth assignment satisfying $\alpha$ and $\neg \beta$ or satisfying $\neg\alpha$ and $\beta$.\\
+
+membership query
+
+guess a truth assignment $v$ answer $v(\alpha)=0$ or 1. 
+
+ 
+
+
+
+
+
 
 
 
