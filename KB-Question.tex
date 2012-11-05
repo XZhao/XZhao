@@ -60,20 +60,60 @@ Input: $C=\{\alpha_1,\cdots,\alpha_n\}$
 
 Query: Whether $\exists K\subseteq C: K\equiv \beta$\\
 
+Let
+$$\mbox{IMP}(C,\beta):=\{\alpha\mid \alpha\in C \mbox{ and }\beta\models \alpha\}$$
+Then
+$$\exists K\subseteq  C(K\equiv \beta)\Longleftrightarrow\mbox{IMP}(C,\beta)\models \beta$$
+
+So, equivalence problem is in P$^{\textbf{NP}[\text{log} n]}$ which is the class of problems solvable in polynomial time with $O(\text{log}n)$ queries to an NP oracle.\\
+
+Next we show hardness. The problem SAT$^n_{\text{odd}}$ is complete for P$^{\textbf{NP}[\text{log} n]}$. Where SAT$^n_{\text{odd}}$ is the problem of determining whether the number of satisfiable formulas among $n$ given CNF formulas.
+
+We shall construct a reduction from SAT$^n_{\text{odd}}$ to the equivalence configuration problem. 
+
+Suppose $F_1,\cdots, F_n$ are 3CNF formulas such that they have pairwisely distinct vaiables. We assume $F_i$ is not tautolodical, otherwise we consider $F_i\wedge p_i$. 
+ 
+ 
+It is easy to see that $\varphi$ is satsfiable iff the number of satisfiable formulas among $F_1,\cdots, F_n$ is odd.  
+
+
+Please note that there is transformation $T$ such that a 3CNF formula $F$ is satisfiable iff $T(F)$ is minimal unsatisfiable. 
+
+Now we have $T(F_1),\cdots, T(F_n)$, and suppose they have $m_1,\cdots, m_n$ clauses, repectively.
+
+By the definition of transformation $T$, in each $T(F_i)$ we have a clause $c_i=(y_{i,1}\vee \cdots\vee y_{i,m_i})$, where $y_{i,j}$ are introduced new variables by $T$.
+
+Now we can see $F_i$ is satisfiable iff $T(F_i)-\{c_i\}$ is satisfiable and equivalent to $\neg c_i\wedge F_i$ are equivalent.
+
+Let $T'(F_i):=(T(F_i)-\{c_i\})\vee_{cl} c_i$
+
+Let $C:=\{T'(F_1), \cdots, T'(F_n), c_1, \cdots, c_n\}$.
+
+
+Let $\beta:=( c_1\vee F_1)\wedge\cdots\wedge (c_n\vee F_n)\wedge (\neg c_1\otimes \cdots \otimes \neg c_n)$
+
+
+Suppose there are odd number of sat frmulas. For simplicility, we assume $F_1, \cdots, F_{2k+1}$ are sat, while others are unsat. 
+
+Let $K=\{T'(F_i),\cdots, T'(F_n)\}$, 
+
+
 
 \ \\
 
-{\bf Retricted Equivalence}(R-equivalence\\
+{\bf Retricted Equivalence}(R-equivalence)\\
 
-Input: $C=\{\alpha_1,\cdots,\alpha_n\}$, $beta$, and a set $V$ of variables
+Input: $C=\{\alpha_1,\cdots,\alpha_n\}$, $\beta$, and a set $V$ of variables
 
 Query: Whether $\exists K\subseteq C: K\equiv^V \beta$\\ 
+
+$\Sigma_3^P$
 
 \ \ \\
 
 {\bf Implication Problem}\\
 
-Input: $C=\{\alpha_1,\cdots,\alpha_n\}$, $beta$
+Input: $C=\{\alpha_1,\cdots,\alpha_n\}$, $\beta$
 
 Query: Whether $\exists K\subseteq C: K\models \beta$\\ 
 
@@ -89,7 +129,7 @@ $$\alpha \models_V \beta \Longleftrightarrow \forall \gamma \mbox{ over } V, (\b
 
 %%%%%%%
 
-Euivalence Problem is in P$^{\mbox{NP[log]}}$
+Euivalence Problem is in P$^{\text{NP}[\text{log}]n}$
 
 R-Equivalence Problem same as above
 
@@ -106,11 +146,11 @@ Implication  $\Sigma_2^P$?
 
 $C$: set of DHORN, $\beta$: DHORN \\
 
-{\bf Equivalence problem is in PTIME}\\
+{\bf Equivalence problem is in PTIME} \\
 
-Idea: Let $$\mbox{IMP}(C,\beta):=\{\alpha\mid \alpha\in C \mbox{ and }\beta\models \alpha\}$$
-Then
-$$\exists K\subseteq  C(K\equiv \beta)\Longleftrightarrow\mbox{IMP}(C,\beta)\models \beta$$
+Idea: Let 
+
+
 
 %%%
 
@@ -125,11 +165,11 @@ The existence of $K$ is equivalent to $C\models\beta$\\
 
 {\bf The $V$-equivalence problem}\\
 
-IMP$(C,\beta,V):=\{\alpha\in C\mid \beta\models_V \alpha\}$\\
+%IMP$(C,\beta,V):=\{\alpha\in C\mid \beta\models_V \alpha\}$\\
 
-The existence of $K\equiv_V \beta$ is equivalent to IMP$(C,\beta, V)\equiv_V\beta$.\\
+%The existence of $K\equiv_V \beta$ is equivalent to IMP$(C,\beta, V)\equiv_V\beta$.\\
 
-we guess it is co-NP complete.
+we guess it seems $\Sigma_2^P$-complete.
 
 See Hans's book page 251
 
@@ -143,7 +183,7 @@ iff IMP$(C,\beta)$ is satisfiable and IMP($C,\beta)\models \beta$\\
 
 \ \\
 
-V-Equivalence Problem: idea Same as DHORN but $\Sigma_2^P$-complete\\ 
+V-Equivalence Problem:  $\Sigma_2^P$-complete\\ 
 
 
 $$\Phi:=\exists y_1,\cdots, y_k \forall x_1,\cdots, x_m \left(c_1\vee\cdots\vee c_n \right)$$
