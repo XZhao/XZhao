@@ -54,7 +54,7 @@
 
 Configuration and Specification (Sets)\\ \ \\
 
-{\bf Equivalence Problem}\\
+{\bf Equivalence Configuration Problem}\\
 
 Input: $C=\{\alpha_1,\cdots,\alpha_n\}$
 
@@ -101,13 +101,67 @@ Let $K=\{T'(F_i),\cdots, T'(F_n)\}$,
 
 \ \\
 
-{\bf Retricted Equivalence}(R-equivalence)\\
+{\bf Retricted Equivalence Configuration}(R-equivalence)\\
 
 Input: $C=\{\alpha_1,\cdots,\alpha_n\}$, $\beta$, and a set $V$ of variables
 
 Query: Whether $\exists K\subseteq C: K\equiv^V \beta$\\ 
 
-$\Sigma_3^P$
+
+
+the problem of determining whether $F\equiv_V G$  is in $\Pi_2^P$ (for the complementary problem: we guess a clause $\gamma$ over $V$, check that $G\models \gamma$ but $F\not\models \gamma$. 
+
+Thus, R-equivalence configuraton is $\Sigma_3^P$ (guess a $K\subseteq C$, theck that it is satisfiable and $K\equiv_V \beta$.) \\
+
+
+Next we show the hardness.
+
+Consider $\Phi:=\exists \vec{x}\forall\vec{y}\exists \vec{z} \varphi$ where $\varphi$ is a CNF formula. We assume w.l.o.g. that $\varphi$ contains clauses non-tautological calss over $\vec{z}$ (otherwise, we pick new varaiable $z'$ and consider $\exists\vec{x}\forall\vec{y}\exists\vec{z}\exists z'(\varphi\wedge z'$)
+
+$\varphi$ be written as $(c'_1\vee c''_1)\wedge (c'_n\vee c''_n)$ in which $c'_i$ is clause over $\vec{x}$.
+
+Pick a new variable $w_1, \cdots, w_n,w$. Let 
+
+Let $$\psi:= \left(\bigwedge_{i=1}^n (c'_i\rightarrow w_i)\right)\wedge 
+\left(\bigwedge_{i=1}^n(\neg c'_i\wedge \neg c''_i\rightarrow \neg w_i)\right)$$
+
+Let $$C_0:=\{\psi\wedge  (c''_1\rightarrow w_1) , \cdots, \psi\wedge (c''_n\rightarrow w_n)\}$$
+
+$$C_1=\{c'_1, \neg c'_1,\cdots, c'_n, \neg c'_n\}$$
+
+$$C_2=\{x_1,\neg x_1\cdots, x_n,\neg x_n\}$$
+
+$$C_3=\{(w_1\wedge\cdots\wedge w_n\rightarrow w), (w\rightarrow (c'_1\vee c''_1)\wedge\cdots\wedge (c'_n\vee c''_n))\}$$
+
+Now let $$C:=C_0\cup C_1\cup C_2\cup C_3\cup\{w\}$$
+
+Let $\beta$ be $$ w_1\wedge\cdots\wedge w_n\wedge w$$
+
+Let $V:=\vec{y}\cup\{w_1,\cdots,w_n,\}\cup\{w\}$\\
+
+
+Claim: Suppose $K\subseteq C$ satisfiable, $c_i\not \in K$ and $K\not\models c_i$, then 
+$K\cup\{\neg c_i, \psi\wedge (c''_i\rightarrow w_i)\}$ is still satisfiable.
+
+
+(Lemma: $F\models_V G$ iff for for any truth assignment $t$ on $V$, if it can be extended to a satisfying truth assignment for $F$, it can be extended to an satisfying truth assignment for $G$. 
+) \\
+
+We shall show $\Phi$ is true if and only if there is satisfiable $K\subseteq C$ s.t. $K\equiv_V \beta$\\
+
+
+
+From right to left:
+Given a such $K\equiv_V \beta$. it must be that $w\in K$. 
+
+Let $K*\superseteq K$ such that for any $c'_i$, if $c'_i\not\in K$ then $K*\models c'_i$. Then $K^*\models_V \beta$. Then we can show $\Phi$ is true.\\
+
+From left to right.
+
+
+
+
+
 
 \ \ \\
 
@@ -116,6 +170,14 @@ $\Sigma_3^P$
 Input: $C=\{\alpha_1,\cdots,\alpha_n\}$, $\beta$
 
 Query: Whether $\exists K\subseteq C: K\models \beta$\\ 
+
+Clearly in $\Sigma_2^P$. We shall the hardness
+
+Consider $\Phi=\exists x_1,\cdots, x_n\forall y_1,\cdots,y_m \varphi$ where $\varphi$ is a DNF formula. Pick a new varibale $z$.
+
+Let $C:=\{\varphi\rightarrow z, x_1,\neg x_1,\cdots, x_n,\neg x_n\}$, $\beta:=z$
+
+Clearly, $\Phi$ is true if and only if $\exists K\subseteq C$ such that $K\models \beta$.
 
 
 \ \\ 
@@ -129,7 +191,7 @@ $$\alpha \models_V \beta \Longleftrightarrow \forall \gamma \mbox{ over } V, (\b
 
 %%%%%%%
 
-Euivalence Problem is in P$^{\text{NP}[\text{log}]n}$
+Euivalence Problem is in P$^{\text{NP}[\text{log}n]}$
 
 R-Equivalence Problem same as above
 
@@ -271,11 +333,24 @@ equivalence query. Guess a $\beta$ ask whether $\alpha\equiv \beta$. If the answ
 
 membership query
 
-guess a truth assignment $v$ answer $v(\alpha)=0$ or 1. 
-
- 
+guess a truth assignment $v$ answer $v(\alpha)=0$ or 1. \\
 
 
+
+
+
+\section{Configuration with constraints}
+
+$C=\{\alpha_1,\cdots, \alpha_n\}, \beta$,
+$D$ is set of formulas over $A_1,\cdots, A_n$ which are propositional atoms.
+Whether there is $K\subseteq C$ such that 
+\begin{itemize}
+\item $K$ is satisfiable,
+\item $K\equiv\beta$, and
+\item the truth assignment $v_K$ satisfies $D$, where $v_K(A_i)=\left\{\begin{array}{ll}
+1 & \text{if } \alpha_i\in K\\ 0 & \text{if }\alpha_i\not\in K\end{array}\right.$  
+
+\end{itemize}
 
 
 
