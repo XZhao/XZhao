@@ -3,6 +3,9 @@
 \usepackage{makeidx}
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage{color}
+\usepackage[all]{xy}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \long\def\remove#1{}
@@ -63,39 +66,29 @@ Query: Whether $\exists K\subseteq C: K\equiv \beta$\\
 Let
 $$\mbox{IMP}(C,\beta):=\{\alpha\mid \alpha\in C \mbox{ and }\beta\models \alpha\}$$
 Then
-$$\exists K\subseteq  C(K\equiv \beta)\Longleftrightarrow\mbox{IMP}(C,\beta)\models \beta$$
+$$\exists K\subseteq  C(K \text{ is satisfiable and } K\equiv \beta)\Longleftrightarrow\mbox{IMP}(C,\beta) \text{ is satisfiable and IMP}(C,\beta)\models \beta$$
 
-So, equivalence problem is in P$^{\textbf{NP}[\text{log} n]}$ which is the class of problems solvable in polynomial time with $O(\text{log}n)$ queries to an NP oracle.\\
+So, equivalence problem is in P$^{\text{NP}[\text{log} n]}$ which is the class of problems solvable in polynomial time with $O(\text{log}n)$ queries to an NP oracle.\\
 
-Next we show hardness. The problem SAT$^n_{\text{odd}}$ is complete for P$^{\textbf{NP}[\text{log} n]}$. Where SAT$^n_{\text{odd}}$ is the problem of determining whether the number of satisfiable formulas among $n$ given CNF formulas.
+Next we show hardness. The problem SAT$^n_{\text{odd}}$ is complete for P$^{\text{NP}[\text{log} n]}$. Where SAT$^n_{\text{odd}}$ is the problem of determining whether the number of satisfiable formulas among $n$ given CNF formulas.
 
 We shall construct a reduction from SAT$^n_{\text{odd}}$ to the equivalence configuration problem. 
 
-Suppose $F_1,\cdots, F_n$ are 3CNF formulas such that they have pairwisely distinct vaiables. We assume $F_i$ is not tautolodical, otherwise we consider $F_i\wedge p_i$. 
+Suppose $F_1,\cdots, F_n$ are 3CNF formulas such that they have pairwisely distinct vaiables. We assume $n$ is even. Otherwise we add formula $p\wedge \neg p$. \\
+
+For $F_i$ introduce a new variable $w_i$. We claim that $F_i$ is unsatisfiable iff $T_i:=(\neg F_i\rightarrow w_i)\leftrightarrow w_i$ is tautological. In other word, $F$ is satisfiable iff $T_i$ is not a tautology (i.e., $\neg T_i$ is satisfiable. 
+
+Let $C:=\{\neg w_1\wedge F_1\wedge \neg T_1,\cdots, F_n\wedge\neg T_i)\}$.
+
+Let $\beta:=(F_1\wedge \neg T_1)\otimes\cdots \otimes (F_n\wedge \neg T_n)$.
  
- 
-It is easy to see that $\varphi$ is satsfiable iff the number of satisfiable formulas among $F_1,\cdots, F_n$ is odd.  
 
+Suppose there are odd number of satisfiable formulas, say $F_1,\cdots, F_{2k+1}$
 
-Please note that there is transformation $T$ such that a 3CNF formula $F$ is satisfiable iff $T(F)$ is minimal unsatisfiable. 
+Let $K:=\{\neg T_1,\cdots, \neg T_{2k+1}\}$. 
 
-Now we have $T(F_1),\cdots, T(F_n)$, and suppose they have $m_1,\cdots, m_n$ clauses, repectively.
+Clearly, $K\models\beta$. 
 
-By the definition of transformation $T$, in each $T(F_i)$ we have a clause $c_i=(y_{i,1}\vee \cdots\vee y_{i,m_i})$, where $y_{i,j}$ are introduced new variables by $T$.
-
-Now we can see $F_i$ is satisfiable iff $T(F_i)-\{c_i\}$ is satisfiable and equivalent to $\neg c_i\wedge F_i$ are equivalent.
-
-Let $T'(F_i):=(T(F_i)-\{c_i\})\vee_{cl} c_i$
-
-Let $C:=\{T'(F_1), \cdots, T'(F_n), c_1, \cdots, c_n\}$.
-
-
-Let $\beta:=( c_1\vee F_1)\wedge\cdots\wedge (c_n\vee F_n)\wedge (\neg c_1\otimes \cdots \otimes \neg c_n)$
-
-
-Suppose there are odd number of sat frmulas. For simplicility, we assume $F_1, \cdots, F_{2k+1}$ are sat, while others are unsat. 
-
-Let $K=\{T'(F_i),\cdots, T'(F_n)\}$, 
 
 
 
@@ -116,22 +109,28 @@ Thus, R-equivalence configuraton is $\Sigma_3^P$ (guess a $K\subseteq C$, theck 
 
 Next we show the hardness.
 
-Consider $\Phi:=\exists \vec{x}\forall\vec{y}\exists \vec{z} \varphi$ where $\varphi$ is a CNF formula. We assume w.l.o.g. that $\varphi$ contains clauses non-tautological calss over $\vec{z}$ (otherwise, we pick new varaiable $z'$ and consider $\exists\vec{x}\forall\vec{y}\exists\vec{z}\exists z'(\varphi\wedge z'$)
+Consider $\Phi:=\exists \vec{x}\forall\vec{y}\exists \vec{z} \varphi$ where $\varphi$ is a CNF formula. \\
+
+We assume w.l.o.g. that $\varphi$ contains a non-tautological clause over $\vec{z}$ (otherwise, we pick new varaiable $z'$ and consider $\exists\vec{x}\forall\vec{y}\exists\vec{z}\exists z'(\varphi\wedge z'$)).\\
+
+We assume that each clause contains a positive occurrence of a variable from $\vec{y}\cup\vec{z}$. If otherwise pick a new variable $u$, and consider $\exists \vec{x}\forall\vec{y}\forall u\exists \vec{z}\varphi^u$, where $\varphi^u$ is obtained from $\varphi$ by adding $u$ to clauses containing no positive literal from $\vec{y}\cup\vec{z}$. Clearly, $\Phi$ and the resulting formula has the same truth.\\
+
+By our assumption $\forall\vec{x}\exists\vec{y}\exists\vec{z}\phi$ is true. (we will use this assumption later).\\ 
 
 $\varphi$ be written as $(c'_1\vee c''_1)\wedge (c'_n\vee c''_n)$ in which $c'_i$ is clause over $\vec{x}$.
 
-Pick a new variable $w_1, \cdots, w_n,w$. Let 
+Pick new variables $w_1, \cdots, w_n,w$. Let 
 
 Let $$\psi:= \left(\bigwedge_{i=1}^n (c'_i\rightarrow w_i)\right)\wedge 
 \left(\bigwedge_{i=1}^n(\neg c'_i\wedge \neg c''_i\rightarrow \neg w_i)\right)$$
 
-Let $$C_0:=\{\psi\wedge  (c''_1\rightarrow w_1) , \cdots, \psi\wedge (c''_n\rightarrow w_n)\}$$
+Let $$C_0:=\{\psi\wedge \neg c'_1\wedge  (c''_1\rightarrow w_1) , \cdots, \psi\wedge\neg c'_n\wedge (c''_n\rightarrow w_n)\}$$
 
-$$C_1=\{c'_1, \neg c'_1,\cdots, c'_n, \neg c'_n\}$$
+$$C_1=\{c'_1, \cdots, c'_n, \}$$
 
 $$C_2=\{x_1,\neg x_1\cdots, x_n,\neg x_n\}$$
 
-$$C_3=\{(w_1\wedge\cdots\wedge w_n\rightarrow w), (w\rightarrow (c'_1\vee c''_1)\wedge\cdots\wedge (c'_n\vee c''_n))\}$$
+$$C_3=\{(w\rightarrow (c'_1\vee c''_1)\wedge\cdots\wedge (c'_n\vee c''_n))\}$$
 
 Now let $$C:=C_0\cup C_1\cup C_2\cup C_3\cup\{w\}$$
 
@@ -140,8 +139,8 @@ Let $\beta$ be $$ w_1\wedge\cdots\wedge w_n\wedge w$$
 Let $V:=\vec{y}\cup\{w_1,\cdots,w_n,\}\cup\{w\}$\\
 
 
-Claim: Suppose $K\subseteq C$ satisfiable, $c_i\not \in K$ and $K\not\models c_i$, then 
-$K\cup\{\neg c_i, \psi\wedge (c''_i\rightarrow w_i)\}$ is still satisfiable.
+%Claim: Suppose $K\subseteq C$ satisfiable, $c_i\not \in K$ and $K\not\models c_i$, %then 
+%$K\cup\{\neg c_i, \psi\wedge (c''_i\rightarrow w_i)\}$ is still satisfiable.
 
 
 (Lemma: $F\models_V G$ iff for for any truth assignment $t$ on $V$, if it can be extended to a satisfying truth assignment for $F$, it can be extended to an satisfying truth assignment for $G$. 
@@ -151,12 +150,68 @@ We shall show $\Phi$ is true if and only if there is satisfiable $K\subseteq C$ 
 
 
 
-From right to left:
-Given a such $K\equiv_V \beta$. it must be that $w\in K$. 
+\color{red} From right to left:\color{black}
 
-Let $K*\superseteq K$ such that for any $c'_i$, if $c'_i\not\in K$ then $K*\models c'_i$. Then $K^*\models_V \beta$. Then we can show $\Phi$ is true.\\
+Given a such $K\equiv_V \beta$. 
+Clearly, $K\cap C_0$ is non-empty.\\
 
-From left to right.
+
+
+It must be that $w\in K$. 
+Let $t$ satisfy $K$. 
+By our assumption we know $t\uparrow\vec{x}$ can be extended to $s$ which falsifies $\varphi$. Now we assign truth values to $w_i$ according to the tuth values $s(c'_i)$ and $s(c''_i)$ to make formulas $\psi$ and  $(c''_i\rightarrow w_i)$ to be true. There there must some $w_i$ which is false. Then if we set $w$ to be false, $K$ is still be satisfied by $s$ (because clauses in $C_3$ are satisfied). This contradict the $V$-euivalence.\\
+
+It must be that $w\rightarrow (c'_1\vee c_1'')\wedge\cdots\wedge (c'_n\vee c''_n)$ is in $K$. Suppose it is not the case. Similar as above, there would be a satisfying truth assigment of $K$ which makes some $w_i$ false, contradicts the $V$-equivalence. \\
+
+
+Suppose $K\not\models c'_i$. Then $\psi\wedge\neg c'_i \wedge (c''_i\rightarrow w_i)$ must be in $K$. 
+Otherwise, $K\cup\{\neg c'_i\}$ is consitent,  then there is a satisfying truth assignment $t$ for $K$ such that $t(c'_i)=0, t(w)=1, t(w_i)=0$. (In fact by our assumption, $t$ can be assumed to satisfiy $(c'_1\vee c''_1)\wedge\cdots\wedge (c'_n\vee c''_n)$ because every clause contains positive literal from $\vec{y}\cup\vec{z}$). This contradict the fact that $K\equiv_V\beta$.
+
+
+Now we can see for each $i$, either $K\models \neg c'_i$ or $K\models c'_i$. 
+That is, for any two satisfying truth assignments $t_1, t_2$ of $K$, each $c'_i$ has the same truth under $t_1\uparrow \vec{x}$ and $t_2\uparrow\vec{x}$.  \\
+
+
+
+
+
+Now fix a trut assigment $e$ on $\vec{x}$ which can be extended to a satisfying truth assigment of $K$. 
+
+Consider any truth assigment $s$ on $\vec{y}$. Since $s$ can be extended to satisfy $\beta$, it can be extended to a truth assigment $t$ which satisfies $K$. Please note we can assmue that $t\uparrow\vec{x}$ is $e$. 
+Since $w$ and $w\rightarrow (c'_1\vee c''_1)\wedge\cdots\wedge (c'_n\vee c''_n)$ are in $K$. We can see $t$ satisfy $\varphi$. 
+
+Consequently, for any truth assigment $s$ on $\vec{y}$, $e*s$ can be extended to a satisfying truth assigment of $\varphi$. Thus, $\Phi$ is true.
+
+
+\ \\ 
+
+{\color{red} From left to right.\color{black}
+
+
+Suppose $\Phi=\exists\vec{x}\forall\vec{y}\exists\vec{z}\varphi$ is true. 
+
+Let $e$ be a truth assignment on $\vec{x}$ such that $\forall\vec{y}\exists\vec{x}\varphi[x/e]$ is true
+
+
+Let $$K_0:=\{\psi\wedge \neg c'_i\wedge (c''_i\rightarrow w_i)\mid e(c'_i)=0, i=1,\cdots,n\}$$
+
+$$K_1:=\{c'_i\mid e(c'_i)=1, i=1,\cdots,n\}$$
+
+$$K_2:=\{x_i\mid e(x_i)=1, i=1,\cdots, n\}\cup\{\neg x_i\mid e(x_i)=0, i=1,\cdots,n\}$$
+
+$$K:=K_0\cup K_1\cup K_2\cup C_3\cup\{w\}$$
+
+
+Consider any truth assignment $s$ on $V$. 
+
+Suppose $s$ can be extended to satisfy $K$. Say the extenson is $t$. Since $w\in K$, $(c'_1\vee c''_1)\wedge\cdots\wedge(c'_n\vee c'_n)$ be be true under $t$. By formulas in $K_0$, we can see each $w_i$ is true under $t$. That means $s$ make $\beta$ true. Thus, $K\models_V\beta$. \\
+
+Now suppose $s$ satisfies $\beta$. Since $\Phi$ is true, $e*(s\uparrow\vec{y})$ can  be extended to satisfy $\Phi$. Let $t$ be such an extension. Next we show $t$ can be extended to satisies $K$. Since $t$ makes $\varphi$ true, either $c'_i$ is true or $c''_i$ is true. We set each $w_i$ to be true. Then all clauses in $K_0$ are true. Set $w$ to be true. Then clauses in $C_3$ are true. Please note formulas in $K_1\cup K_2$ are already atisfied by $e$. Consequently, $s$ can be extended to satisfy $K$.
+Hence, $\beta\models_V K$.\\
+
+Altogether we obtain $K\equiv_V \beta$.
+
+
 
 
 
@@ -177,7 +232,7 @@ Consider $\Phi=\exists x_1,\cdots, x_n\forall y_1,\cdots,y_m \varphi$ where $\va
 
 Let $C:=\{\varphi\rightarrow z, x_1,\neg x_1,\cdots, x_n,\neg x_n\}$, $\beta:=z$
 
-Clearly, $\Phi$ is true if and only if $\exists K\subseteq C$ such that $K\models \beta$.
+Clearly, $\Phi$ is true if and only if $\exists K\subseteq C$ such that $K$ is satisfiable and $K\models \beta$.
 
 
 \ \\ 
@@ -191,11 +246,6 @@ $$\alpha \models_V \beta \Longleftrightarrow \forall \gamma \mbox{ over } V, (\b
 
 %%%%%%%
 
-Euivalence Problem is in P$^{\text{NP}[\text{log}n]}$
-
-R-Equivalence Problem same as above
-
-Implication  $\Sigma_2^P$?
 
 
 
@@ -210,7 +260,7 @@ $C$: set of DHORN, $\beta$: DHORN \\
 
 {\bf Equivalence problem is in PTIME} \\
 
-Idea: Let 
+Idea: just checked IMP$(C,\beta)\equiv \beta$. 
 
 
 
