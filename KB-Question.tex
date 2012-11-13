@@ -51,15 +51,21 @@
 \begin{document}
 
 
+\begin{tabular}{l|l|l|l}
+& $\equiv$ & $\equiv_V$ & $\models$\\ \hline
+DHORN & PTIME & $\Sigma_2^P$, hardness is unknown & PTIME \\ \hline
+HORN & PTIME & $\Sigma_2^P$-complete & NP-complete\\ \hline
+CNF & $P^{NP[\text{log}\, n]}$, hardness unknown& $\Sigma_3^P$-complete & $\Sigma_2^P$-complete
+\end{tabular}
+
 
 \section{General Problems}
-
 
 Configuration and Specification (Sets)\\ \ \\
 
 {\bf Equivalence Configuration Problem}\\
 
-Input: $C=\{\alpha_1,\cdots,\alpha_n\}$
+Input: $C=\{\alpha_1,\cdots,\alpha_n\}$ and $\beta$
 
 Query: Whether $\exists K\subseteq C: K\equiv \beta$\\
 
@@ -102,22 +108,24 @@ Query: Whether $\exists K\subseteq C: K\equiv^V \beta$\\
 
 
 
-the problem of determining whether $F\equiv_V G$  is in $\Pi_2^P$ (for the complementary problem: we guess a clause $\gamma$ over $V$, check that $G\models \gamma$ but $F\not\models \gamma$. 
+the problem of determining whether $F\equiv_V G$  is in $\Pi_2^P$ (for the complementary problem: we guess a clause $\gamma$ over $V$, check that $G\models \gamma$ but $F\not\models \gamma$, or $G\not\models\gamma$ but $F\models\gamma$). 
 
-Thus, R-equivalence configuraton is $\Sigma_3^P$ (guess a $K\subseteq C$, theck that it is satisfiable and $K\equiv_V \beta$.) \\
+Thus, R-equivalence configuraton is $\Sigma_3^P$ (guess a $K\subseteq C$, check that it is satisfiable and $K\equiv_V \beta$.) \\
 
 
 Next we show the hardness.
 
 Consider $\Phi:=\exists \vec{x}\forall\vec{y}\exists \vec{z} \varphi$ where $\varphi$ is a CNF formula. \\
 
-We assume w.l.o.g. that $\varphi$ contains a non-tautological clause over $\vec{z}$ (otherwise, we pick new varaiable $z'$ and consider $\exists\vec{x}\forall\vec{y}\exists\vec{z}\exists z'(\varphi\wedge z'$)).\\
+We assume w.l.o.g. that $\varphi$ contains a non-tautological clause over $\vec{z}$ (otherwise, we pick new varaiable $z'$ and consider $\exists\vec{x}\forall\vec{y}\exists\vec{z}\exists z'(\varphi\wedge z'$)).
 
-We assume that each clause contains a positive occurrence of a variable from $\vec{y}\cup\vec{z}$. If otherwise pick a new variable $u$, and consider $\exists \vec{x}\forall\vec{y}\forall u\exists \vec{z}\varphi^u$, where $\varphi^u$ is obtained from $\varphi$ by adding $u$ to clauses containing no positive literal from $\vec{y}\cup\vec{z}$. Clearly, $\Phi$ and the resulting formula has the same truth.\\
+By this assumption, $\forall\vec{x}\exists\vec{y}\exists\vec{z}\neg \varphi$ is true\\
 
-By our assumption $\forall\vec{x}\exists\vec{y}\exists\vec{z}\phi$ is true. (we will use this assumption later).\\ 
+We assume that each clause contains a positive occurrence of a variable from $\vec{y}\cup\vec{z}$. If otherwise pick a new variable $u$, and consider $\exists \vec{x}\forall\vec{y}\forall u\exists \vec{z}\varphi^u$, where $\varphi^u$ is obtained from $\varphi$ by adding $u$ to clauses containing no positive literal from $\vec{y}\cup\vec{z}$. Clearly, $\Phi$ and the resulting formula has the same truth.
 
-$\varphi$ be written as $(c'_1\vee c''_1)\wedge (c'_n\vee c''_n)$ in which $c'_i$ is clause over $\vec{x}$.
+By this assumption, $\forall\vec{x}\exists\vec{y}\exists\vec{z}\phi$ is true. (we will use this later).\\ 
+
+$\varphi$ can be written as $(c'_1\vee c''_1)\wedge\cdots\wedge (c'_n\vee c''_n)$ in which $c'_i$ is over $\vec{x}$, while $c''_i$ is over $\vec{y}\cup\vec{z}$.
 
 Pick new variables $w_1, \cdots, w_n,w$. Let 
 
@@ -159,9 +167,9 @@ Clearly, $K\cap C_0$ is non-empty.\\
 
 It must be that $w\in K$. 
 Let $t$ satisfy $K$. 
-By our assumption we know $t\uparrow\vec{x}$ can be extended to $s$ which falsifies $\varphi$. Now we assign truth values to $w_i$ according to the tuth values $s(c'_i)$ and $s(c''_i)$ to make formulas $\psi$ and  $(c''_i\rightarrow w_i)$ to be true. There there must some $w_i$ which is false. Then if we set $w$ to be false, $K$ is still be satisfied by $s$ (because clauses in $C_3$ are satisfied). This contradict the $V$-euivalence.\\
+By our assumption we know $t\uparrow\vec{x}$ can be extended to $s$ which falsifies $\varphi$. Now we assign truth values to $w_i$ according to the tuth values $s(c'_i)$ and $s(c''_i)$ to make formulas $\psi$ and  $(c''_i\rightarrow w_i)$ to be true. There  must be some $w_i$ which is false. Then if we set $w$ to be false, $K$ is still be satisfied by $s$ (because clauses in $C_3$ are satisfied). This contradict the $V$-euivalence.\\
 
-It must be that $w\rightarrow (c'_1\vee c_1'')\wedge\cdots\wedge (c'_n\vee c''_n)$ is in $K$. Suppose it is not the case. Similar as above, there would be a satisfying truth assigment of $K$ which makes some $w_i$ false, contradicts the $V$-equivalence. \\
+It must be that $C_3\subseteq K$, i.e., $w\rightarrow (c'_1\vee c_1'')\wedge\cdots\wedge (c'_n\vee c''_n)$ is in $K$. Suppose it is not the case. Similar as above, there would be a satisfying truth assigment of $K$ which makes some $w_i$ false, contradicts the $V$-equivalence. \\
 
 
 Suppose $K\not\models c'_i$. Then $\psi\wedge\neg c'_i \wedge (c''_i\rightarrow w_i)$ must be in $K$. 
@@ -291,11 +299,11 @@ See Hans's book page 251
 
 Equivalence Problem: same as the DHORN case (PTIME).\\
 
-iff IMP$(C,\beta)$ is satisfiable and IMP($C,\beta)\models \beta$\\ 
+Desired $K$ exists iff IMP$(C,\beta)$ is satisfiable and IMP($C,\beta)\models \beta$\\ 
 
 \ \\
 
-V-Equivalence Problem:  $\Sigma_2^P$-complete\\ 
+V-Equivalence Configuration Problem :  $\Sigma_2^P$-complete\\ 
 
 
 $$\Phi:=\exists y_1,\cdots, y_k \forall x_1,\cdots, x_m \left(c_1\vee\cdots\vee c_n \right)$$
@@ -306,31 +314,63 @@ for each variable $z$, introduce a new variable $\pi(\neg z)$. Let $\pi(z)=z$.\\
 
 introduce $U$.\\
 
-for a clause $c=L_1\wedge\cdots\wedge L_s$, we write 
+Let $$\psi_0:=\left(\bigwedge_{j=1}^m (\neg \pi(\neg x_j)\vee \neg x_j)\right), \ \psi_1:= \left(\bigwedge_{i=1}^k(\neg \pi(\neg y_i)\vee \neg y_i)\right)$$
+
+$$\theta:=\left(\bigvee_{i=1}^m (\neg x_i\wedge \neg\pi(\neg x_i))\right)$$
+
+%$$\theta_i:=\left(\bigvee_{x\not\in c_i, \neg x\not\in c_i}(\neg x\wedge\neg\pi(\neg %x))\right)$$
+
+Please note that $\theta$ is not HORN  when $n>1$. Forturnately, by using Tseiting algorithm, one can transform  $\theta$ to an equivalent HORN formula when restricted to old variables. \\  
+
+
+
+For a conjunction $c=L_1\wedge\cdots\wedge L_s$, we write 
 $\pi(c):=\pi(L_1)\wedge\cdots\wedge \pi(L_s)$
 
 
+$$\begin{array}{lcl}C_0&:=&\{\psi_0\wedge\psi_1 \wedge\left( \bigwedge_{i=1}^n(\pi(c_i)\rightarrow U\vee \theta)\right)\}\\ 
 
+C&:=&C_0\cup \{y_i,\pi(\neg y_i)\mid i=1,\cdots,k\}\\
+\beta&:= &(U\vee\theta)\wedge \psi_0 \\
+V&:=&\{U\}\cup\{x_1,\cdots,x_m,\pi(\neg x_1),\cdots, \pi(\neg x_m)\}
+\end{array}$$
 
+We shall show 
 
-$$\begin{array}{ll}C:=&\{\pi(c_i)\rightarrow U\mid i=1,\cdots,n\}\cup\\ 
-&\{\neg \pi(\neg x_j)\vee \neg x_j\mid j=1,\cdots,m\}\cup\\
-
-&\{\neg \pi(\neg y_i)\vee \neg y_i\mid i=1,\cdots, k\}\cup\\
-&\{y_i,\pi(\neg y_i)\mid i=1,\cdots,k\}\end{array}$$
-
-
-$$\beta:= U\vee \left(\bigvee_{j=1}^k (\neg \pi(\neg x_j)\wedge \neg x_j)\right)$$
-
-
-(Remark: using Tsting algorithm) \\
-
-Let $$V:=\{U\}\cup\{x_1,\cdots,x_m\}$$
-
-$(\exists K\subseteq C$ such that $K\equiv_V \beta)$ if and only if $\Phi$ is true.
+$$(\exists K\subseteq C \text{ such that } K\equiv_V \beta) \text{ if and only if $\Phi$ is true}.$$
 
 \ \\
 
+\color{red} 
+!!!! I suddenly find that $U\vee \theta $ may not be HORN. Forturnately we can change $U$ to $\neg U$ in $C$ and $\beta$. Then the following proof should be changed accordingly 
+\color{black}\\
+
+Suppose $\Phi$ is true. There is truth assignment
+$e$ on $\{y_1,\cdots, y_m\}$ such that $\forall x_1,\cdots,x_m\varphi[\vec{y}/e]$ is true, where $\vec{y}=y_1\cdots,y_k$. Define 
+%
+$$K=C_0\cup \{y_i\mid t(y_i)=1, 1\leq i\leq k\}\cup \{\pi(\neg y_i)\mid t(y_i)=0, 1\leq i\leq k\}$$
+
+For any satisfying truth assignment $t$ for $K$, if it makes $\theta$ true then $\beta$ is true under $t$. Suppose $t$ makes $\theta$ false, then $t$ corresponds a truth assignment on $x_1,\cdots, x_n$ accoding the truth of $x_i$ and $\pi(\neg x_i)$. Since $\Phi$ is true, some  $\pi(c_i)$ must be true under $t$, then $T(U)=1$. Therefore, $t(\beta)=1$.
+
+Suppose $s$ is a satisfying truth assignment for $\beta$. Then $s*e$ satisfies $\psi_0\wedge \psi_1$. If $s$ makes $\theta$ true, then $s*e$ satisfies $K$. Suppose $s(\theta)=0$. Then $s(U)=1$, hence $K$ is still satisfied by $s*e$. 
+
+Altogether, we have $K\equiv_V\beta$.\\
+
+
+For the inverse direction, suppose there is satisfiable $K\subseteq C$ such that $K\equiv_V\beta$. 
+
+
+Clearly, the formula in $C_0$ must be in $K$. Then by formula $\psi_1$, either $y_i$ or  $\pi(\neg y_i)$ is not in $K$. 
+
+Pick a truth assignment $e$ on $\{y_1,\cdots, y_k\}$ such that if $y_i\in K$ then $e(y_i)=1$, and $e(y_i)=0$  if else. 
+
+We need to show $\forall x_1,\cdots,x_m(c_1\vee\cdots\vee c_n)$ is true.
+
+Consider any truth assigment $s$ on $\{x_1,\cdots, x_m\}$. Let $s'$ be the assignment defined by $s'(\pi(\neg x_i)=1$ iff $s(x_i)=0$. Then $e'*s'$ satisfies $\psi_0\wedge\psi_1$, where $e'$ is obtained from $e$ is the same way as $s'$. 
+We claim that, $(e'*s')$ makes $\pi(c_i)$ true for some $i$. Otherwise, we could set $U$ to be false,  and get a truth assignment satisfying $K$ but bot satisfying $\beta$ (please note that $s'(\theta)=0$), contradict the $V$-quivalence. 
+
+Consequently, $\Phi$ is true.
+ 
 \ \\
 
 Implication Problem

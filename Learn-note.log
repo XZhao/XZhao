@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  9 NOV 2012 19:31
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  13 NOV 2012 22:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**KB-Question.tex
-(./KB-Question.tex
+**Learn-note.tex
+(./Learn-note.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, ge
 rman-x-2012-05-30, ngerman-x-2012-05-30, afrikaans, ancientgreek, ibycus, arabi
@@ -265,36 +265,34 @@ loaded))
 \c@lemma=\count112
 \c@corollary=\count113
 \c@proposition=\count114
-\c@example=\count115
-\c@remark=\count116
- (./KB-Question.aux)
-\openout1 = `KB-Question.aux'.
+ (./Learn-note.aux)
+\openout1 = `Learn-note.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
 
 (/usr/local/texlive/2012/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count117
+\scratchcounter=\count115
 \scratchdimen=\dimen148
 \scratchbox=\box32
-\nofMPsegments=\count118
-\nofMParguments=\count119
+\nofMPsegments=\count116
+\nofMParguments=\count117
 \everyMPshowfont=\toks27
-\MPscratchCnt=\count120
+\MPscratchCnt=\count118
 \MPscratchDim=\dimen149
-\MPnumerator=\count121
-\makeMPintoPDFobject=\count122
+\MPnumerator=\count119
+\makeMPintoPDFobject=\count120
 \everyMPtoPDFconversion=\toks28
 ) (/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
@@ -340,75 +338,24 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for U+msa on input line 51.
+LaTeX Font Info:    Try loading font information for U+msa on input line 47.
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 51.
+LaTeX Font Info:    Try loading font information for U+msb on input line 47.
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
-Package xypdf Info: Line width: 0.47998pt on input line 51.
+Package xypdf Info: Line width: 0.47998pt on input line 47.
 
-Overfull \hbox (63.7418pt too wide) in paragraph at lines 54--60
-[][] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 64--65
+Underfull \hbox (badness 10000) in paragraph at lines 93--94
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 64--65
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 66--67
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 70--71
-
- []
-
-
-Overfull \hbox (52.46217pt too wide) detected at line 75
-\OMS/cmsy/m/n/12 9\OML/cmm/m/it/12 K \OMS/cmsy/m/n/12 ^^R \OML/cmm/m/it/12 C\OT
-1/cmr/m/n/12 (\OML/cmm/m/it/12 K[]K \OMS/cmsy/m/n/12 ^^Q \OML/cmm/m/it/12 ^^L\O
-T1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 ([]) []\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 C; ^^
-L\OT1/cmr/m/n/12 )[](\OML/cmm/m/it/12 C; ^^L\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 
-j[]\OT1/cmr/m/n/12 = \OML/cmm/m/it/12 ^^L
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--78
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 83--84
-
- []
-
-[1
-
-{/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 101--102
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 103--104
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 107--108
+Underfull \hbox (badness 10000) in paragraph at lines 109--110
 
  []
 
@@ -417,245 +364,33 @@ Underfull \hbox (badness 10000) in paragraph at lines 113--114
 
  []
 
+[1
 
-Underfull \hbox (badness 10000) in paragraph at lines 118--119
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 122--123
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 126--127
-
- []
-
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 147--148
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 154--156
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 157--158
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 163--165
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 168--171
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 172--173
-
- []
-
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 179--181
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 194--195
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 215--216
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 217--219
-
- []
-
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 229--230
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 231--232
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 235--236
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 246--247
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 267--268
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 269--270
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 277--278
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 279--280
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 281--282
-
- []
-
-[5]
-Underfull \hbox (badness 10000) in paragraph at lines 283--284
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 286--287
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 300--301
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 302--303
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 304--305
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 306--307
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 309--312
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 313--314
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 315--316
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 323--324
-
- []
-
-[6]
-Underfull \hbox (badness 10000) in paragraph at lines 342--343
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 345--347
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 357--358
-
- []
-
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 374--375
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 397--398
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 400--401
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 403--404
-
- []
-
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 422--423
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 426--427
-
- []
-
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 438.
-
-(/usr/local/texlive/2012/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 438.
- [9]
-(./KB-Question.aux) )
-(\end occurred inside a group at level 1)
-
-### simple group (level 1) entered at line 196 ({)
-### bottom level 
+{/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+[2] (./Learn-note.aux) ) 
 Here is how much of TeX's memory you used:
- 4931 strings out of 493488
- 63668 string characters out of 3141326
- 170971 words of memory out of 3000000
- 8135 multiletter control sequences out of 15000+200000
- 11268 words of font info for 47 fonts, out of 3000000 for 9000
+ 4911 strings out of 493488
+ 63402 string characters out of 3141326
+ 166778 words of memory out of 3000000
+ 8118 multiletter control sequences out of 15000+200000
+ 13861 words of font info for 58 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,11n,24p,3222b,222s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmbx12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmex10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmmi12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmmi8.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-8.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10
-.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.p
-fb>
-Output written on KB-Question.pdf (9 pages, 120292 bytes).
+ 38i,13n,24p,3221b,296s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/local/texlive/2012/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmbx10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmmi12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmmi8.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr6.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr8.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+y7.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8
+.pfb>
+Output written on Learn-note.pdf (2 pages, 102972 bytes).
 PDF statistics:
- 66 PDF objects out of 1000 (max. 8388607)
- 46 compressed objects within 1 object stream
+ 51 PDF objects out of 1000 (max. 8388607)
+ 36 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
