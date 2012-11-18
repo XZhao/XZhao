@@ -82,18 +82,27 @@ We shall construct a reduction from SAT$^n_{\text{odd}}$ to the equivalence conf
 
 Suppose $F_1,\cdots, F_n$ are 3CNF formulas such that they have pairwisely distinct vaiables. We assume $n$ is even. Otherwise we add formula $p\wedge \neg p$. \\
 
-For $F_i$ introduce a new variable $w_i$. We claim that $F_i$ is unsatisfiable iff $T_i:=(\neg F_i\rightarrow w_i)\leftrightarrow w_i$ is tautological. In other word, $F$ is satisfiable iff $T_i$ is not a tautology (i.e., $\neg T_i$ is satisfiable. 
+We also assume each $F_i$ is not tautological (otherwise condider $F_i\wedge p_i$).\\ 
 
-Let $C:=\{\neg w_1\wedge F_1\wedge \neg T_1,\cdots, F_n\wedge\neg T_i)\}$.
+We assume $F_i$ is over variables $\vec{x}_i$. Pick new varables $\vec{y}_i$ and $\vec{z}_i$. We formulas $F_i(\vec{x}_i), F_i(\vec{y}_i), F_i(\vec{z}_i)$.
 
-Let $\beta:=(F_1\wedge \neg T_1)\otimes\cdots \otimes (F_n\wedge \neg T_n)$.
- 
+$$\psi:=\bigwedge_{i=1}^n \left((F_i(\vec{y}_i)\rightarrow \neg F_i(\vec{x}_i))\wedge (\neg F_i(\vec{y}_i)\wedge \neg F_i(\vec{x}_i)\rightarrow \neg F_i(\vec{z}_i))\right)$$
 
-Suppose there are odd number of satisfiable formulas, say $F_1,\cdots, F_{2k+1}$
+%$$F_i(\vec{y}_i)\vee F_i(\vec{x}_i)\rightarrow F_i(\vec{z}_i)$$
 
-Let $K:=\{\neg T_1,\cdots, \neg T_{2k+1}\}$. 
 
-Clearly, $K\models\beta$. 
+$$C:=\{\psi\}\cup \{F_1(\vec{y}_1)\vee F_1(\vec{x}_1),\cdots, F_n(\vec{y}_n)\vee F_n(\vec{x}_n)\}$$
+
+$$\beta:=\psi\wedge ((F_1(\vec{y}_1)\vee F_1(\vec{x}_1))\otimes\cdots\otimes (F_n(\vec{y}_n)\vee F_n(\vec{x}_n)))$$
+
+
+Suppose for some $K\subseteq C$ such that $K\equiv \beta$. Then it must be $\psi\in K$. 
+
+We claim that if $F_i$ is satisfiable then $F(\vec{y}_i)\vee F_i(\vec{x}_i)$ must be in $K$.\\
+
+
+Suppose 
+
 
 
 
@@ -427,6 +436,11 @@ guess a truth assignment $v$ answer $v(\alpha)=0$ or 1. \\
 
 
 
+%%%%%%%%%
+
+
+
+ 
 
 
 \section{Configuration with constraints}
@@ -441,6 +455,73 @@ Whether there is $K\subseteq C$ such that
 1 & \text{if } \alpha_i\in K\\ 0 & \text{if }\alpha_i\not\in K\end{array}\right.$  
 
 \end{itemize}
+
+Duppose $D$, $\beta$ are DHORN, $D$ is 2HORN, then NP-complete.\\
+
+%2HORN formula $H$, and $t$ is a conjunction of propositional atoms, $V$ a set variables with distint atoms from $t$.
+
+%Determine whether there is a set $s\subseteq V$ such that $H$ is consistent and $s\wedge H\models t$. 
+
+%This problem is NP-complete. 
+
+Let $F$ be an arrbitrary 3CNF formula $c_1\wedge \cdots\wedge c_n$ with $c_i:=l_{i,1}\vee l_{i,2}\vee l_{i,3}$  over $\{x_1,\cdots, x_m\}$
+
+
+pick new variable $\pi(\neg x_i)$ for $\neg x_i$. $\pi(x_i)$ is $x_i$. 
+
+introduce new variables $w_1, \cdots, w_n$. Let
+
+$$\begin{array}{l}H_0=\{\pi(l_{i,j})\rightarrow w_i\mid 1\leq i\leq n, j=1,2,3\}\\
+D:=\{\neg x_1\vee \neg \pi(\neg x_1), \cdots, \neg x_m\vee \neg \pi(\neg x_m)\}\\
+H:=H_0\cup D\end{array}$$, 
+
+Let $\beta:=w_1\wedge\cdots\wedge w_n$. $V=\{x_1, \pi(\neg x_1),\cdots, x_m,\neg x_m\}$. 
+
+Clearly $F$ is satisfiable iff there is $s\subseteq V$ such that $s\wedge H\models \beta$. \\
+
+
+Next we transform $H$ to the constraint configuration problem for DHORN. 
+
+
+
+For each literl $L$ over $\{x_1,\cdots, x_m\}$, define $$\alpha_i(\pi(L)):=\{w_j\mid \pi(L)\rightarrow w_j\in H_0\}$$
+
+%For each $\pi(x_i)$, define $$\alpha_i^-=\{w_j\mid \pi(\neg x_i)\rightarrow w_j\}$$
+
+Let $$K:=\{\alpha(\pi(L))\mid L\in\{x_1, \neg x_1,\cdots, x_m\neg x_m\}\}$$
+%%
+Now we can consider $\pi(L)$ the name of $\alpha(\pi(L))$. So, let 
+$$D:=\{\neg x_1\vee \neg\pi(\neg x_1),\cdots, \neg x_m\vee\neg \pi(\neg x_m)\}$$
+
+%
+Clearly $K\equiv \beta$. 
+
+Clearly, there is $s\subseteq V$ such that $v\wedge H\models \beta$ if and only if 
+
+there is $s\subseteq V$ such that $s$ satisfies $D$ when $s$ is considered as a truth assigment and $\{\alpha(L)\mid L\in s\}\equiv \beta$.
+
+Thus the constraint configuration problem for this case it NP-complete. \\
+
+
+
+However, if $C:=\{\alpha_1,\cdots, \alpha_n\}, \beta$ and $D$ are all DHORN, then it is poly-time solvable. 
+
+IMP$(C, \beta)$. Suppose it is satisfiable. (otherwsie retun no)
+
+Please note that for any $\alpha\in C-\text{IMP}(C,\beta)$, $\alpha\wedge \text{IMP} \not\equiv \beta$
+
+
+Let $D':=D\cup\{\neg A_i\mid \alpha_i\not\in\text{IMP}(C,\beta), \}$. 
+
+If $D'$ is not satisfiable, then return no. 
+
+Suppose $D'$ is sat. 
+
+Check that IMP$(C,\beta)\equiv\beta$. if not return no. Suppose it is the case. 
+
+Let IMP$_1:=\text{IMP}()-\{\alpha_i\mid D'\models \neg A_i\}$
+
+Check that IMP$_1$ equivalent to $\beta$. If it is the case then return yes, return no else. 
 
 
 
