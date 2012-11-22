@@ -1,0 +1,133 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{makeidx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{color}
+\usepackage[all]{xy}
+\usepackage{CJK}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\long\def\remove#1{}
+\newcommand{\dom}{\mbox{dom}}
+
+\newcommand{\vp}{\varphi}
+
+
+\newcommand{\coNP}{\mbox{coNP}}
+
+\newcommand{\NP}{\mbox{NP}}
+\newcommand{\DP}{\mbox {D}^P}
+
+\newcommand{\LeKl}{\mbox{$\sqcup$ }}
+\newcommand{\card}[1]{\mbox{\#}(#1)}
+
+\newcommand{\sss}{\mbox{\bf S}}
+\newcommand{\jjj}{\mbox{\bf J}}
+
+\newcommand{\QR}[1]{\mbox{$\ \mid\!\!\!\frac{#1}{\
+    \stackrel{\mbox{\scriptsize\it Q-Res}}{\ }\ }\ $}}
+\newcommand{\QUR}[1]{\mbox{$\ \mid\!\!\!\frac{#1}{\
+    \stackrel{\mbox{\scriptsize\it Q-Pos-Unit-Res}}{\ }\ }\ $}}
+%\baselineskip 0.2in
+
+
+\newcommand{\pbox}{\hbox to 6pt{\leaders\hrule width 6pt height 6pt\hfill}}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newenvironment{proof}{\parindent=0pt{\bf Proof: }}{
+   \hspace*{\fill}\hbox to 6pt{\leaders\hrule width 6pt height 6pt\hfill}\par}
+
+
+\pagestyle{plain}
+
+\begin{document}
+
+\begin{CJK*}{GBK}{song}
+\CJKtilde
+
+
+
+%%%%%%%
+
+\title{
+}
+
+\author{
+Xishun Zhao \footnote{Corresponding author. Tel: 0086-20-84114036,
+Fax:0086-20-84110298.}
+%\thanks{This research was partially supported by the NSFC project
+%under grant number: 60970040 and a MOE project
+%under grant number: 05JJD72040122. }\\
+%Institute of Logic and Cognition,
+%\\ Sun Yat-sen
+%University\\ 510275 Guangzhou, (P.R. China)\\
+%{Email: hsszxs@mail.sysu.edu.cn}
+}
+
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+%%%%%%%%%%%%%%%%%%%
+
+Given $f, g$, and $H$ such that $f+H\in$ MU(1), $g+H\in$ MU(1). Then 
+
+$$\forall h\in H, \ (H-h)+\{f,g\} \text{ is satisfiable}$$
+
+Proof. For $n=1$, it is clearly true. 
+
+Then by induction and the disjoint splitting propery of MU(1) formulas \\
+
+
+
+Suppose $\Phi:=Q\varphi$ with $\varphi=H+\{f,g\}$ with the above property.
+Then (conjecture)
+%
+$\Phi$ is true iff both $Q(H+f)$ and $Q(H+g)$ are ture\\
+
+
+Need the following property. 
+
+$F\in $MU(1). $f, g \in F$, a path from $f$ to $g$ 
+
+$f_1=f, \cdots, f_n=g$ and $L_1, \cdots, L_n$ such that 
+
+$L_1\in f_1$, $\neg L_i, L_{i+1}$ are in $f_{i+1}$ for $i=1, \cdots n-1$, $\neg L_n \in f_n$. \\
+
+
+Claim: Let $f,g\in F$, $\pi_1, \pi_2$ are two paths from $f$ to say to $g_1$ and $g_2$. Then the two path are compatable, that is, they do not contain complementary literals. 
+
+Proof. For $n=1$ clearly. For $n>1$ by using disjoint splitting. 
+
+
+{\bf So, in this case, QMU(2) is solvable in polynomial time.}
+
+
+Suppose $F$ is lean $d(F)=2$. 
+
+Case 1. $F-\{f\}\in$ MU(1), and for all $h\in F-\{f\}$, $F-\{h\}$ is satisfiable.
+
+Case 2. $F-\{f\}\in$ MU(1), and there is $g\in F-f$, $F-g$ is in MU(1) (then this case)
+
+Case3. $F'\subseteq F\in $MU(1) such that $F-F'$ has more than one clauses. 
+
+Case 4. $F\in$ MU(2)
+
+
+ 
+
+
+
+
+
+
+\end{CJK*}
+\end{document}
