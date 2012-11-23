@@ -12,3 +12,10 @@ auto
 .DS_Store
 *.pdf
 *.out
+*.log
+
+*.log
+
+*.pdf
+
+*.gz
