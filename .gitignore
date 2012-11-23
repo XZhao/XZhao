@@ -19,9 +19,3 @@ auto
 *.pdf
 
 *.gz
-
-QMU(2).log
-
-QMU(2).pdf
-
-QMU(2).synctex.gz
