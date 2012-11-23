@@ -1,4 +1,14 @@
-*.pdf
+*~
+.directory
+makefile
+auto
+*.dvi
 *.log
 *.aux
-*.dvi
+*.bbl
+*.blg
+*.toc
+*.synctex.gz
+.DS_Store
+*.pdf
+*.out

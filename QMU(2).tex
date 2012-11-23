@@ -121,9 +121,39 @@ Case3. $F'\subseteq F\in $MU(1) such that $F-F'$ has more than one clauses.
 
 Case 4. $F\in$ MU(2)
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
- 
 
+\section{General Structure of LEAN(2)}
+
+Suppose $F\in\text{MLEAN}(2)$ unsatisfiable, but $F\not\in \text{MU}(2)$. 
+
+Then $F$ must contain a MU(1) subformula. So, let $G\subseteq F$ be a subformula in MU(1). Let $\theta=F-G$. 
+
+Plaese note that $F$ is matching lean, the formula $\theta'$ obtained from $\theta$ by omitting variables occuring in $G$ must be mlean and has deficiency 1.  
+
+{\bf Case 1.} For any clause $g\in G$  such that $(G-\{g\})+\theta$ is satisfiable. That is, $G$ is the only MU(1) subformula of $F$. 
+
+We suppose it is not case 1. 
+
+   
+{\bf Case 2.} For some $g\in G$ such that $(G-\{g\})+\theta$ is unsatisfiable.
+That is there is $G'\subseteq F$ such that $G'\not=G$ and $G'\in \text{MU}(1)$. 
+
+Because $G'=G'\cap G+G'\cap \theta$ and $G'$ has deficiency 1, it must be that $\theta\subseteq G'$. 
+
+Let $H=G\cap G'$, $\eta =G'-H$. That is, $F$ can be written as follows
+
+$$F=\theta+H+\eta\ \text{ with }\theta+H\in \text{MU}(1) \text{ and } \eta+H \in \text{MU}(1)$$ 
+
+Let $\theta^-$ (resp. $\eta^-$) be the formula obtained from $\theta$ (resp. $\eta$) by omitting occurrences of variables of $H$. Then both $\theta^-$ and $\eta^-$ are in MU(1) and have distinct variables. 
+
+The following is an example of such formulas \\
+
+
+Let $\theta^+$ is the clause obtained from $\theta$ by iteratively applying sDP reduction on variables in $\theta^-$. Likewise for $\eta^+$. Then we have 
+
+$$\{\theta^+\}+H,\ \{\eta^+\}+H \text{ and } \{\theta^+\vee \eta^+\}+H \text{ are all in MU(1)}$$ 
 
 
 
