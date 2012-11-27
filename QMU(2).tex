@@ -5,7 +5,7 @@
 \usepackage{amsfonts}
 \usepackage{color}
 \usepackage[all]{xy}
-\usepackage{CJK}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -48,9 +48,6 @@
 
 \begin{document}
 
-\begin{CJK*}{GBK}{song}
-\CJKtilde
-
 
 
 %%%%%%%
@@ -78,6 +75,107 @@ Fax:0086-20-84110298.}
 \end{abstract}
 %%%%%%%%%%%%%%%%%%%
 
+\begin{theorem}
+$\Phi:=Q(\varphi+f)$, $f=u_1\vee \cdots\vee u_s\vee f'$, 
+each $u_i$ is a universal literal, $u_i>l$ for all existential literal $l$ of $f$.  Then 
+
+$\Phi$ is true iff both $Q\varphi$ and $Q'(\varphi[u_1=0,\cdots,u_s=0]+f'$ are true. 
+\end{theorem}
+
+\begin{proof}
+
+$Q$ is $\forall Y\exists X$. 
+
+The direction $\Longrightarrow$ is clearly valid. 
+
+
+
+The inverse direction $\Longleftarrow$ is also nard to see.\\
+
+$Q$ is $\exists xQ*$ then neither $x$ nor $\neg x$ occurs in $f$. 
+
+Suppose $\Phi$ is true. and $Q^*(\varphi[x=\epsilon]+f)$ is true. 
+
+By the  induction hypothesis $Q^*(varphi[x=\epsilon])$ is true and $Q'(\varphi[x=\epsilon][u_1=0,\cdots, u_s=0]+f')$ is true. 
+
+By the former, we have $\exists xQ^*varphi$ is true. 
+
+By the latter, 
+
+%%%%%%%%%%%%%%%%
+
+For the inverse. Suppose $\exists xQ^*\varphi$ is true and $\exists xQ^*( +f')$ is true. 
+
+
+
+
+%%% something wrong
+
+
+
+\end{proof}
+
+
+%%%%%%%%%%%%%%%
+QCNF$(k)$ is the class of QCNF formulas with maximum defciency $k$. \\
+
+QSAT$(k)$ is the class of all true formulas in QCNF$(k)$. 
+
+Suppose for $k\geq 1$, QSAT$(k)$ is solvable in polynomial time $p(n)$, where $n$ is the length of the formula. \\
+
+Next we show QSAT$(k+1)$ is also solvable in polynomial time. 
+
+Let $\Phi:=Q\varphi$ with maximum deficiency $K+1$.\\
+
+Case 1. $Q$ is $\forall y Q'\varphi$. 
+
+Case 1.1. $y$ occurs in $\varphi$ positively and negatively 
+
+      Check the truth of $Q'\varphi[y=1]$ and $Q'\varphi[y=0]$.  
+      
+      If both are true then return true, else return false. \\
+      
+Case 1.2. $y$ occurs in $\varphi$ only positively
+
+      Consider $Q'\varphi[y=0]$\\
+      
+Case 1.3. $y$ occurs only negatively 
+
+      Consider $Q'\varphi[y=1]$\\
+      
+
+Case 2. $Q$ is $\exists XQ'\varphi$, where $Q'$ begins with universal quantifiers. 
+
+pick a clause $\varphi\in \varphi$ such that var$(f)\cap X$ is non empty.
+
+Let $L_1, \cdots, L_m$ be literals of $f$ such that var$(L_i)\in X$.
+%for generality we assume $L_i$ occurs in $\varphi-\{f\}$. 
+
+$\varphi'=\varphi-\{f\}$ %has fewer deficiency
+
+For each literal $L_i$ $\{$ let $X_i=X-\{\text{var}(L_i)\}$,    
+
+If one of $\exists X_i \varphi'[L_i=1]$ is true then return true. $\}$
+
+else $\{$ Let $X*=X-\{\text{var}(L_1),\cdots, \text{var}(L_m)\}$ $\varphi*=\varphi[L_1=0,\cdots,L_m=0]$, and consider
+
+$\exists X^*Q'\varphi^* $      
+      
+      
+  %%%%%%%%%%%%%%%%%%%%%
+  \   \\
+  
+  
+$\Phi=\exists X Q(\psi+f)$ such that var$(f)\cap X$ is empty. Let $u_1, \cdots, u_t$ are all universal literals larger than all existential literals in $f$. Let $f'$ obtained from $f$ by deleting all $u_i$. Then 
+
+$\Phi$ is true iff either $\exists XQ\psi$ and $\exists X Q(\psi+f')$ are true.     
+      
+
+
+
+%\end{document}
+
+%%%%%%%%%%%%%%%%
 Given $f, g$, and $H$ such that $f+H\in$ MU(1), $g+H\in$ MU(1). Then 
 
 $$\forall h\in H, \ (H-h)+\{f,g\} \text{ is satisfiable}$$
@@ -106,7 +204,9 @@ $L_1\in f_1$, $\neg L_i, L_{i+1}$ are in $f_{i+1}$ for $i=1, \cdots n-1$, $\neg 
 Claim: Let $f,g\in F$, $\pi_1, \pi_2$ are two paths from $f$ to say to $g_1$ and $g_2$. Then the two path are compatable, that is, they do not contain complementary literals. 
 
 Proof. For $n=1$ clearly. For $n>1$ by using disjoint splitting. 
+\\
 
+Any two path must compatible\\
 
 {\bf So, in this case, QMU(2) is solvable in polynomial time.}
 
@@ -122,6 +222,59 @@ Case3. $F'\subseteq F\in $MU(1) such that $F-F'$ has more than one clauses.
 Case 4. $F\in$ MU(2)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ \ \\ \ \\
+Suppose $F=H+f$, $G=H=g$ both are in MU(1) (then $H+f\vee g$ is also in MU(1))
+%
+Then 
+
+
+\begin{enumerate}
+
+\item $f^{-x}\in F_x$ iff $g^{-x}\in G_x$
+
+\item $f^{-\neg x}\in F_{\neg x}$ iff $g^{-\neg x}\in G_{\neg x}$
+
+\item $f\in F[x=0]-F_x$ iff $g\in G[x=0]-G_x$
+
+\item $f\in F[n=1]-F_{\neg x}$ iff $g\in G[x=1]-G_{\neg x}$ 
+
+\item In case 3, $(F[x=0]-F_x)\wedge g$ is satisfiable on variables not in $F_x$.
+
+\item In case 4, similarly. 
+
+\end{enumerate}
+
+
+
+$\Phi=Q\varphi$, $\varphi=f+\theta + g$
+
+
+There must be a universal variable $y$, and a partial model 
+
+%%%%%%%%%
+
+
+\begin{lemma}
+$\exists x\forall y\exists z \phi$. 
+$M$ is a model of $\Phi$. 
+
+deleting from $\phi[z/M_z]$ all tautological clauses, then deleting all universal part. $M_x$ satisfies the resulting formula (over $x$) is satisfiable. 
+\end{lemma}
+
+Examples
+
+$$\color{red} (x_1\vee x_2) \color{black} \wedge (\neg x_1\vee x_2) \wedge (\neg x_2\vee x_3)\wedge (\neg x_2\vee \neg x_3)\wedge \color{red} (x_1)\color{black}$$
+
+
+$$\color{black} (x_1\vee x_2) \color{black} \wedge (\neg x_1\vee x_2) \wedge (\neg x_2\vee x_3)\wedge (\neg x_2\vee \neg x_3)\wedge \color{red} (x_2\vee x_3)\color{black}$$
+
+
+%%% other new idea
+
+$\exists X\forall Y\exists \cdots \varphi$ 
+
+for each $y\in Y$, consider all clauses containing $y$ and all clauses containing $\neg y$. For each truth assignment on $X$, the clauses with $y$ or the other becomes a autarky. whether poly-time computable?   
 
 
 \section{General Structure of LEAN(2)}
@@ -159,7 +312,7 @@ $$\{\theta^+\}+H,\ \{\eta^+\}+H \text{ and } \{\theta^+\vee \eta^+\}+H \text{ ar
 
 We consider the first case. That $F$ contains only MU(1) subformula.
 
-Agian try 
+Agian try and try
 
-\end{CJK*}
+
 \end{document}

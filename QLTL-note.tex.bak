@@ -6,7 +6,7 @@
 \usepackage{color}
 \usepackage[all]{xy}
 \usepackage{CJK}
-%\usepackage{ctex}
+\usepackage{ctex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \long\def\remove#1{}
@@ -85,7 +85,7 @@ Fax:0086-20-84110298.}
 %A &*+[F]{\sum_{i=n}^m {i^2}} \\
 %   & {\bullet} & D \ar[ul]             }
 
-
+Ã«Ö÷Ï¯
 
 %%%%%%%%%
 
