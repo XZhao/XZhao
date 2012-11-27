@@ -13,9 +13,5 @@ auto
 *.pdf
 *.out
 *.log
-
-*.log
-
-*.pdf
-
+*.bak
 *.gz
