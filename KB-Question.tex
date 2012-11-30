@@ -55,7 +55,7 @@
 & $\equiv$ & $\equiv_V$ & $\models$\\ \hline
 DHORN & PTIME & $\Sigma_2^P$, hardness is unknown & PTIME \\ \hline
 HORN & PTIME & $\Sigma_2^P$-complete & NP-complete\\ \hline
-CNF & $P^{NP[\text{log}\, n]}$, hardness unknown& $\Sigma_3^P$-complete & $\Sigma_2^P$-complete
+CNF & $P^{NP[\text{log}\, n]}$-complete & $\Sigma_3^P$-complete & $\Sigma_2^P$-complete
 \end{tabular}
 
 
@@ -80,32 +80,68 @@ Next we show hardness. The problem SAT$^n_{\text{odd}}$ is complete for P$^{\tex
 
 We shall construct a reduction from SAT$^n_{\text{odd}}$ to the equivalence configuration problem. 
 
-Suppose $F_1,\cdots, F_n$ are 3CNF formulas such that they have pairwisely distinct vaiables. We assume $n$ is even. Otherwise we add formula $p\wedge \neg p$. \\
+Suppose $F_1,\cdots, F_n$ are 3CNF formulas such that they have pairwisely distinct variables. We assume $n$ is $2^k$. Otherwise we add some formulas like $p\wedge \neg p$. \\
 
 We also assume each $F_i$ is not tautological (otherwise condider $F_i\wedge p_i$).\\ 
 
-We assume $F_i$ is over variables $\vec{x}_i$. Pick new varables $\vec{y}_i$ and $\vec{z}_i$. We formulas $F_i(\vec{x}_i), F_i(\vec{y}_i), F_i(\vec{z}_i)$.
-
-$$\psi:=\bigwedge_{i=1}^n \left((F_i(\vec{y}_i)\rightarrow \neg F_i(\vec{x}_i))\wedge (\neg F_i(\vec{y}_i)\wedge \neg F_i(\vec{x}_i)\rightarrow \neg F_i(\vec{z}_i))\right)$$
-
-%$$F_i(\vec{y}_i)\vee F_i(\vec{x}_i)\rightarrow F_i(\vec{z}_i)$$
-
-
-$$C:=\{\psi\}\cup \{F_1(\vec{y}_1)\vee F_1(\vec{x}_1),\cdots, F_n(\vec{y}_n)\vee F_n(\vec{x}_n)\}$$
-
-$$\beta:=\psi\wedge ((F_1(\vec{y}_1)\vee F_1(\vec{x}_1))\otimes\cdots\otimes (F_n(\vec{y}_n)\vee F_n(\vec{x}_n)))$$
-
-
-Suppose for some $K\subseteq C$ such that $K\equiv \beta$. Then it must be $\psi\in K$. 
-
-We claim that if $F_i$ is satisfiable then $F(\vec{y}_i)\vee F_i(\vec{x}_i)$ must be in $K$.\\
-
-
-Suppose 
+We assume $F_i$ is over variables $\vec{x}_i$. 
 
 
 
+$$C_{ij}:=\{(f_i\wedge \neg f_j)\wedge \varphi_{ij}), 
+((\neg f_i\wedge f_j)\wedge \varphi_{ij}), 
+((f_i\wedge f_j)\wedge \varphi_{ij}),
+((\neg f_i\wedge \neg f_j)\wedge \varphi_{ij})\}
+$$
 
+$$C_0:=C_{12}\cup C_{34}\cup\cdots\cup C_{(n-1)n}\cup \{f_1,\cdots, f_n\}$$
+
+
+$$\begin{array}{ll}C_1:=&\{f_{12}=f_1\oplus f_2, \cdots, f_{(n-1)n}=f_{n-1}\oplus f_n\}\cup \\
+
+&\{f_{1234}=f_{12}\oplus f_{34}, \cdots, f_{(n-3)(n-2)(n-1)n}=f_{(n-3)(n-2)}\oplus f_{(n-1)n}\}\cup \\
+
+&\cdots\cdots \\
+
+&\{f_{final}=f_{1\cdots2^{k-1}}\oplus f_{(2^{k-1}+1)\cdots n}\}
+\end{array}
+$$
+
+
+$$C:=C_0\cup C_1$$
+
+$$\beta:=C_1\cup \{f_1\rightarrow F_1, \cdots, f_n\rightarrow F_n\}\wedge f_{final}$$
+
+
+\remove{
+
+$$C_0=\{ f_1\rightarrow F_1,\cdots, f_n\rightarrow F_n \}$$
+
+$$\varphi_{ij}=(f_i\rightarrow F_i)\wedge (f_j\rightarrow F_j)$$ 
+
+$$\beta_{ij}:=((f_i\wedge \neg f_j)\wedge \varphi_{ij}) \vee 
+((\neg f_i\wedge f_j)\wedge \varphi_{ij})\vee 
+((f_i\wedge f_j)\wedge \varphi_{ij})\vee 
+((\neg f_i\wedge \neg f_j)\wedge \varphi_{ij})
+$$
+
+
+
+
+$$\begin{array}{ll}C_1:=&\{f_{12}=f_1\oplus f_2, \cdots, f_{(n-1)n}=f_{n-1}\oplus f_n\}\cup \\
+
+&\{f_{1234}=f_{12}\oplus f_{34}, \cdots, f_{(n-3)(n-2)(n-1)n}=f_{(n-3)(n-2)}\oplus f_{(n-1)n}\}\cup \\
+
+&\cdots\cdots \\
+
+&f_{final}=f_{1\cdots2^{k-1}}\oplus f_{(2^{k-1}+1)\cdots n}
+\end{array}
+$$
+
+$$C=C_0\cup C_1\cup\{f_1,\cdots, f_n\}$$
+
+$$\beta = \beta_{12}\wedge \cdots\wedge \beta_{(n-1)n}\wedge C_1\wedge f_{final}$$
+}
 
 \ \\
 
