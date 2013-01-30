@@ -614,6 +614,39 @@ Lemma: For $i=1,\cdots,6$, and $n$, there is a B\"{u}chi automaton ${\cal A}_i^{
 \end{itemize}
 \ \\
 
+{\bf Non-empty Problem:} Determining whether a B\"{u}chi automaton accepts at least one infinite word.
+
+For a Buchi automaton $M$, 
+\begin{itemize}
+\item a state $t$ is {\bf reachable} from a state $s$ if there is a finite word $w=w_1\cdots w_k$ and a finite sequence $s_0,\cdots, s_k$ of sates in $S$ such that $s_0=s, s_k=t$ and $s_{i+1}\in \delta(s_i,w_{i+1})$ for $0\leq i\leq k-1$.  
+    
+\item $M$ accepts some word iff $M$ contains an accepting state that is reachable from some initial state and is reachable from itself. 
+
+\item The non-emptiness problem for Buchi automata is logspace-complete for NLOGSPACE.
+
+\end{itemize}
+
+Let $M_1,\cdots, M_k$ be Buchi automata, then $L(M_1)\cap\cdots\cap L(M_k)$ can be recognized by a Buchi automata with not more than $k\Pi^k_{i=1}|M_i|$ states. 
+
+Let 
+$M_i:=(\Sigma, Q^i, Q^i_0,\delta^i, F^i)$. 
+
+Define $M=(\sigma, Q, Q_0, \delta, F)$ as follows:
+
+\begin{itemize}
+\item $Q:=Q^1\times\cdots\times Q_k\times\{1,\cdots,k\}$
+\item $Q_0:=Q_0^1\times\cdots\times Q_0^k\times\{1\}$
+\item $F:=F^1\times Q^2\times\cdots\times Q^k\times\{1\}$
+\item $(q^1,\cdots, q^k, j)\in \delta ((s^1,\cdots, s^k,i),a)$ iff $q^l\in \delta^l(s^l,a)$ for all $l\in\{1,\cdots,k\}$ and 
+(either ($q^i\not\in F^i$ and $i=j$) or ($q^i\in F^i$ and $j=i+1$ mod $k$))
+\end{itemize}
+
+
+ 
+
+\ \\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Theorem: Molde checking for LTL$^\omega_1(\textsf{U}))$ is PTIME solvable.
 
 input Kripke structure $T=(N,R,\epsilon)$ and some state $s_0\in N$ and a formula $\varphi\in $ LTL$_1(\textsf{U})$.
@@ -698,17 +731,34 @@ $\frac{x}{y}$
 
 \section{QLTL}
 
-If $A\in$ QLTL($\cdots$), $x$ is a propositional atom,  then so are 
+If $A\in$ QLTL($\cdots$), $x$ is a propositional atom,  then so are
 $\exists x A$ and $\forall xA$.\\
 
+
+Recall a linear time structure is a map $\pi:\mathbb{N}\rightarrow 2^{Prop}$
+
 Two linear time structures
-$\pi_1,\pi_2$ are $X$-variant if for any $i$, $\pi_1(i)$ and $\pi_2(i)$ agree on atoms not in $X$. 
+$\pi_1,\pi_2$ are $X$-variant if for any $i$, $\pi_1(i)$ and $\pi_2(i)$ agree on atoms not in $X$.
 Here $X$ is a set of atoms.\\
 
 
+Satisfaction Relation
+\begin{itemize}
+\item $\pi, i\models p$, for $p\in Prop$, iff $p\in \pi(i)$
+ \item $\pi, i\models \textsf{X}A$ iff $\pi,i+1\models A$
+ \item $\pi,i\models \textsf{F}A$ iff there is $j\geq i$ such that $\pi,j\models A$
+ \item $\pi,i\models A\textsf{U} B$ iff there is $j\geq i$ such that $\pi,j\models B$ and $\pi,j'\models A$ for $i\leq j'<j$
 
+\item $\pi,i\models \forall x A$ iff $\pi',i\models A$ for all $x$-variant $\pi'$ of $\pi$.
+\item $\pi,i\models \exists x A$ iff $\pi',i\models A$ for some $x$-variant $\pi'$ of $\pi$.
+\item we write $\pi\models A$ if $\pi,0\models A$.
+\item SAT for QLTL($\cdots$): determining whether a given formula $A$ in QLTL$(\cdots)$ is satisfiable, i.e.,there is a linear-time structure $\pi$ such that $\pi\models A$.
+\item VAL for QLTL($\cdots$): determining whether a given formula $A$ in QLTL$(\cdots)$ is valid, i.e., $\pi\models A$ for any linear-time structure $\pi$.
+\end{itemize}
 
+$\textsf{U}$ can be defined by $\textsf{F}$ and $\exists$ in QLTL as follows
 
+$$A\textsf{U}B \Longleftrightarrow \textsf{F}B\wedge \exists z(z\wedge \textsf{G}(z\rightarrow (B\vee (A\wedge \textsf{X}z))))$$
 
 
 
