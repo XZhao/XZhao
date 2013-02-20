@@ -642,7 +642,49 @@ Define $M=(\sigma, Q, Q_0, \delta, F)$ as follows:
 \end{itemize}
 
 
- 
+Subword Automaton $A$ is a tuple $(\Sigma, S, \rho, \xi, F)$, where 
+
+\begin{itemize}
+\item $\sigma$, $S$, $\rho$ $F$ as usual.
+\item $\xi:\Sigma\rightarrow S$ is a labelling function 
+\item An infinite word $w\in \Sigma^{\omega}$ is accepted by $A$ if the following two conditions hold:
+\begin{enumerate}
+\item Labelling condition: $\xi(w_{i+1})\in \rho(\xi(w_i),w_i)$ for every $i\in \omega$,
+\item Subword condition: for every $i\in\omega$, there is some $j\geq i$ and a mapping $\varphi[i,j]\rightarrow S$ such that $\varphi(i)=\xi(i)$, $\varphi(j)\in F$, and for each $i\leq k<j$, $\varphi(k+1)\in \rho(\varphi(k),w_k)$.
+\end{enumerate}
+\end{itemize}
+
+Every subword automaton can be transformed to a Buchi automaton with quadratic states.\\
+
+
+
+A set-subword automaton $A$ is a pair $(\Psi,\rho)$ where 
+
+\begin{itemize}
+\item $\Psi$ is a finite set of symbols which are formulas of a logic
+\item $2^{\Psi}$, the power set of $\Psi$, serves both as the alphabet and the set of states. That is, $\Sigma=2^{\Psi}$ and $S=2^{\Psi}$. 
+
+\item $\rho: \Sigma\times S\rightarrow 2^S$ such that 
+
+\begin{enumerate}
+\item $\rho(s,a)\not=\emptyset$ iff $s\subseteq a$
+\item $\emptyset\in\rho(\emptyset,a)$
+\item if $s\subseteq s'$, $s_1\subseteq s'_1$ and $s_1\in\rho(s',a)$ then $s'_1\in \rho(s,a)$
+\item if $s'_1\in \rho(s_1,a)$ and $s'_2\in\rho(s_2,a)$ then $s'_1\cup s'_2\in \rho(s_1\cup s_2,a)$ 
+\end{enumerate} 
+\item a word $w$ is accepted by $A$ if for every $i\in\omega$ and every (formula) $f\in w_i$ there is a finite interval $[i,j]$ and a mapping $\varphi:[i,j]\rightarrow S$ such that 
+
+\begin{enumerate}
+\item $\varphi(i)=\{f\}$,
+\item $\varphi(j)=\emptyset$,
+\item for all $i\leq k<j$, $\varphi(k+1)\in \rho(\varphi(k), w_k)$.
+\end{enumerate}
+
+
+
+
+
+\end{itemize}
 
 \ \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
