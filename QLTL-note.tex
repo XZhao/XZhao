@@ -122,6 +122,7 @@ Given $x\in Prop$, two models $\pi_1$ and $\pi_2$. We say $\pi_1$ is an $x$-vari
 
 \item $\textsf{G}$ (or $\square$) for always hold in the future.
 \item $\textsf{G}A$ iff $\neg \textsf{F}\neg A$.
+\item $A\textsf{V} B$ defined as $\neg (\neg A\textsf{U}\neg B)$, equivalent to $B\wedge (A\vee \textsf{X}(A\textsf{V}B))$
 \end{itemize}
 
 Satisfaction Relation
@@ -616,20 +617,24 @@ Lemma: For $i=1,\cdots,6$, and $n$, there is a B\"{u}chi automaton ${\cal A}_i^{
 
 {\bf Non-empty Problem:} Determining whether a B\"{u}chi automaton accepts at least one infinite word.
 
-For a Buchi automaton $M$, 
+For a Buchi automaton $M$,
 \begin{itemize}
-\item a state $t$ is {\bf reachable} from a state $s$ if there is a finite word $w=w_1\cdots w_k$ and a finite sequence $s_0,\cdots, s_k$ of sates in $S$ such that $s_0=s, s_k=t$ and $s_{i+1}\in \delta(s_i,w_{i+1})$ for $0\leq i\leq k-1$.  
-    
-\item $M$ accepts some word iff $M$ contains an accepting state that is reachable from some initial state and is reachable from itself. 
+\item a state $t$ is {\bf reachable} from a state $s$ if there is a finite word $w=w_1\cdots w_k$ and a finite sequence $s_0,\cdots, s_k$ of sates in $S$ such that $s_0=s, s_k=t$ and $s_{i+1}\in \delta(s_i,w_{i+1})$ for $0\leq i\leq k-1$.
+
+\item $M$ accepts some word iff $M$ contains an accepting state that is reachable from some initial state and is reachable from itself.
 
 \item The non-emptiness problem for Buchi automata is logspace-complete for NLOGSPACE.
 
 \end{itemize}
 
-Let $M_1,\cdots, M_k$ be Buchi automata, then $L(M_1)\cap\cdots\cap L(M_k)$ can be recognized by a Buchi automata with not more than $k\Pi^k_{i=1}|M_i|$ states. 
 
-Let 
-$M_i:=(\Sigma, Q^i, Q^i_0,\delta^i, F^i)$. 
+
+\noindent {\bf Intersection:}\\
+
+Let $M_1,\cdots, M_k$ be Buchi automata, then $L(M_1)\cap\cdots\cap L(M_k)$ can be recognized by a Buchi automata with not more than $k\Pi^k_{i=1}|M_i|$ states.
+
+Let
+$M_i:=(\Sigma, Q^i, Q^i_0,\delta^i, F^i)$.
 
 Define $M=(\sigma, Q, Q_0, \delta, F)$ as follows:
 
@@ -637,16 +642,123 @@ Define $M=(\sigma, Q, Q_0, \delta, F)$ as follows:
 \item $Q:=Q^1\times\cdots\times Q_k\times\{1,\cdots,k\}$
 \item $Q_0:=Q_0^1\times\cdots\times Q_0^k\times\{1\}$
 \item $F:=F^1\times Q^2\times\cdots\times Q^k\times\{1\}$
-\item $(q^1,\cdots, q^k, j)\in \delta ((s^1,\cdots, s^k,i),a)$ iff $q^l\in \delta^l(s^l,a)$ for all $l\in\{1,\cdots,k\}$ and 
+\item $(q^1,\cdots, q^k, j)\in \delta ((s^1,\cdots, s^k,i),a)$ iff $q^l\in \delta^l(s^l,a)$ for all $l\in\{1,\cdots,k\}$ and
 (either ($q^i\not\in F^i$ and $i=j$) or ($q^i\in F^i$ and $j=i+1$ mod $k$))
 \end{itemize}
 
 
-Subword Automaton $A$ is a tuple $(\Sigma, S, \rho, \xi, F)$, where 
+\noindent {\bf Union}\\
+
+\noindent {\bf Complementation:}\\
+
+{\bf Generalized automaton:} $(\Sigma, S, \delta, S_0, F_1, \cdots, F_k)$
+
+a infinite word is accepted by the generalized automaton iff it can be accepted by every $(\Sigma, S, \delta, S_0, F_i)$, $i=1,\cdots, k$.
+
+A GBA can be converted to a BA efficiently by intersection.
+\\
+
+
+{\bf From LTL to generalized B\"{u}chi Automaton:}
+
+cl$'(g)$ is the least set of all subformulas of $g$
+\begin{itemize}
+\item $g\in$ cl$'(g)$
+\item $f\wedge f'\in $ cl$'(g)$ implies both $f,f'\in$ cl$'(g)$
+\item $f\vee f'\in $ cl$'(g)$ implies $f,f'\in$ cl$'(g)$
+%\item $f\in$ cl$(g)$ iff $\neg f\in$ cl$(g)$
+\item $f\textsf{U} f'\in $ cl$'(g)$ implies both $f,f'\in$ cl$'(g)$
+\item $\textsf{F}f\in$ cl$'(g)$ implies $f\in$ cl$'(g)$
+\item $\textsf{X}f\in$ cl$'(g)$ implies $f\in$ cl$'(g)$
+\end{itemize}
+
+Finally, cl$(g)=$cl$'(g)\cup \{\neg f\mid f\in\mbox{cl}'(g)\}$.  $\neg\neg f$ is identified with $f$. \\
+
+\noindent
+{\bf consistent subset of cl$(g)$ as state:} Let $S_g$ be the set of subsets $s$ satisfying:
+\begin{itemize}
+\item for all $f\in$ cl$(g)$, $f\in s$ iff $\neg f\not\in s$
+\item for all $f\vee f'\in $ cl(g), $f\vee f'\in s$ iff $f\in s$ or $f'\in s$.
+\item for all $f\wedge f'\in$ cl$(g)$, $f\wedge f'\in s$ iff both $f\in s$ and $f'\in s$.
+\item for all $f\textsf{U} f'\in\mbox{cl}(g)$, $f\textsf{U} f'\in s$ iff either $f'\in s$ or $f, \textsf{X}(f\textsf{U}f')\in s$
+\item for $\textsf{F}f\in$ cl$(g)$, $\textsf{F}f\in s$ iff $f\in s$ or  $\textsf{X}\textsf{F}f\in s$.
+\end{itemize}
+
+Constructing a GBA for $g$.
+$A_g:=(\Sigma, S, \delta, S_0, F_1,\cdots, F_k)$
+
+\begin{itemize}
+\item $\Sigma=2^{\text{prop}(g)}$, prop$(g)$ is the set of propositional atoms occurring in $g$.
+\item $S=S_g$ defined above
+\item $s'\in \delta(s,a)$ iff
+  \begin{itemize}
+  \item $a=s\cap \mbox{prop}(g)$
+  \item for all $\textsf{X} f\in$ cl$(g)$, $\textsf{X}\in s$ iff $f\in s'$
+  \end{itemize}
+\item $S_0=\{s\in S_g\mid g\in s\}$
+
+\item $k$ is the number of until formulas in cl$(g)$. Let $f_1\textsf{U} f'_1,\cdots, f_k\textsf{U} f'_k$ be all the until formulas in cl$(g)$.
+$$F_i:=\{ s\in S_g\mid f_i\textsf{U}f'_i\in s \mbox{ or } f'_i\in s \}$$
+
+For an infinite word $\pi$ or $2^{\text{prop}(g)}$, we have
+%
+$$\pi \mbox{ is accepted by $A_g$ iff }\pi,0\models g$$
+
+That is, what accepted by $A_g$ are exactly the models of $g$.
+\end{itemize}
+
+
+
+
+\section{HORN LTL}
+
+We shall define two functions from LTL to $\mathbb{N}$
+\begin{itemize}
+
+\item pocc$(\top)=$pocc$(\bot)=$nocc$(\top)=$nocc$(\bot)=0$
+
+\item for a propositional atom $p$,
+
+pocc$(p)=1$, nocc$(p)=0$, and
+
+pocc$(\neg p)=0$, nocc($\neg p)=1$
+
+\item for any $f$, pocc$(\textsf{X}f)=1$, nocc$(\textsf{X}f)=1$.
+
+
+\item pocc$(\neg f)=$nocc$(f)$, nocc$(\neg f)=$pocc$(f)$.
+
+
+\item pocc$(f\wedge g)=\max\{\mbox{pocc}(f), \mbox{pocc}(g)\}$, nocc$(f\wedge g)=\mbox{nocc}(f)+\mbox{nocc}(g)$.
+
+\item pocc$(f\vee g)=\mbox{pocc}(f)+\mbox{pocc}(g)\}$, nocc$(f\wedge g)=\max\{\mbox{nocc}(f), \mbox{nocc}(g)\}$.
+
+\item pocc$(f\textsf{U}g)=\max\{1,\mbox{pocc}(f)\}+\mbox{pocc}(g)$, nocc$(f\textsf{U} g)=\max\{\mbox{nocc}(f),\mbox{nocc}(g),1\}$.
+
+\item pocc$(f\textsf{V}g)=\max\{\mbox{pocc}(f), \mbox{pocc}(g),1\}$, nocc$(f\textsf{V} g)=\max\{1,\mbox{nocc}(f)\}+\mbox{nocc}(g)$.
+
+\item pocc$(\textsf{F} f)=\mbox{pocc}(F)+1$, \mbox{pocc}$(\textsf{G}f)=\max\{\mbox{pocc}(f),1\}$
+
+nocc$(\textsf{F}f)=\max\{\mbox{nocc}(f),1\}$   \mbox{nocc}$(\textsf{G}f)=\mbox{nocc}(f)+1$
+
+\end{itemize}
+
+
+
+
+
+\end{CJK*}
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5555
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Subword Automaton $A$ is a tuple $(\Sigma, S, \rho, \xi, F)$, where
 
 \begin{itemize}
 \item $\sigma$, $S$, $\rho$ $F$ as usual.
-\item $\xi:\Sigma\rightarrow S$ is a labelling function 
+\item $\xi:\Sigma\rightarrow S$ is a labelling function
 \item An infinite word $w\in \Sigma^{\omega}$ is accepted by $A$ if the following two conditions hold:
 \begin{enumerate}
 \item Labelling condition: $\xi(w_{i+1})\in \rho(\xi(w_i),w_i)$ for every $i\in \omega$,
@@ -658,33 +770,82 @@ Every subword automaton can be transformed to a Buchi automaton with quadratic s
 
 
 
-A set-subword automaton $A$ is a pair $(\Psi,\rho)$ where 
+A set-subword automaton $A$ is a pair $(\Psi,\rho)$ where
 
 \begin{itemize}
 \item $\Psi$ is a finite set of symbols which are formulas of a logic
-\item $2^{\Psi}$, the power set of $\Psi$, serves both as the alphabet and the set of states. That is, $\Sigma=2^{\Psi}$ and $S=2^{\Psi}$. 
+\item $2^{\Psi}$, the power set of $\Psi$, serves both as the alphabet and the set of states. That is, $\Sigma=2^{\Psi}$ and $S=2^{\Psi}$.
 
-\item $\rho: \Sigma\times S\rightarrow 2^S$ such that 
+\item $\rho: \Sigma\times S\rightarrow 2^S$ such that
 
 \begin{enumerate}
 \item $\rho(s,a)\not=\emptyset$ iff $s\subseteq a$
 \item $\emptyset\in\rho(\emptyset,a)$
 \item if $s\subseteq s'$, $s_1\subseteq s'_1$ and $s_1\in\rho(s',a)$ then $s'_1\in \rho(s,a)$
-\item if $s'_1\in \rho(s_1,a)$ and $s'_2\in\rho(s_2,a)$ then $s'_1\cup s'_2\in \rho(s_1\cup s_2,a)$ 
-\end{enumerate} 
-\item a word $w$ is accepted by $A$ if for every $i\in\omega$ and every (formula) $f\in w_i$ there is a finite interval $[i,j]$ and a mapping $\varphi:[i,j]\rightarrow S$ such that 
+\item if $s'_1\in \rho(s_1,a)$ and $s'_2\in\rho(s_2,a)$ then $s'_1\cup s'_2\in \rho(s_1\cup s_2,a)$
+\end{enumerate}
+\item a word $w$ is accepted by $A$ if for every $i\in\omega$ and every (formula) $f\in w_i$ there is a finite interval $[i,j]$ and a mapping $\varphi:[i,j]\rightarrow S$ such that
 
 \begin{enumerate}
 \item $\varphi(i)=\{f\}$,
 \item $\varphi(j)=\emptyset$,
 \item for all $i\leq k<j$, $\varphi(k+1)\in \rho(\varphi(k), w_k)$.
 \end{enumerate}
-
-
-
-
-
 \end{itemize}
+
+%%%%%%%%%%%%%%%%%%%
+
+
+
+H-sequence (Hintikka) for an formula $g$ is a sequence $\psi:\mathbb{N}\rightarrow 2^{cl(g)}$
+
+\begin{enumerate}
+\item $g\in \psi(0)$ and for all $i$,
+\item $f\in \psi(i)$ iff $\neg f\psi(i)$
+\item $f\wedge f'\in \psi(i)$ iff $f,f'\in\psi(i)$
+\item $f\textsf{U}f'\in\psi(i)$ implies there is $j\geq i$ such that $f'\in\psi(j)$ and for all $i\leq k<j$ we have $f\in\psi(k)$.
+
+\item  $\textsf{F}f\in\psi(i)$ implies there is $j\geq i$ such that $f\in\psi(j)$
+\item $\textsf{X}f\in\psi(i)$ implies $f\in\psi(i+1)$
+\item $\neg(f\textsf{U}f'\in \psi(i)$ implies for any $j\geq i$ if $f'\in\psi(j)$ there must $i\leq k<j$ such that $\neg f\in\psi(k)$
+\item $\neg \textsf{F}f\in \psi(i)$ implies ...
+\item $\neg \textsf{X}f$ implies ...
+\end{enumerate}
+
+An LTL formula $g$ has a model iff it has a H-sequence.
+\\
+
+The Local Automata
+
+$$M_L=(2^{cl(f)}, 2^{cl(f)}, \rho_L, N_f, 2^{cl(f)}$$
+$N_f:=\{s\mid f\in s\}$
+
+$s'\in \rho(s,a)$ iff $s=a$ and
+\begin{itemize}
+\item  $g\in s$ iff $\neg g\not\in s$
+\item $g_1\wedge g_2\in s$ iff $g_1, g_2\in s$
+\end{itemize}
+
+The positive automata
+
+$M=(\sigma=\{a_1,\cdots,a_l\}, S, \rho, S_0, F)$ to $M^0=(2^{cl(f)}, S, \rho^0,S_0, F)$
+where $s'\in \rho^0(s,\textbf{a})$ iff for some $j$, $f_j\in\textbf{a}$ and $s'\in\rho(s,a_j)$
+
+
+From $M^0$ to a new one.
+
+$(2^{cl(f)}, S\cup\{0\}, \rho^0, S_0, F)$
+
+$\rho^0$ is extended as follows.
+
+for all $\textbf{a}$ such that $A(f_1,\cdots,f_l)\in \textbf{a}$ we have $0\in\rho^0(0,\textbf{a})$.
+
+Add 0 to $S$, dormant state
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+
+
+
 
 \ \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -801,11 +962,6 @@ Satisfaction Relation
 $\textsf{U}$ can be defined by $\textsf{F}$ and $\exists$ in QLTL as follows
 
 $$A\textsf{U}B \Longleftrightarrow \textsf{F}B\wedge \exists z(z\wedge \textsf{G}(z\rightarrow (B\vee (A\wedge \textsf{X}z))))$$
-
-
-
-
-
 
 
 
