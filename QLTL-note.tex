@@ -453,7 +453,7 @@ means that $S$ has exactly $n$ $A$-alternations.
 
 An $A$-alternation is like $A\cdots\neg A$.
 
-Genrally, $\theta_n[\psi]$ means that ...
+Generally, $\theta_n[\psi]$ means that ...
 
 Suppose $S$ has exactly $n$ $A$ alternations. we can view it as the encoding of a valuation $v_S$ of $\{P_1,\cdots,P_n\}$ by saying that $P_k$ holds if and only if $B$ and $\neg B$ can be found in the $K$-th $\neg A$ segment.
 
@@ -515,9 +515,9 @@ $$\pi\models\varphi^1_i\Longleftrightarrow v_S\not\models C_i$$
 
 \ \\
 
-MC(LTL$_2(\textsf{F}))$ and SAT(LTL$_2(\textsf{F}))$ are NP-complete.
+MC(LTL$_2(\textsf{F}))$ and SAT(LTL$_2(\textsf{F}))$ are NP-complete.\\
 
-
+SAT(LTL$(\textsf{X})$) and SAT(LTL$_1(\textsf{X})$) are NP-complete\\
 %%%%%% fragment with only one proposition
 
 Wrt equivalence mudulo stuttering, a model with one has one of the following patterns for some $n\geq 1$.
@@ -707,8 +707,15 @@ $$\pi \mbox{ is accepted by $A_g$ iff }\pi,0\models g$$
 That is, what accepted by $A_g$ are exactly the models of $g$.
 \end{itemize}
 
+\color{red}
+For any state $S$, atp$(S)$ the set of propositional atoms or negated atoms in $S$.
+
+For any state $S$ there most polynomially many $P$ of propositional literals such that $(S-\mbox{atp}(S))\cup P$ is still a state.\\
 
 
+Given a LTL formula
+
+\color{black}
 
 \section{HORN LTL}
 
@@ -744,7 +751,63 @@ nocc$(\textsf{F}f)=\max\{\mbox{nocc}(f),1\}$   \mbox{nocc}$(\textsf{G}f)=\mbox{n
 \end{itemize}
 
 
+%Suppose $\pi_1$, $\pi_2$ is a model of $g$ then $\pi_1\cap\pi_2$ is a model of $g$, too. Here $(\pi_1\cap\pi_2)(i)=\pi_1(i)\cap \pi_2(i)$
 
+Polynomial-bounded LTL operators\\ \  \\
+
+A structure $\xi$ and a structure $\pi$ such that for some $m\geq 0$,
+
+for $i=0,\cdots,m$, $\xi(i)=\pi(i)$,
+
+for $i>m+1$, $\pi(i)=\xi(i-1)$,
+
+$\pi(m+1)=\pi(m)=\xi(m)$.\\
+
+Lemma 1: for LTL$(\textsf{U})$ formula $f$,
+
+$\pi(m)\models f$ iff $\pi(m+1)\models f$
+
+for $i\leq m$, $\xi(i)\models f$ iff $\pi(i)\models f$
+
+for $i>m+1$, $\xi(i-1)\models f$ iff $\pi(i)\models f$. \\
+
+
+Given a structure $\xi$, a formula $f$. $S[\xi(i),f]$ is the set of formulas in CL$(f)$ and true in $\xi(i)$.\\
+
+Lemma 2. $\xi$, $i,j$ such that $S[\xi(i),f]=S[\xi(j),f]$. Let $\xi'$ be defined as follows
+
+$\xi(0)=\xi'(0), \cdots, \xi(i-1)=xi'(i-1)$, $\xi'(i)=\xi(j), \xi'(i+1)=\xi(j+1), \cdots$.
+
+Then for any $k<i$, $S[\xi(k),f]=S[\xi'(k),f]$, for any $k\geq i$, $S[\xi(j+(k-i),f]=S[\xi'(k),f]$
+
+Proof: By induction. $f$ is $\textsf{X} f_1$, by induction hypothesis and the assumption $S[\xi(i),f]=S[\xi(j),f]$.
+
+
+$f$ is $f_1\textsf{U} f_2$. nontrivial case $k\geq i-1$, $\xi(k)\models f$, for $k'\geq k$ $f_2$ is true in $\xi(k')$. If $k'\geq >i$ Then $\xi(i)\models f$ and $\xi(j)\models f$ and so $\xi'(i)\models f$. Then we can see that $\xi'(k)\models f$.\\
+
+
+Definition: A structure $\xi$, a formula $g:=g_1\textsf{U} g_2$ such that $\xi(i)\models g$. We say $g$ is {\bf fulfilled} before $j$ iff $j\geq i$ and $\xi(l)\models g_2$ for some $l\in\{i,\cdots,j\}$.
+
+A structure $\xi$ is said to be {\bf ultimately periodic} with starting index $i$ and period $m$ if $\forall k\geq i, \xi(k)=\xi(k+m)$.\\
+
+Lemma 3. A structure $\xi$, $i, p$ be such that $p>0$, $S[xi(i),f]=S[\xi(i+p),f]$, and every $\textsf{U}$-formula in $S[\xi(i),f]$ is fulfilled before $i+p$. Define $\xi'$ as follows:
+for $k<i+p$, $\xi(k)=\xi'(k)$, and $\xi'$ is periodic with starting index $i$ and period $p$. Then for any $g\in CL(f)$ the following two conditions hold:
+
+(a) $\forall k<i+p, \xi(k)\models g$ iff $\xi'(k)\models g$
+
+(b) $\forall k\geq i$, $\xi'(k)\models g$ iff  $\xi'(k+p)\models g$. 
+
+Proof: prove (a) and (b) simultaneously by induction on the structure of $g$. If $g$ is atomic the assertion follows trivially.  
+
+Suppose the assertions for $g_1, g_2$ hold. Easily to show the assertions for $\neg g_1, g_1\wedge g_2$. 
+
+Now consider the case $g:=g_1\textsf{U}g_2$. 
+
+(a) assume $\xi(k)\models g$ with $k<i+p$. If $k<i$ then easy. Suppose $i\leq k<i+p$. If $g$ is fulfilled before $i+p$ then easy. Assume fulfilled after $i+p$ then $\xi(i+p)\models g$ and hence $\xi(i)\models g$. Then $g$ is fulfilled before $i+p$. Proof is also nor hard.\\
+
+Theorem (Ultimately Periodic Model Theorem): A LTL formula $f$ is satisfiable. Then it has a model $\xi$ which is ultimately periodic with starting index $l\leq 2^{1+length(f)}$ period $p\leq 4^{1+length(f)$ and for all $l\geq l$, $S[\xi(k),f]=S[\xi(k+p),f]$, and every $\xtsf{U}$ formula in $S[\xi(k),f]$ is fulfilled before $k+p$. 
+
+Proof: Let $\pi$ be a model of $f$. Then $\pi(0)\models f$
 
 
 \end{CJK*}
