@@ -1,0 +1,133 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{makeidx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{color}
+\usepackage[all]{xy}
+\usepackage{CJK}
+%\usepackage{ctex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\long\def\remove#1{}
+\newcommand{\dom}{\mbox{dom}}
+
+\newcommand{\vp}{\varphi}
+
+
+\newcommand{\coNP}{\mbox{coNP}}
+
+\newcommand{\NP}{\mbox{NP}}
+\newcommand{\DP}{\mbox {D}^P}
+
+\newcommand{\LeKl}{\mbox{$\sqcup$ }}
+\newcommand{\card}[1]{\mbox{\#}(#1)}
+
+\newcommand{\sss}{\mbox{\bf S}}
+\newcommand{\jjj}{\mbox{\bf J}}
+
+\newcommand{\QR}[1]{\mbox{$\ \mid\!\!\!\frac{#1}{\
+    \stackrel{\mbox{\scriptsize\it Q-Res}}{\ }\ }\ $}}
+\newcommand{\QUR}[1]{\mbox{$\ \mid\!\!\!\frac{#1}{\
+    \stackrel{\mbox{\scriptsize\it Q-Pos-Unit-Res}}{\ }\ }\ $}}
+%\baselineskip 0.2in
+
+
+\newcommand{\pbox}{\hbox to 6pt{\leaders\hrule width 6pt height 6pt\hfill}}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newenvironment{proof}{\parindent=0pt{\bf Proof: }}{
+   \hspace*{\fill}\hbox to 6pt{\leaders\hrule width 6pt height 6pt\hfill}\par}
+
+
+\pagestyle{plain}
+
+\begin{document}
+
+%\begin{CJK*}{GBK}{song}
+%\CJKtilde
+
+
+
+%%%%%%%
+
+\title{
+}
+
+\author{
+Xishun Zhao \footnote{Corresponding author. Tel: 0086-20-84114036,
+Fax:0086-20-84110298.}
+%\thanks{This research was partially supported by the NSFC project
+%under grant number: 60970040 and a MOE project
+%under grant number: 05JJD72040122. }\\
+%Institute of Logic and Cognition,
+%\\ Sun Yat-sen
+%University\\ 510275 Guangzhou, (P.R. China)\\
+%{Email: hsszxs@mail.sysu.edu.cn}
+}
+
+
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+
+
+
+Fix a formula $F$. Let 
+$$h_1:=f_1\textsf{U}g_1,\cdots, h_k:=f_k\textsf{U}g_k$$ be all $\textsf{U}$-subformulas of $F$.\\
+
+Pick new atoms $c_1, \cdots, c_k$\\
+
+An outer-most occurrence of $f_i\textsf{U}g_i$ in $F$ is an occurrences not in another $U$-formulas. \\
+
+$F^C$ be the formula obtained from $F$ by replacing each outer-most occurrence of $f_i\textsf{U}g_i$ by $c_i$. 
+
+
+Now in $F^C$ there are no occurrences of $\textsf{U}$-formulas.\\ 
+
+ 
+CL$(F^C)$ be as usual. Let $n$ be the $\textsf{X}$-depth of $F^C$ is $n$. Define CL$^m(F^C)$ be the formulas in $F^C$ with $\textsf{X}$-depth $\leq \max\{0, n-m\}$.  
+
+\begin{definition}
+$$s_0, s_1, \cdots$$
+Define 
+
+$$S,i\models g \ \ \mbox{ iff }\ \ S,i\models g[c_1/h_1,\cdots,c_k/h_k]$$
+
+
+
+$sat_S(i,i):=\{g\in CL(F^C)\mid S,i\models g\}$
+
+$sat_S(i,i+m):=\{g\in CL(F^C)\mid g\in CL^m(F^C), S,i\models g\}$
+
+\end{definition}
+
+
+\begin{lemma}
+$S: s_0, s_1, \cdots, s_i, s_{i+1}, \cdots, s_j, \cdots,$
+
+$S': s_0, \cdots, s_{i-1}, s_j, \cdots, $
+
+Then 
+
+(1) for every $m <i$ and every formula $g\in CL^m(F^C)$, 
+
+$S,m\models g$ iff $S',m\models g$\\
+
+(2) for every $m\geq i$ and every formula $g\in CL(F^C)$
+
+$S, j+m\models g$ iff $S', i+m\models g$
+
+\end{lemma}
+
+
+
+\end{document}

@@ -776,7 +776,7 @@ Given a structure $\xi$, a formula $f$. $S[\xi(i),f]$ is the set of formulas in 
 
 Lemma 2. $\xi$, $i,j$ such that $S[\xi(i),f]=S[\xi(j),f]$. Let $\xi'$ be defined as follows
 
-$\xi(0)=\xi'(0), \cdots, \xi(i-1)=xi'(i-1)$, $\xi'(i)=\xi(j), \xi'(i+1)=\xi(j+1), \cdots$.
+$\xi(0)=\xi'(0), \cdots, \xi(i-1)=\xi'(i-1)$, $\xi'(i)=\xi(j), \xi'(i+1)=\xi(j+1), \cdots$.
 
 Then for any $k<i$, $S[\xi(k),f]=S[\xi'(k),f]$, for any $k\geq i$, $S[\xi(j+(k-i),f]=S[\xi'(k),f]$
 
@@ -795,19 +795,36 @@ for $k<i+p$, $\xi(k)=\xi'(k)$, and $\xi'$ is periodic with starting index $i$ an
 
 (a) $\forall k<i+p, \xi(k)\models g$ iff $\xi'(k)\models g$
 
-(b) $\forall k\geq i$, $\xi'(k)\models g$ iff  $\xi'(k+p)\models g$. 
+(b) $\forall k\geq i$, $\xi'(k)\models g$ iff  $\xi'(k+p)\models g$.
 
-Proof: prove (a) and (b) simultaneously by induction on the structure of $g$. If $g$ is atomic the assertion follows trivially.  
+Proof: prove (a) and (b) simultaneously by induction on the structure of $g$. If $g$ is atomic the assertion follows trivially.
 
-Suppose the assertions for $g_1, g_2$ hold. Easily to show the assertions for $\neg g_1, g_1\wedge g_2$. 
+Suppose the assertions for $g_1, g_2$ hold. Easily to show the assertions for $\neg g_1, g_1\wedge g_2$.
 
-Now consider the case $g:=g_1\textsf{U}g_2$. 
+Now consider the case $g:=g_1\textsf{U}g_2$.
 
 (a) assume $\xi(k)\models g$ with $k<i+p$. If $k<i$ then easy. Suppose $i\leq k<i+p$. If $g$ is fulfilled before $i+p$ then easy. Assume fulfilled after $i+p$ then $\xi(i+p)\models g$ and hence $\xi(i)\models g$. Then $g$ is fulfilled before $i+p$. Proof is also nor hard.\\
 
-Theorem (Ultimately Periodic Model Theorem): A LTL formula $f$ is satisfiable. Then it has a model $\xi$ which is ultimately periodic with starting index $l\leq 2^{1+length(f)}$ period $p\leq 4^{1+length(f)$ and for all $l\geq l$, $S[\xi(k),f]=S[\xi(k+p),f]$, and every $\xtsf{U}$ formula in $S[\xi(k),f]$ is fulfilled before $k+p$. 
+Theorem (Ultimately Periodic Model Theorem): A LTL formula $f$ is satisfiable. Then it has a model $\xi$ which is ultimately periodic with starting index $l\leq 2^{1+length(f)}$ period $p\leq 4^{1+length(f)}$ and for all $l\geq l$, $S[\xi(k),f]=S[\xi(k+p),f]$, and every $\textsf{U}$ formula in $S[\xi(k),f]$ is fulfilled before $k+p$.
 
-Proof: Let $\pi$ be a model of $f$. Then $\pi(0)\models f$
+Proof: Let $\pi$ be a model of $f$. Then $\pi(0)\models f$. Let $l, m$ be integers such that $S[\pi(l),f]=S[\pi(l+m),f]$ and the following condition (*) holds:
+
+(*) Every $\textsf{U}$-formula in $S[\pi(l),f]$ is fulfilled before $l+m$\\
+
+It is easy to see that $l, m$ must  exist. Now we repeatedly apply the reductions of Lemma 2 to states between
+
+END\\
+
+
+{\bf Conjecture:} for $h$ , in which there are fixed number of $\textsf{U}$-formulas, SAT(LTL) for $h$ is in NP.
+Moreover, there is model with only polynomially many states (truth assignments).
+
+Let $f_1\textsf{U} g_1, \cdots, f_k\textsf{U}g_k$ be the $\textsf{U}$-formulas of $f$.
+
+UL$'_(g):=\{f_1, g_1,\cdots, f_k, g_k,\}\cup \{\textsf{X}(f_1\textsf{U} g_1),\cdots, \textsf{X}(f_k\textsf{U}g_k)\}\cup \{f_1\textsf{U} g_1, \cdots, f_k\textsf{U}g_k\}$
+
+UL$(g):=\mbox{UL}'(g)\cup \neg\mbox{UL}'(g)$
+
 
 
 \end{CJK*}
