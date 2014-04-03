@@ -1,0 +1,178 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx}
+\usepackage{makeidx}
+\usepackage{amsmath}
+\usepackage{color} 
+\usepackage{amsfonts}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%oliver
+\usepackage[active]{srcltx}  %%oliver
+\usepackage{xr} %%oliver
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{stmaryrd}
+\usepackage{array}
+\usepackage{exscale}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\pbox}{\hbox to 6pt{\leaders\hrule width 6pt height 6pt\hfill}}
+
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newenvironment{proof}{\parindent=0pt{\bf Proof: }}{
+   \hspace*{\fill}\hbox to 6pt{\leaders\hrule width 6pt height 6pt\hfill}\par}
+
+\long\def\remove#1{}
+
+\pagestyle{plain}
+
+\begin{document}
+
+
+
+
+\noindent\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+ & Class $R$        & Class $T$      & $\alpha \models \beta$    & $\color{red}\exists\color{black}\alpha \models  \beta$ & \color{red}$\alpha\models \exists\beta$\color{black}  &$\exists \alpha \models \exists \beta$ \\ \hline
+1. & DHORN          & DHORN          & PTIME           & \color{red} PTIME\color{black}   &  \color{red} coNP-c\color{black}           &  coNP-c    \\ \hline
+2. & 2-Term         & Term           & PTIME           & PTIME  &             &  PTIME     \\ \hline
+3. & HORN           & HORN           & PTIME           & \color{red} PTIME\color{black}\textbf{•}    &     \color{red} coNP-c\color{black}       &  coNP-c    \\ \hline
+4. & CLAUSE         & LITERAL        & PTIME           & PTIME  &             &  PTIME     \\ \hline
+5. & CNF            & CLAUSE         & coNP-c          & coNP-c  &            &  coNP-c    \\ \hline
+6. & CNF            & CNF            & coNP-c            & \color{red} coNP-c\color{black}   &  \color{red} $\Pi_2^P$-c \color{black}         &  \color{red} $\Pi_2^P$-c \color{black}     \\ \hline
+\end{tabular}
+
+
+\ \ \\  \ \\ \
+
+
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ & {\em Class R} &  {\em Class T} & $\alpha \approx \beta$ & $\exists \alpha \approx \beta$ & 
+$\exists \alpha \approx \exists \beta$  \\ \hline
+1. & DHORN   & DHORN   & PTIME  & \color{red} coNP-c\color{black}   & coNP-c   \\ \hline
+2. & 2-Term  & Term    & PTIME  & PTIME  & PTIME    \\ \hline
+3. & HORN    & HORN    & PTIME  & \color{red} coNP-c\color{black}   & coNP-c   \\ \hline
+4. & CLAUSE  & LITERAL & coNP-c & coNP-c & --       \\ \hline
+5. & CNF     & CNF     & coNP-c & \color{red} $\Pi_2^P$-c \color{black}   & \color{red} $\Pi_2^P$-c \color{black}     \\ \hline
+
+\end{tabular}
+
+
+
+
+\ \ \\
+
+Below are the main proofs for the red parts\\ 
+
+%Suppose two Horn formulas $\alpha, \beta$ and a set $X$ of variables.\\
+
+
+{\bf The problem $\exists X \alpha \models \beta$ can be solved in poly-time for HORN formulas.} 
+
+{\bf Proof:} We suppose $X\cap var(\beta)$ is empty. (Other waise we can rename $x\in X$ by a new variable $x'$ and consider $\exists X'\alpha'$ where $\alpha'$ is the resulting formula after renaming.
+
+Then we claim that $\exists X\alpha\models \beta$ if and only if $\alpha\models\beta$. 
+
+Suppose $\exists X\alpha\models \beta$. Consider any truth assingment $t$ on var$(\alpha)$ wich satisfying $\alpha$. Let $t^*$ be the restriction of $t$ on var$(\alpha)-X$. Then clearly $t^*$ satisfies $\exists X\alpha$. Therefore, $t^*$ satisfies $\beta$, so does $t$. 
+
+Suppose conversely $\alpha\models\beta$. Consider any truth assignment $s$ on var$(\alpha)-X$ satisfying $\exists X\alpha$. Then $s$ can be extended to a truth assignment $t$ defined on var$(\alpha)$ such that $t$ satisfies $\alpha$. Then $t$ satisfies $\beta$, hence $s$ satisifies $\beta$ since $X\cap var(\beta)$ is empty.\\ \\
+
+
+{\bf The problem $\alpha\models\exists X\beta$ is coNP-complete.}
+
+{\bf Proof:} We define a reduction from 3-unsat. Consider any 3-CNF formula $F:=C_1\wedge\cdots\wedge C_m$ with $C_i=(L_{i,1}\vee L_{i,2}\vee L_{i,3})$ over variables $x_1,\cdots, x_n$.
+
+For each clause $C_i$ we introduce a new variable $c_i$. For each $x_k$ we introduce a variable $\pi(\neg x_k)$ intended to mean $\neg x_k$. For convenience let $\pi(x)=x$. Let 
+
+\begin{itemize}
+\item $\alpha:=\bigwedge_{k=1}^{n} (\neg x_k\vee \neg \pi(\neg x)) $
+
+\item $\beta:=\left(\bigwedge_{i=1}^{m}\bigwedge_{j=1}^{3}\left(\pi(L_{i,j})\rightarrow c_i\right)\right)\wedge (\neg c_1\vee\cdots\vee\neg c_m)$
+
+\item $X:=\{c_1,\cdots,c_m\}$
+\end{itemize}
+
+Please check that $F$ is unsatisfiable if and only if $\alpha\models \exists X\beta$
+
+Suppose $F$ is unsat. Consider any truth assignment $t$ satisfying $\alpha$. We first consider the case that $t(x)=1-t(\pi(\neg x))$. That is, $t$ determine uniquely a truth assignment on $x_1,\cdots, x_n$. we call such $t$ a normal truth assigment. Since $F$ is unsat, there is some $i$ such that all of $\pi(L_{i,j})$, $j=1,2,3,$ are false under $t$, fro such kind $i$ we can set $c_i=0$. Therefore $\exists X\beta$ can be satisfied by $t$.
+
+Suppuse $t$ is not normal, i.e., for some $x$ we have $t(x)=t(\pi(\neg x))=0$, now define $t'$ by set $t'(x)=1$ for all such variable $x$. Now $t'$ is normal. Thus $t$ cannot satisfies all clause $\pi(L_{i,1})\vee \pi(L_{i,2}\vee \pi(L_{i,3})$
+
+Please note that $t$ can be obtained by conversely change thuth value to 0 for some variable $x$  with $t'(x)=1$. Thus $t$ falsify clauses which are falsified by $t'$. So, $t$ satifies $\exists X\beta$. \\
+
+Suppose $\alpha\models \exists X\beta$. It is easy to show$F$ is unsat. I omit the proof.\\ \\
+
+
+{\bf The problem $\exists X\alpha\approx\beta$ is coNP-complete for HORN formulas.}
+
+{\bf Proof:} We define a reduction from 3-unsat. Consider any 3-CNF formula $F:=C_1\wedge\cdots\wedge C_m$ with $C_i=(L_{i,1}\vee L_{i,2}\vee L_{i,3})$ over variables $x_1,\cdots, x_n$.
+
+For each clause $C_i$ we introduce a new variable $c_i$. For each $x_k$ we introduce a variable $\pi(\neg x_k)$ intended to mean $\neg x_k$. For convenience let $\pi(x)=x$. Let 
+
+\begin{itemize}
+\item $\beta:=\bigwedge_{k=1}^{n} (\neg x_k\vee \neg \pi(\neg x)) $
+
+\item $\alpha':= \left(\bigwedge_{i=1}^{m}\bigwedge_{j=1}^{3}\left(\pi(L_{i,j})\rightarrow c_i\right)\right)\wedge (\neg c_1\vee\cdots\vee\neg c_m)$
+
+\item $\alpha:=\beta\wedge \alpha'$
+
+\item $X:=\{c_1,\cdots,c_m\}$
+\end{itemize}
+
+(please note that here $\beta$ is the previous $\alpha$ in the above reduction, while $\alpha'$ is the previous $\beta$).
+
+Clearly $\exists X\alpha\models \beta$.
+
+Please check that $F$ is unsatisfiable if and only if $\beta\models\exists X\alpha$ if and only if $\beta\models \exists X\alpha'$.
+
+\ \\ \\
+
+{\bf The problem $\exists X\alpha\approx\beta$ is coNP-complete for DHORN formulas.}
+
+In the above reduction we introduce an additional variable $y$. Define 
+
+\begin{itemize}
+\item $\beta:=\bigwedge_{k=1}^{n} (y\vee \neg x_k\vee \neg \pi(\neg x))$
+
+\item $\alpha':= \left(\bigwedge_{i=1}^{m}\bigwedge_{j=1}^{3}\left(\pi(L_{i,j})\rightarrow c_i\right)\right)\wedge (y\vee \neg c_1\vee\cdots\vee\neg c_m)$
+
+\item $\alpha:=\beta\wedge \alpha'$
+
+\item $X:=\{c_1,\cdots,c_m\}$
+\end{itemize}
+Clealy $\alpha$ and $\beta$ are DHORN. 
+Please check that 
+
+$F$ is unsat if and only if $\exists X\alpha\approx\beta$\\ \\
+
+
+{\bf The problem $\exists X\alpha\approx \beta$ is $\Pi_2^P$-complete for CNF formulas. }
+
+{\bf Proof:} Consider any $\Phi=\forall Y\exists X \left(\bigwedge_{i=1}^m C_i\right)$, where each clause $C_i=(C'_i\vee C''_i)$ such that $C'_i$ is the universal part whereas $C''_i$ is the existential part. Introduce new variables $z_1,\cdots,z_m$. Define
+
+\begin{itemize}
+\item $\beta:=\bigwedge_{i=1}^m(C'_i\leftrightarrow z_i)$
+
+\item $\alpha':=\bigwedge_{i=1}^m(z_i\vee C''_i)$
+
+\item $\alpha:=\alpha'\wedge \beta$
+\end{itemize}
+
+Please note that $\beta$ can be easily transformed to a CNF formula with only slightly size increasing. 
+
+   
+Please check that 
+
+$\Phi$ is true if and only if $\beta\models \exists X\alpha'$\\
+
+Then clearly 
+
+$\Phi$ is true if and only if $\exists X\alpha\approx \beta$\\
+
+\end{document}

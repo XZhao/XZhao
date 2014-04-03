@@ -1,0 +1,924 @@
+%% LyX 2.0.2 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[a4paper,english,oribibl]{llncs}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\usepackage{babel}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{amstext}
+\usepackage{graphicx}
+\usepackage[unicode=true,
+ bookmarks=false,
+ breaklinks=false,pdfborder={0 0 0},backref=false,colorlinks=false]
+ {hyperref}
+%\hypersetup{pdftitle={Learning Boolean Specifications},
+% pdfauthor={Hans Kleine Büning and Yan Yuhan}}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\pdfpageheight\paperheight
+\pdfpagewidth\paperwidth
+
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{flafter}
+\usepackage{caption2}
+\usepackage{placeins}
+\usepackage{listings}
+\usepackage{hvfloat}
+\usepackage{comment}
+
+\newcommand{\ded}[2]{\mbox{$\ \mid\!\!\!\frac{\mbox{\scriptsize #1}}{\
+            \stackrel{\mbox{\scriptsize\it #2}}{\ }\ }\ $}} 
+
+\newcommand{\bur}[1]{\mbox{$\ \mid\!\!\!\frac{#1}{\
+    \stackrel{\mbox{\scriptsize\it b-Unit-Res}}{\ }\ }\ $}}
+
+\newcommand{\qur}[1]{\mbox{$\ \mid\!\!\!\frac{#1}{\
+    \stackrel{\mbox{\scriptsize\it Q-Unit-Res}}{\ }\ }\ $}}
+
+ \def\rmodels{=\joinrel\mathrel|}
+
+\newcommand{\QBF}{\mbox{\rm QBF}}
+\newcommand{\pQBF}{\mbox{\rm pQBF}}
+\newcommand{\ExBF}{\mbox{\rm $\exists$BF}}
+\newcommand{\exBF}{\mbox{\rm \footnotesize $\exists$BF}}
+\newcommand{\DQBF}{\mbox{\rm DQBF}}
+\newcommand{\DpoQBF}{D_{po}\mbox{\rm QBF}}
+\newcommand{\DlogQBF}{D_{log}\mbox{\rm QBF}}
+\newcommand{\DkQBF}{D_{k}\mbox{\rm QBF}}
+\newcommand{\HORN}{\mbox{\rm HORN}}
+\newcommand{\kHORN}{\mbox{\rm k-HORN}}
+\newcommand{\QHORN}{\mbox{\rm QHORN}}
+\newcommand{\QkHORN}{\mbox{\rm Qk-HORN}}
+\newcommand{\QEHORN}{\mbox{\rm QEHORN}}
+\newcommand{\EHORN}{\mbox{\rm EHORN}}
+\newcommand{\ExHORN}{\mbox{\rm $\exists$HORN}}
+\newcommand{\ExkHORN}{\mbox{\rm $\exists$k-HORN}}
+\newcommand{\ExTwoHORN}{\mbox{\rm $\exists$2-HORN}}
+\newcommand{\TwoHORN}{\mbox{\rm 2-HORN}}
+\newcommand{\ExTwoCNF}{\mbox{\rm $\exists$2-CNF}}
+\newcommand{\exHORN}{\mbox{\rm \footnotesize $\exists$HORN}}
+\newcommand{\DQHORN}{\mbox{\rm DQHORN}}
+\newcommand{\renQHORN}{\mbox{\rm ren-QHORN}}
+\newcommand{\TERM}{\mbox{\rm TERM}}
+\newcommand{\CLAUSE}{\mbox{\rm CLAUSE}}
+\newcommand{\CNF}{\mbox{\rm CNF}}
+\newcommand{\kCNF}{\mbox{\rm k-CNF}}
+\newcommand{\DNF}{\mbox{\rm DNF}}
+\newcommand{\kDNF}{\mbox{\rm k-DNF}}
+\newcommand{\NNF}{\mbox{\rm NNF}}
+\newcommand{\QNNF}{\mbox{\rm QNNF}}
+\newcommand{\QCNF}{\mbox{\rm QCNF}}
+\newcommand{\QDNF}{\mbox{\rm QDNF}}
+\newcommand{\DQCNF}{\mbox{\rm DQCNF}}
+\newcommand{\DQTwoCNF}{\mbox{\rm DQ2-CNF}}
+\newcommand{\DQNNF}{\mbox{\rm DQNNF}}
+\newcommand{\QTwoCNF}{\mbox{\rm Q2-CNF}}
+\newcommand{\ThreeCNF}{\mbox{\rm 3-CNF}}
+\newcommand{\TwoCNF}{\mbox{\rm 2-CNF}}
+\newcommand{\QK}{\mbox{\rm QK}}
+\newcommand{\DQK}{\mbox{\rm DQK}}
+\newcommand{\PROP}{\mbox{\rm PROP}}
+\newcommand{\BOOL}{\mbox{\rm \rm BOOL}}
+\newcommand{\BF}{\mbox{\rm \rm BF}}
+\newcommand{\NBF}{\mbox{\rm NBF}}
+\newcommand{\NL}{\mbox{\rm NL}}
+\newcommand{\PTIME}{\mbox{\rm P}}
+\newcommand{\NP}{\mbox{\rm NP}}
+\newcommand{\coNP}{\mbox{\rm coNP}}
+\newcommand{\NSPACE}{\mbox{\rm NSPACE}}
+\newcommand{\SPACE}{\mbox{\rm SPACE}}
+\newcommand{\PSPACE}{\mbox{\rm PSPACE}}
+\newcommand{\NPSPACE}{\mbox{\rm NPSPACE}}
+\newcommand{\NEXPTIME}{\mbox{\rm NEXPTIME}}
+\newcommand{\IP}{\mbox{\rm IP}}
+\newcommand{\MIP}{\mbox{\rm MIP}}
+\newcommand{\SAT}{\mbox{\rm SAT}}
+\newcommand{\ThreeSAT}{\mbox{\rm 3-SAT}}
+\newcommand{\QSAT}{\mbox{\rm QSAT}}
+\newcommand{\LTL}{\mbox{\rm LTL}}
+\newcommand{\vars}{\mbox{\rm vars}}
+\newcommand{\freevars}{\mbox{\rm freevars}}
+\newcommand{\CIRCUITS}{\mbox{\rm CIRCUITS}}
+
+\newcommand{\Circ}{\mbox{\rm $\cal C$}}
+\newcommand{\QC}{\mbox{\rm Q$\cal C$}}
+\newcommand{\EC}{\mbox{\rm $\exists$$\cal C$}}
+\newcommand{\CE}{\mbox{\rm $\cal C$$_{\exists}$}}
+\newcommand{\CAE}{\mbox{\rm $\cal C$$_{\forall, \exists}$}}
+\newcommand{\CEk}{\mbox{\rm $\cal C$$_{\exists (k)}$}}
+\newcommand{\CEt}{\mbox{\rm $\cal C$$_{\exists (2)}$}}
+\newcommand{\CEo}{\mbox{\rm $\cal C$$_{\exists (1)}$}}
+\newcommand{\CEof}{\mbox{\rm $\cal C$$^*_{\exists (1)}$}}
+
+\newcommand{\AK}{\mbox{${\cal{A}}_K$}}
+\newcommand{\AM}{\mbox{$^\exists\!\!\models$}}
+%\newcommand{\AMB}{\mbox{$^A$\hspace{-0.5mm}$\models^B$}}
+\newcommand{\AMB}{\mbox{$^\exists\!\!\models^\exists$}}
+\newcommand{\MB}{\mbox{$\models^\exists$}}
+%\newcommand{\AM}{\mbox{$^A$\hspace{-0.5mm}$\models$}}
+
+\newcommand{\AEQB}{\mbox{$^\exists\!\!\approx^\exists$}}
+\newcommand{\AEQ}{\mbox{$^\exists\!\!\approx$}}
+
+
+
+
+\lstset{numberbychapter=false}
+\lstset{basicstyle=\fontfamily{pcr}\selectfont\footnotesize}
+\lstset{commentstyle=\fontfamily{pcr}\selectfont\itshape\footnotesize}
+\lstset{keywordstyle=\fontfamily{pcr}\selectfont\bfseries\footnotesize}
+
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+\renewcommand{\headrulewidth}{0pt}
+
+\makeatother
+
+\begin{document}
+\author{Hans Kleine Büning \and Yan Yuhan}
+
+\institute{Computer Science Institute, University of Paderborn, Germany\\
+\email{kbcsl@upb.de} (H. Kleine Büning), \email{yuhan@upb.de} (U. Bubeck)}
+
+
+\title{On Configuration Problems based on Representations in Propositional Logic}
+\maketitle
+
+\begin{abstract}
+On Configuration Problems based on Representations in Propositional Logic
+Abstract. We consider configuration problems, where the components are represented by propositional formulas. Configuration is the process of composing a system from a predefined set of components, while observing a set of given constraints. The resulting system is either equivalent to the given demands or even a more powerful system. This leads to equivalence and consequence problems. We focus on the computational complexity of the configuration problem for various sub-classes  of formulas taking into account whether or not helping variables are allowed.
+\end{abstract}
+\section{complexities}
+\noindent\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ & Class $R$        & Class $T$      & $\alpha \models \beta$    & $\alpha \models \exists \beta$ & $\exists \alpha \models \exists \beta$ \\ \hline
+1. & DHORN          & DHORN          & PTIME           & open                &  coNP-c    \\ \hline
+2. & 2-Term         & Term           & PTIME           & PTIME               &  PTIME     \\ \hline
+3. & HORN           & HORN           & PTIME           & open                &  coNP-c    \\ \hline
+4. & CLAUSE         & LITERAL        & PTIME           & PTIME               &  PTIME     \\ \hline
+5. & CNF            & CLAUSE         & coNP-c          & coNP-c              &  coNP-c    \\ \hline
+6. & CNF            & CNF            & open            & open                &  open      \\ \hline
+\end{tabular}
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ & {\em Class R} &  {\em Class T} & $\alpha \approx \beta$ & $\exists \alpha \approx \beta$ & 
+$\exists \alpha \approx \exists \beta$  \\ \hline
+1. & DHORN   & DHORN   & PTIME  & open   & coNP-c   \\ \hline
+2. & 2-Term  & Term    & PTIME  & PTIME  & PTIME    \\ \hline
+3. & HORN    & HORN    & PTIME  & open   & coNP-c   \\ \hline
+4. & CLAUSE  & LITERAL & coNP-c & coNP-c & --       \\ \hline
+5. & CNF     & CNF     & coNP-c & open   & open     \\ \hline
+
+\end{tabular}
+
+
+
+
+
+
+\section{new}
+$C=\{\alpha_1, \ldots, \alpha_n\}$ over the variables $V$\\
+$S$ is a consistent formula over $N_1, \ldots, N_n$\\
+$G$ is a formula over $V$\\
+$\beta$ is the target formula over $V$\\
+Query: $\exists K \subset C:$\\
+1. $K \wedge G$ is consistent and $K \models \beta$\\
+2. For $K=\{\alpha_1, \ldots, \alpha_r\}$:\\
+\hspace*{4mm} If $N_1 \wedge \ldots \wedge N_r \wedge S \models N_j$ then $\alpha_j \in K$\\
+\hspace*{4mm} If $N_1 \wedge \ldots \wedge N_r \wedge S \models \neg N_j$ then $\alpha_j \not\in K$\\
+
+\section{Abduction and Configuration}
+
+\begin{definition}
+An instance of the abduction problem $Abd(V, H, KB, M)$ is a set of variables $V$, the hypotheses $H \subseteq Lit(V)$, a formula $KB$ with $var(KB) \subseteq V$, and a formula $M$ (the manifestation).
+Then the question is whether there exists a subset $E \subseteq H$ such that
+$E \wedge KB \models M$ and $E \wedge KB$ is consistent(satisfiable).
+\end{definition}
+
+Encoding:\\
+$KB := \bigwedge_i (N_i \rightarrow \alpha_i) \wedge S \wedge G$\\
+$V_e := V \cup \{N_1, \ldots, N_r\}$\\
+$H :=\{ N_1, \ldots, N_r\}$\\
+$M := \beta$\\
+Query: $\exists R\subseteq H: (H \wedge T \models \beta$ and $H \wedge T$ is consistent).\\
+
+For various classes of formulas the computational complexity of the abduction problem has been investigated. The encoding preserves the classes.
+For example, if $S$, $G$, $\beta$, and the components are Horn formulas, then
+$T$ can be transforme easily into a Horn formula. Therefore, the complexity of the abduction problem for Horn formulas is an upper of the complexity of the configuration problem. The problem has been shown to be  NP-complete \cite{xx}. But since the resulting formulas of the abduction problem have a special structure, we can not guarantee the lower bound resp. hardness of the configuration problem.
+
+Problems:
+1. direct configuration\\
+\begin{definition}Configuration Problems for the classes $R$ and $T$:\\
+1. An instance of the configuration problem conf($R, T$) is a finite set of components $C=\{\alpha_1,\cdots,\alpha_n\} \subseteq R$ and a formula $\beta \in T$. The question is whether there exists a satisfiable subset $K \subseteq C$ such that $K \models \beta$?\\
+2. An instance of the configuration problem 
+conf($\exists_K R$, $T$) is a finite set of components $C=\{\alpha_1,\cdots,\alpha_n\} \subseteq R$, a formula $\beta \in T$, and a set of variables $X$ for which $X \cap freevar(\beta)$ is empty. The question is whether there exists a satisfiable subset $K \subseteq C$ such that $(\exists X K) \models \beta$?\\
+\end{definition}
+
+
+2. Helping variables:\\
+
+
+
+3. Equivalence configuration:
+
+\begin{definition}
+1. e-conf$(R, T)$:\\
+Let $R$ and $T$ classes of formulas. An instance of the equivalence configuration problem
+is a finite set of components $C=\{\alpha_1,\cdots,\alpha_n\} \subseteq R$ and a formula $\beta \in T$. The question is whether there exists a satisfiable subset $K \subseteq C$ such that
+$K \in$ SAT and $ K \approx \beta$.
+
+2. e-conf($\exists _K R, T$)
+An instance is a finite set of components $C=\{\alpha_1,\cdots,\alpha_n\} \subseteq R$, a formula $\beta \in T$, and a set of variables $X$ for which $X \cap freevar(\beta)$ is empty. The question is whether there exists a satisfiable subset $K \subseteq C$ such that $(\exists X K) \approx \beta$.\\
+\end{definition}
+
+\begin{theorem}
+Let $C$ be a set of components, $\beta$ is the target formula and $X$ a set of variables
+with $X \cap var(\beta)$ is empty. Then it holds:\\
+$\exists K \subseteq C: K$ is consistent and $K \models \beta$\\
+iff $\exists K \subseteq C: K$ is consistent and $(\exists X K) \models \beta$.
+\end{theorem}
+\begin{proof}
+Let $K$ a solution for $K \models \beta$
+\end{proof}
+The constraint $X \cap var(\beta)$ is empty is necessary because otherwise for $C=\{x\}$ and $\beta=x$
+we obtain $x \models x$ but $\exists x \not \models x$.
+
+\section{Introduction}
+
+Th design of software systems or technical systems by using existing components is a widely used approach in industry. In the paper in hand, we investigate the configuration problem, where the components are represented by propositional formulas \cite{SinzConfiguration, SteinConfiguration}. In general, a set of components is given and we are looking for a subset of components satisfying some demands under some constraints. In our scenario we investigate a set-based configuration approach. Let $C$ be a set of components and $\beta$ the target formula, then we have to decide whether there exists a subset of components $K$ with $K \models \beta$
+or $K \approx \beta$. For various reasons the description of components and systems make use of helping variables. These variables are very useful for short and natural encodings but as we will see they may lead to more complex decision problems. Subsequently we assume that the components are represented as
+propositional formulas in conjunctive normal form, where our results are based on a detailed analysis 
+of the configuration problem for restrictions like definite Horn formulas and terms.    
+
+The motivation of our research is threefold. From a theoretical point of view the computational complexity is of interest. The knowledge about the complexity may help to develop appropriate
+search procedures and which solvers should be applied with the problems. Since the logical structure of the components have an impact on the complexity,
+the results can also be used as a guideline for the developer of components and solvers.
+
+
+
+
+\section{Notation and Configuration}
+We assume that the reader is familiar with the basic concepts of the computational complexity. $\Sigma^P_i$ and $\Pi^P_i$ are the classes of the polynomial hierarchy \cite{MS72}. $D^P$ is the class of problem which can be described as the difference of two NP-problems. For example, the minimal unsatisfiability problem is $D^P$-complete
+\cite{pawo}. We will investigate the configuration problems for various classes: CNF is the classs of formulas in conjunctive normal form, DNF are the formulas in disjunctive normal form, HORN is the set of Horn formulas, and DHORN is the set of definite Horn formulas (Horn formulas without negative clauses).
+Moreover, CLAUSE is the set of clauses and LITERAL is the set literals. Finally, Term is the class of Terms, i.e. a conjunction of literals, where 2-Term denotes the class of terms consisting of at most two literals.
+$x^0$ is an abbreviation for $\neg x$ and $x^1$ stands for $x$. For formulas $\alpha$ and $\beta$ the logical equivalence is written as $\alpha \approx \beta$. $var(\alpha)$ denotes the set of variables of the the formula $\alpha$.\\
+Let $V$ be a set of variables. Formulas $\alpha$ and $\beta$ are restricted equivalent for $V$ - in symbols $\alpha \approx_V \beta$ if and only if the they have the same set of consequences restricted to formulas over the variables $V$. That is equivalence $\{\pi : \alpha \models \pi, var(\pi) \subseteq V\} = \{ \sigma : \beta \models \sigma, var(\sigma) \subseteq V\}$. We say $\beta$ is a restricted logical consequence of $\alpha$ with respect to $V$- in symbols $\alpha \models_V \beta$ - if and only if $\{\pi : \alpha \models \pi, var(\pi) \subseteq V\} \subseteq \{ \sigma : \beta \models \sigma, var(\sigma) \subseteq V\}$.
+For Horn formulas and definite Horn formulas it has been shown the restricted equivalence problem as well as the restricted consequence problem is coNP-complete \cite{KBLettmann}. Subsequently, we will stress the relationship to existentially quantified formulas with free variables.
+
+
+\begin{lemma}\cite{KBLettmann}
+Let $\alpha$ and $\beta$ be propositional formulas, $V$ a set of variables, $X= var(\alpha) \setminus V$, and $Y= var(\beta) \setminus V$.\\
+1. $\alpha \approx_V \beta$ if and only if $\exists X \alpha \approx \exists Y \beta$\\
+2. $\alpha \models_V \beta$ if and only if $\exists Y \beta \models \exists X \alpha$
+\end{lemma}
+
+The basic version of the configuration problem has as instance a set of components $C=\{\alpha_1, \ldots, \alpha_n\}$, where $\alpha_i$ a propositional formulas, and a target formula $\beta$. Then we have to decide whether
+there exists a satisfiable subset $K \subseteq C$, such that $K \models \beta$ or the stronger constraint that $K \approx \beta$. The set $K$ is the conjunction of the components. We demand the satisfiability of $K$, because
+an contradictory system always implies $\beta$. But for applications that would not lead to a satisfying answer. 
+
+
+Helping variables play an important role for several reasons:
+They allow short representations of formulas, transformations into CNF, and in case of configuration
+problems not all the properties of a component are important. Take for example the car configuration, then a component may contain some properties about the battery. But for the customer is not of interest.
+
+Usually, the introduction of helping variables destroy the equivalence between two formulas. Take for example
+ a clause $(a \vee b \vee c \vee d)$. The transformation into 3-clause leads to 
+$(a \vee b \vee x), (\neg x \vee c \vee d)$, Obviously, these formulas are not equivalent. But the existential closure
+$\exists x: (a \vee b \vee x)\wedge (\neg x \vee c \vee d)$ is equivalent to the initial clause. Or in other words, both formulas are restricted equivalent for $V=\{a, b, c, d\}$.
+Therefore, we extend the basic configuration problem to configurations with existential quantifiers.
+Instead of local existential quantifiers, existentially quantified components, we are dealing with global 
+helping variables, i.e. we consider configurations $\exists X K$. That is a stronger concept that covers the local helping variables. But that allows us to represent the fact that a helping variable has the same value for all components. 
+
+
+Another example illustrates the power of helping variables: Often the configuration problem depends additionally on
+global knowledge. For example let $\alpha_1$ and $\alpha_2$ be two components. When we want exclude that both components occur in a solution, we can define $\neg (N_1 \wedge N_2)$, where
+$N_i$ the names of the components $\alpha_i$ or if $\alpha_3$ is in the solution then $\alpha_4$ belongs to the solution, too. Then we define $N_3 \rightarrow N_4$. These formulas can be considered as global knowledge.\\
+
+Let $C=\{\alpha_1, \ldots, \alpha_n\}$ be the set of components, $\beta$ the target formula,
+and each components $\alpha_i$ has the name $N_i$, and the global knowledge $\Delta$ is a formula over $N_1, \ldots, N_n$.\\
+A subset $K \subseteq C$ satisfies $\Delta$ iff $\Delta$ ist true for the truth assignment
+$v(N_i)=1$ iff $\alpha_i \in K$.\\
+Then the extended configuration problem for $\models$ is defined as:\\
+{\em Instance}: $C=\{\alpha_1, \ldots, \alpha_n\}$ is the set of components, $\beta$ the target formula,
+each components $\alpha_i$ has the name $N_i$, and the global knowledge $\Delta$ is a formula over $N_1, \ldots, N_n$.\\
+{\em Query:} $\exists K \subseteq C: K \in \mbox{ SAT}, K \mbox{ satisfies }\Delta, K \models \beta$.\\
+
+We can transform a configuration problem with global knowledge into a problem without global knowledge in polynomial time as follows:
+We associate to $C$ and $\Delta$ the following set of components:
+$C_{ext}=\{\alpha_i \wedge N_i \wedge \Delta \wedge \bigwedge_{1 \leq j\not = i \leq n}
+(N_j \rightarrow \alpha_j) : 1 \leq i \leq n\}$\\
+Please note, that we don't change the target formula and that the components of $C$ has been extended. 
+Then we can show the following lemma. We skip the proof, because of length restrictions.
+\begin{lemma}
+Let $C=\{\alpha_1, \ldots, \alpha_n\}$ be a set of components, where $N_i$ is the name of $\alpha_i$. The global knowledge $\Delta$ is a formula over $N_1, \ldots, N_n$ and $\beta$ is the target formula. For the associated set of components $C_{ext}$ we have:\\
+$\exists K \subseteq C: K \in \mbox{SAT, } K \mbox{ satisfies } \Delta, K \models \beta$
+  iff\\
+$\exists K' \subseteq C_{ext}: K' \in \mbox{SAT and } (\exists N_1 \ldots \exists N_n K') \models \beta$.\\
+\end{lemma}
+
+
+
+Next we introduce more formally the configuration problems. 
+
+\begin{theorem}
+The configuration problem $<$2-Term, $\models$, Term$>$ is NP-complete.
+\end{theorem}
+\begin{proof}
+The components are terms with at most 2 literals and the target formula is a term. Let $C$ be the set of components, where each component is a term consisting of at most two literals, and the target formula $\beta$ is a term.
+Obviously, the configuration problem is in NP: guess a satisfiable subset $K \subseteq C$ and decide
+$K \models \beta$. Now we will show the NP-hardness.
+
+Let $\alpha = \alpha_1 \wedge \ldots \wedge \alpha_m$ be a 3-CNF formula over the variables $x_1, \ldots, x_n$. We associate
+to $\alpha$ a set $C$ of 2-term components, the target formula $\beta= q_1 \wedge \ldots \wedge q_m$, such that $\alpha$ is satisfiable if and only if
+there exists $K \subseteq C$ for which $K$ is satisfiable and $K \models\beta$.
+
+Let $q_1, \ldots, q_m$ be new variables for $\alpha$.\\
+We define $C=\{(q_i \wedge L) : 1 \leq i \leq m, L \in \alpha_i\}$. The variable $q_i$ indicates that $L$ occurs in the clause $\alpha_i$.\\
+Suppose, $\alpha$ is satisfiable. Then there is a truth assignment $v$ with $v(\alpha)=1$ and therefore for every clause $\alpha_i$ there is a literal $L$ with $v(L)=1$.\\
+We define $K = \{(q_i \wedge L) : 1 \leq i \leq m, v(L)=1, L \in \alpha_i\}$. Then $K$ is satisfiable and since
+for every clause $\alpha_i$ there exists some $L \in \alpha_i$ with $v(L)=1$ we obtain $K \models q_1 \wedge \ldots \wedge q_m$.\\
+For the other direction we assume that there is some $K \subseteq C$ with $K \in$ SAT and $K \models \beta$.
+Then for every variable $q_i$ there is a term $q_i \wedge L$ in $K$. Since $K$ is satisfiable, the conjunction of literals $L$ of the components (2-terms) are satisfiable. This leads to a satisfying truth assignment for $\alpha$.\\
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{Consequence}
+In this chapter we investigate the complexity of the configuration problem for $\models$, \AM, 
+and \AMB. NP-c, coNP-c, and $\Sigma^P_2$-c are abbreviations for NP-complete, coNP-complete,
+and $\Sigma^P_2$-complete.\\
+
+In general, the configuration problem is the question whether there exists a set of components satisfying our demands. When we additionally demand that a solution consists of at most $k$ components, the complexity may increase. In Theorem 1 we will give an example. In the second row
+the problem (DHORN $\leq k$, $\models$ (\AM, \AMB  resp.), DHORN) is the configuration problem, for which the components and the target formula are definite Horn formulas and the configuration has at most $k$ components.
+
+\begin{theorem}
+The table contains the computational complexities of the configuration problems.\\
+
+\noindent\begin{tabular}{|l|l|l|l|l||}
+\hline
+ & Class $R$        & Class $T$      & conf$(R, T)$    & conf$(R, \exists T)$ \\ \hline
+1. & DHORN          & DHORN          & PTIME           & coNP-c                         \\ \hline
+1. & 2-Term         & Term           & NP-c            & NP-c                           \\ \hline
+2. & HORN           & HORN           & NP-c            & $\Sigma^p_2$-c                 \\ \hline
+3. & CLAUSE         & LITERAL        & $\Sigma_2^P$-c  & $\Sigma_2^P$-c                 \\ \hline
+4. & CNF            & CLAUSE         & $\Sigma_2^P$-c  & $\Sigma_2^P$-c                 \\ \hline
+5. & CNF            & CNF            & $\Sigma_2^P$-c  & $\Sigma_3^P$                   \\ \hline
+\end{tabular}
+\end{theorem}
+
+The configuration problem (DHORN $\leq k$, \AMB, DHORN) is in $\Sigma^P_2$. We conjecture that this problem is complete, too. Because of the NP-completeness of (DHORN $\leq k$, \AM, DHORN) and 
+the coNP-completeness of (DHORN, \AMB, DHORN) we additionally know that that problem is NP- and coNP-hard.
+The other open problem is the case (CNF, \AMB, CNF). Again, we only know that the problem is in
+$\Sigma^P_3$, but the conjectured completeness remains open.
+
+\vspace*{5mm}
+
+\begin{proof}
+Ad 1: (DHORN, $\models$, DHORN): Since every definite Horn formula is satisfiable, we only we have to test whether for the complete set of components $C$ we have $C \models \beta$. That can be performed in polynomial time\cite{Doga}.\\
+
+(DHORN, $\models$, $\exists$ DHORN): For definite Horn formulas the problem whether $\exists K \subseteq C: (\exists X K) \models \exists Y \beta)$ is equivalent to the problem of deciding whether$(\exists X C) \models (\exists Y \beta)$. This problem is coNP-complete \cite{KBLettmann}\\
+
+Ad 2: ((DHORN $\leq k$, $\models$ DHORN), (DHORN \AM DHORN)): Next we show the NP-completeness of the problem whether for a set of components $C$, a target formula $\beta$ in DHORN, and a fixed $k$ there exists some $K \subseteq C$ with $K \models \beta$ and $K$ consists of at most $k$ components.\\
+Since $K \models \beta$ (($\exists X K) \models \beta$ resp.)is decidable in polynomial time, the configuration problem is in NP (guess a subset $K \subseteq C$).
+The NP-hardness can be shown by a reduction to the Minimal Input Set Problem (MI) for definite Horn formulas.
+Let $\alpha$ be a definite Horn formula without unit clauses, and let $H$ be the set of variables occurring only
+negatively in $\alpha$, and $y$ be a variable which occurs positively in $\alpha$. Then we have to decide whether
+there exists a subset $I \subseteq H$ with at most $k$ variables, such that $I \wedge \alpha \models y$. This problem is known to be NP-complete \cite{KBLettmann}. The proof is based on a simple reduction to the vertec cover problem
+\cite{KAR72}.
+
+We can associate to $\alpha$ and $y$ a configuration problem as follows: Let $C = H \cup \{\alpha\}$ be the set of components and let $y$ be the target
+formula. If there is a solution for the MI-problem then there is subset $K \subseteq C$ with at most $k+1$ elements
+and $K \models y$. For the other direction, suppose there exists $K \subseteq C, |K | \leq k+1$ and $K \models y$. Then there is a subset $I \subseteq H$ with at most $k$ elements, such that
+$I \wedge \alpha \models y$.\\
+
+(DHORN $\leq k$, \AMB DHORN): Obviously, the problem is in $\Sigma^P_2$. Guess a subset $K$ of at most $k$ components and decide whether $(\exists X K) \models (\exists Y \beta)$. The latter is coNP-complete.
+\end{proof}
+
+\begin{proof}
+AD 3:  (2-Term,$\models$, ($\exists$) Term)): For terms, existential quantifiers simplify the term to true, if the variables occur as literal, or the quantifier variable can be omitted. Thus, it suffices to investigate the case (2-Term, $\models$, Term).
+The components are terms with at most 2 literals and the target formula is a term. Obviously, the configuration problem is in NP: guess a satisfiable subset $K$, the test
+is simple. Now we will show the NP-hardness.
+
+Let $\alpha = \alpha_1 \wedge \ldots \wedge \alpha_m$ be a 3-CNF formula over the variables $x_1, \ldots, x_n$. We associate
+to $\alpha$ a set $C$ of 2-term components, the target formula $\beta= q_1 \wedge \ldots \wedge q_m$, such that $\alpha$ is satisfiable if and only if
+there exists $K \subseteq C$ for which $K$ is satisfiable and $K \models\beta$.
+
+Let $q_1, \ldots, q_m$ be new variables for $\alpha$.\\
+We define $C=\{(q_i \wedge L) : 1 \leq i \leq m, L \in \alpha_i\}$. The variable $q_i$ indicates that $L$ occurs in the clause $\alpha_i$.\\
+Suppose, $\alpha$ is satisfiable. Then there is a truth assignment $v$ with $v(\alpha)=1$ and therefore for every clause $\alpha_i$ there is a literal $L$ with $v(L)=1$.\\
+We define $K = \{(q_i \wedge L) : 1 \leq i \leq m, v(L)=1, L \in \alpha_i\}$. Then $K$ is satisfiable and since
+for every clause $\alpha_i$ there exists some $L \in \alpha_i$ with $v(L)=1$ we obtain $K \models q_1 \wedge \ldots \wedge q_m$.\\
+For the other direction we assume that there is some $K \subseteq C$ with $K \in$ SAT and $K \models \beta$.
+Then for every variable $q_i$ there is a term $q_i \wedge L$ in $K$. Since $K$ is satisfiable, the conjunction of literals $L$ of the components (2-terms) are satisfiable. This leads to a satisfying truth assignment for $\alpha$.\\
+
+\end{proof}
+
+\begin{proof}
+Ad 4.1: (HORN, $\models$, HORN).\\
+Since every term is a Horn formula, the NP-hardness follows from part (3).
+ Whether or not $K \models \beta$ can be decided in polynomial time. Therefore, we only have to guess a satisfiable subset $K$ of $C$. That shows that the problems belong to NP.\\
+
+4.2 (HORN, $\models$, $\exists$ HORN):  That the problems is in $\Sigma^P_2$ is obvious. We can guess some satisfiable $K \subseteq C$ and
+then decide the coNP-problem $(K) \models (\exists Y \beta)$. For the complementary problem guess a
+truth assignment $v$ for the free variable and check whether $v(K)=1$ and $v(\exists Y \beta)=0$.
+That can be performed in polynomial time , because we are dealing with quantified Horn formulas. Altogether,
+we have $\Sigma^P_2$-procedure.
+Now it remains to show the $\Sigma^P_2$-hardness.
+
+Let $\Phi:=\exists U\forall W (\theta\vee\sigma)$ be a closed formula, for which $\theta \vee \sigma\in$ 3-DNF, $\theta$ is negatively monotone
+while $\sigma$ is positively monotone.
+Let 
+$$\begin{array}{l}\theta=\bigvee_{1 \leq i \leq n}(\neg L_{i,1}\wedge \neg L_{i,2}\wedge \neg L_{i,3}),\\ \sigma=\bigvee_{1 \leq j \leq m}(K_{j,1}\wedge K_{j,2}\wedge K_{j,3})\end{array}$$
+where $L_{i,p}$ and $K_{j,q}$ are variables from $U\cup W$.
+For new variables $a_1,\cdots, a_n$, $b_1,\cdots, b_m$, and $c$ we define
+
+$$\begin{array}{cll}C_1&:=&\{a_1\wedge\cdots\wedge a_n\wedge b_j\rightarrow c\mid 1\leq j\leq m\}\cup\\
+&&\{L_{i,p}\rightarrow a_i\mid 1\leq i\leq n, 1\leq p\leq 3\}\cup\\
+&&\{K_{j,1}\wedge K_{j,2}\wedge K_{j,3}\rightarrow b_j\mid 1\leq j\leq m\}\\
+C_2&:=&U\cup\{\neg u\mid u\in U\}\\
+C&:=&C_1\cup C_2\\ \\
+\beta&:=&\{a_1\wedge\cdots\wedge a_n\rightarrow c\}\cup\\
+&&\{L_{i,p}\rightarrow a_i \mid 1\leq i\leq n, 1\leq p\leq 3\}
+\end{array}$$
+
+$$\mbox{For } 
+X:=\{a_1,\cdots, a_n, b_1,\cdots, b_m\}, \mbox{and }\ \ Y:=\{a_1,\cdots, a_m\}$$
+
+
+we shall show: $\Phi$ is true iff $\exists K\subseteq C: K$ satisfiable and  $(\exists X K) \models (\exists Y\beta)$\\
+
+Suppose $\Phi$ is true, then there is a truth assignment $t$ on $U$ such that $\forall W(\theta\vee \sigma)[t]$ is true.
+For
+$$K:=C_1\cup\{u\mid t(u)=1, u\in U\}\cup\{\neg u\mid t(u)=0, u\in U\}$$
+$K$ is satisfiable. We show that $(\exists X K) \models (\exists Y\beta)$. Consider any truth assignment $s$ satisfying $\exists X K$. Then clearly $s$ and $t$ agree on $U$.
+There must be an extension $s'$ of $s$ such that $s'$ satisfies $K$.  Since  $\forall W(\theta\vee \sigma)[t]$ is true, we can distinguish between two cases:\\
+
+{\bf Case 1.} $\neg L_{i,1}\wedge\neg L_{i,2}\wedge \neg L_{i,3}$ is true under $s'$ for some $i$. Then we modify $s'$ to $s''$ as follows:
+
+$s''(a_i)=0, s''(a_h)=s'(a_h)$ for $h\not=i$, and $s''(c)=s'(c)$. It is easy to see that $s''$ satisfies $\beta$. Therefore, $s$ satisfies $\exists Y\beta$ since $s, s', s''$ agree on variables in $U\cup W\cup\{c\}$.\\
+
+{\bf Case 2.} Not Case 1. There must be some $j$ such that $K_{j,1}\wedge K_{j,2}\wedge K_{j,3}$ is true under $s'$. Then $s'(b_j)=1$. Because Case 1 does not happen, all $a_1,\cdots,a_n$ are true under $s'$. Hence, $s'(c)=1$. Consequently $s'$ satisfies $\beta$. Thus, $s$ satisfies $\exists Y\beta$.\\
+
+
+Altogether, we have shown $(\exists X K) \models (\exists Y \beta)$. \\
+
+
+For the inverse direction we suppose there is some $K\subseteq C$ such that $K$ is satisfiable and $\exists X K\models \exists Y \beta$.
+We have to show that $\exists U\forall Y (\theta\vee \sigma)$ is true.\\
+
+Please note, that for any satisfiable $K'\subseteq C_2$, $C_1\cup K'$ is satisfiable. Thus we may assume that $C_1\subseteq K$.\\
+
+
+{\bf Case 1.} Either $u\in K$ or $\neg u\in K$ for any variable $u\in U$. Let $t$ be the truth assignment defined by $t(u)=1$ iff $u\in K$. We shall show $\forall W(\theta\vee \sigma)[t]$ is true. Suppose otherwise, then $t$ has an extension $t'$ which makes $\neg\theta \wedge \neg \sigma$ true.
+That is, for all $i=1,\cdots, n$ there is some $p=1,2,3$ such that $L_{i,p}$ is true under $t'$, and for all $j=1,\cdots,m$ there is some $q=1,2,3$ such that $\neg K_{j,q}$ is true under $t'$. Now we may extend $t'$ to $t''$ as follows: $t''(a_1)=\cdots=t''(a_n)=1$, $t''(b_1)=\cdots=t''(b_m)=0$, $t''(c)=0$. Clearly, $t''$ makes $K$ true. Let $s$ be the assignment obtained from $t$ by setting $c$ to be false. Then $s$ satisfies $\exists X K$ since $s$ and $t''$ agrees on $U\cup W\cup\{c\}$. However, $s$ can not be extended to satisfy $\beta$ because any extension of $s$ must make $a_1,\cdots, a_n$ and $c$ be true if it satisfies $\beta$. That is, $s$ does not satisfy $\exists Y\beta$ contradicts the assumption $\exists X K\models\exists Y\beta$.
+
+Therefore, $\forall W(\theta\vee \sigma)[t]$ is true, so is $\exists U\forall W(\theta\vee \sigma)$.\\
+
+{\bf Case 2.} Not Case 1. Let $U_1=:\{u\mid u\in K \mbox{ or }\neg u\in K\}$. Let $W_1:=W\cup (U-U_1)$. Now we consider $\exists U_1\forall W_1(\theta\vee\sigma)$. Then by the proof of Case 1, we obtain that $\exists U_1\forall W_1(\theta\vee\sigma)$ is true. Since $U_1\subseteq U, W\subseteq W_1$ it follows that $\exists U\forall W(\theta\vee\sigma)$ is also true.
+
+
+
+
+
+
+
+
+
+\end{proof}
+\vspace*{3mm}
+\begin{proof}
+AD 5,6, and 7:\\
+Since an existentially quantified clause evaluates to true, it suffices to consider the case that the target formula $\beta$ consist no existential quantifier. Then we have:
+$\exists K \subseteq C: K$ is satisfiable and $(\exists X K) \models \beta$ iff
+$\exists K \subseteq C: K \in %\overline
+{\mbox{SAT}}$ and $\forall X (\neg K \vee \beta)$ is a tautology.
+That leads to $\Sigma^p_2$-procedure: Guess a satisfiable $K$ and check the tautology.\\
+Now it remains to show the $\Sigma^P_2$-hardness for conf(CLAUSE, Literal).\\
+
+
+conf(CLAUSE, Literal) is $\Sigma^P_2$-hard:\\
+Let $\Phi:= \exists x_1, \ldots, x_n \forall y_1, \ldots, y_m \varphi$ be a closed formula, where
+$\varphi= \varphi_1 \vee \ldots \vee \varphi_k$ is a propositional DNF-formula. For those formulas the satisfiability problem is $\Sigma^p_2$-complete.
+For a new variable $z$ we define the set of components\\
+$C= \{ (\varphi_i \rightarrow z) | 1 \leq i \leq k\} \cup \{x_1, \neg x_1, \ldots, x_n, \neg x_n\}$ and the target formula 
+$\beta=z$. Then we have:\\
+$\Phi$ is true if and only if $\exists K \subseteq C: K \in$ SAT and $K \models z$.\\
+From left to right:\\
+Suppose $\Phi$ is true. Then there is a partial truth assignment $v(x_1)= \epsilon_1, \ldots v(x_n)= \epsilon_n$, such
+that $\forall y_1 \ldots \forall y_m \varphi([x_1/\epsilon_1, \ldots, x_n/\epsilon_n])$ is true. The subset of components
+$K= \{ \varphi_1 \rightarrow z, \ldots, \varphi_k \rightarrow z, x_1^{\epsilon_1}, \ldots, x_n^{\epsilon_n}\}$ is satisfiable. Assume that $K\not \models z$.
+Then there is a truth assignment $v$ with $v(z)=0$, but $v(K)=1$. We obtain $v(\varphi_i([x_1/\epsilon_1, \ldots, x_n/ \epsilon_n]))=0$ for $1 \leq i \leq k$ in contradiction to $\phi[[x_1/\epsilon_1, \ldots, x_n/]$ is a tautology.\\
+
+From right to left: Suppose, $\exists K \subseteq C: K \in$ SAT and $K \models z$. Then $K$ contains at least one clause
+$\varphi_i \rightarrow z$, say for $1 \leq i \leq q$, because only these clauses contain a variable $z$. W.l.o.g. let 
+$\{x_1^{\epsilon_1}, \ldots, x_r^{\epsilon_r}\}$ be the $x_j$-literals for some $r\geq 0$. Then 
+$\bigwedge_{1 \leq i \leq q} (\varphi_i[x_1/\epsilon_1, \ldots, x_n/\epsilon_r] \rightarrow z) \models z$. In that case
+$\bigwedge_{1 \leq i \leq q} (\neg \varphi_i[x_1/\epsilon_1, \ldots, x_r/\epsilon_r]$ is unsatisfiable. Hence,
+$\forall x_{r+1} \ldots \forall x_n, \forall y_1 \ldots y_m: \bigvee_{1 \leq i \leq q} (\varphi_i[x_1/\epsilon_1, \ldots, x_r/\epsilon_r]$ is a tautology. That shows that $\Phi$ is true.\\
+
+
+
+It remains to discuss the configuration problem (CNF, \AMB, CNF).
+In general, the problem of deciding
+$(\exists K)\models (\exists Y\beta)$ is in $\Pi^P_2$. Thus, to decide the existence of a desired $K$ is in $\Sigma_3^P$. Whether the configuration problem is $\Sigma^P_3$-complete remains an open problem.
+\end{proof}
+
+
+
+
+
+
+
+\section{Equivalence}
+In this chapter we investigate the complexity of the configuration problems for which the set of components
+have to be equivalent to the target formula. A detailed analysis illustrates that the hardness of the problems depends essentially on the helping variables. Again, we make use of the abbreviations
+NP-c (coNP-c, coNP-h, $\Sigma^P_i$-c, $\Sigma^P_i$-h resp.) for NP-complete (coNP-complete, coNP-hard, $\Sigma^P_i$-complete, $\Sigma^P_i$-hard resp.)
+
+
+
+
+\begin{theorem}
+The table contains the computational complexities of the equivalence configuration problem.
+
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ & {\em Class R} &  {\em Class T} & E-Conf$(R, T)$ & E-Conf$(\exists_K R, T)$ & 
+E-Conf$(\exists_K R,\exists T)$ \\ \hline
+1. & DHORN  & DHORN & PTIME & open & coNP-h\\ \hline
+2. & 2-Term & Term & PTIME & NP-c & NP-c\\ \hline
+3. & HORN  & HORN & PTIME  & $\Sigma^P_2$ &  $\Sigma^P_2$-c \\ \hline
+4. & CLAUSE & LITERAL & coNP-c & $\Sigma^P_2$-h & -- \\ \hline
+5. & CNF & CNF & $P^{NP[\text{log}\, n]}$, $D^P$-h  & $\Sigma^P_3$-c& $\Sigma^P_3$-c \\ \hline
+
+\end{tabular}
+\end{theorem}
+
+\vspace*{5mm}
+
+\begin{proof}
+AD 1: E-Conf(DHORN, DHORN):
+Let $C=\{\alpha_1, \ldots, \alpha_n\}$ be the set of components and $\beta$ be the target formula.
+Since every definite Horn formula is satisfiable, every configuration is satisfiable.
+Let $F(\beta) =\{\alpha_i: \beta \models \alpha_i, 1 \leq i \leq n\}$ be the set of derivable components.
+If $F(\beta)$ is empty, then there is no solution. Otherwise, we
+obtain: $\exists K \subseteq C: K \approx \beta$ iff $F(\beta) \approx \beta$. Thus, it remains to decide whether $F(\beta) \models \beta$. Because $F(\beta)$ and $\beta$ are Horn formulas, that can be performed in polynomial time.\\
+
+(DHORN, \AEQB, DHORN):
+Since for two definite Horn formulas $\exists X \alpha$ and $\exists Y \beta$ and free variables $V$ the problem whether or
+not $\exists X \alpha \approx \exists Y \beta$ is equivalent to the restricted equivalence problem $\alpha \approx_V \beta$ and this problem is known to be coNP-complete \cite{KBLettmann}, Hence, the configuration problem for \AEQB is at least coNP-hard.
+That the configuration problem is in $\Sigma^P_2$ follows from the configuration problem
+(Horn, \AEQB Horn), part(3).
+If helping variables only occur in the configuration $K$, that is for \AEQ , then the computational complexity remains open.\\
+\end{proof}
+\begin{proof}
+Ad 2: (2-Term, $\approx$, Term):
+Let $C=\{(L_{i_1} \wedge L_{i_2} : 1 \leq i \leq n\}$ be the set of components and let $\beta = K_1 \wedge \ldots \wedge K_m$ be the target formula, where $L_{i_t}$ and $K_r$ are literals.
+Then there exists a set $K \subseteq C$ with $K \approx \beta$ if and only if
+the set of components $\{L_{i_1} \wedge L_{i_2}: L_{i_1}, L_{i_2} \mbox{ occur in } \beta, 1 \leq i \leq n\}$ is equivalent to $\beta$. That can be decided in polynomial time.
+
+The complexities for (2-Term, \AEQ Term) and (2-Term, \AEQB, Term) follow from the proof of the complexities for consequences, see proof of Theorem 1, part 3.
+
+\end{proof}
+
+
+\begin{proof}
+AD 3.1: (HORN,  $\approx$, HORN): Let $C=\{\alpha_1, \ldots, \alpha_n\}$ be the set of components and $\beta$ be the target formula. The test whether the target formula is satisfiable costs at most linear time. If the target formula is unsatisfiable then
+the configuration problem has no solution. Otherwise, we compute
+$F(C, \beta) :=\{\alpha_i : \beta \models \alpha_i, 1 \leq i \leq n\}$. If $F(C, \beta)$ is empty then there is no solution. Otherwise, the set $F(C, \beta)$ is satisfiable and we have
+$\exists K \subseteq C: K \in \mbox{SAT and } K \approx \beta$ iff $F(C, \beta) \approx \beta$.\\
+The direction from right to left is obvious (set $K= F(C, \beta)$). From left to right, we assume $\exists K \subseteq
+C: K$ is satisfiable and $K \approx \beta$. Let $K$ be a solution with the maximum number of components. If $F(c,\beta)$ is not a solution then there is some
+$\alpha_i \in F(C, \beta)$, but not in $K$. Since $\beta \models \alpha_i$ and $K \approx \beta$ we obtain
+$K \models \alpha_i$ and therefore $K \cup\{\alpha_i\} \approx \beta$ in contradiction to the maximum
+number of components. Hence, $F(C, \beta)$ is a solution. Since $F(C, \beta)$ can be computed in polynomial time, the configuration problem is solvable in polynomial time.
+
+3.2 (HORN, \AEQ, HORN) and (HORN, \AEQB, HORN): 
+Let $C=\{\alpha_1, \ldots, \alpha_n\}$ be a set of Horn components with helping variables $X$ and $\beta$ be the target formula with helping variables $Y$ over the free variables $V$.
+The problem $\exists K \subseteq C: K \in  \mbox{ SAT and } (\exists X \alpha \approx (\exists Y \beta)$ is in $\Sigma^P_2$, because
+the problem $(\exists X \alpha \approx (\exists Y \beta)$ is equivalent to the restricted equivalence for Horn formulas,
+which is coNP-complete \cite{KBL}. The first part to select a satisfiable subset $K$ is in NP. 
+That shows that both problems are in $\Sigma^P_2$\\
+
+Whether (HORN, \AEQ, HORN) is $\Sigma^P_2$-complete, is an open problem.
+But for \AEQB we can show the $\Sigma^P_2$-hardness by a reduction to the satisfiability problem for
+closed $\exists \forall DNF$-formulas.
+Let $\Phi:=\exists y_1,\cdots, y_k \forall x_1,\cdots, x_m \phi$ be a formula with DNF-kernel
+$\phi = c_1 \vee \ldots \vee c_n$, where $c_i$ is a conjunction of literals.\\
+For each variable $z$, we introduce a new variable $g(\neg z)$ and define $g(z)=z$.
+
+Furthermore, we define $\psi_1:=\left(\bigvee_{i=1}^m (\neg x_i\vee \neg g(\neg x_i))\right)$.\\
+
+Then, $\Phi$ is true iff $\exists \pi(y_1),\cdots, \pi(y_k) \forall x_1,\cdots, x_m (\pi(\phi) \wedge \theta)$ is true.
+
+
+Let $$\psi_0:=\left(\bigwedge_{j=1}^m (\neg \pi(\neg x_j)\vee \neg x_j)\right) \mbox{ and }\theta:=\left(\bigvee_{i=1}^m (\neg x_i\wedge \neg\pi(\neg x_i))\right)$$
+
+Please note that $\theta$ is not HORN  when $n>1$. A transformation into an equivalent Horn formula without helping variables by means of the distributivity law leads to a formula super-polynomial in the length of $\theta$. For new variables $a_0, \ldots, a_k$ there exists an equivalent Horn formula with existential variables of linear length. Instead of the Tseitin procedure \cite{Tseitin}, we make use of a simple transformation.
+$$\theta \approx \exists a_0 \ldots \exists a_k (\neg a_k \wedge a_0 \wedge \bigwedge_{1 \leq i \leq k-1} ((\neg a_i \vee \neg x_i \vee a_{i+1}) \wedge (\neg a_i \vee \neg g(\neg x_i) \vee a_{i+1}))).$$
+
+For a new variable $U$ we associate to $\Phi$ the set of components $C$:\\
+
+Let $C_0:=\{\psi_0\wedge\psi_1 \wedge\left( \bigwedge_{i=1}^n(\pi(c_i)\rightarrow \neg U\vee \theta)\right)\}$ be consist of one component and \\
+
+$$C:= C_0  \cup \{y_i: 1 \leq i \leq k\} \cup \{g(\neg y_i): 1 \leq i \leq k\}$$
+with helping variables $Y := \{y_1, \ldots y_k, a_0, \ldots, a_k, g(\neg y_1), \ldots, g(\neg y_k)\}$\\
+and the target formula \\
+$\beta := (\neg U\vee\theta)\wedge \psi_0$ with helping variables $A := \{a_0, \ldots, a_k\}$ \\
+The set of free variables is $V:=\{U\}\cup\{x_1,\cdots, x_m,g(\neg x_1),\cdots, g(\neg x_m)\}$
+
+Now we will show
+
+$$(\exists K\subseteq C: (\exists Y K) \approx \exists A \beta) \mbox{ if and only if} \Phi \mbox{ is true.}$$
+
+
+Suppose $\Phi$ is true. Then there is a truth assignment
+$v$ on $\{y_1,\cdots, y_k\}$, such that $\forall x_1,\cdots,x_m\varphi[\vec{y}/v(\vec{y})]$ is true, where $\vec{y}=y_1\cdots,y_k$. We define
+
+$$K := C_0\cup \{y_i: v(y_i)=1, 1\leq i\leq k\}\cup \{g(\neg y_i): v(y_i)=0, 1\leq i\leq k\}$$
+
+For any satisfying truth assignment $t$ for $\exists Y K$, if it makes $\theta$ true then $\beta$ is true under $t$. Suppose $t$ makes $\theta$ false, then $t$ corresponds a truth assignment on $x_1,\cdots, x_n$ accoding the truth of $x_i$ and $\pi(\neg x_i)$. Since $\Phi$ is true, some  $\pi(c_i)$ must be true under $t$, then $T(U)=1$. Therefore, $t(\beta)=1$.
+
+Suppose $s$ is a satisfying truth assignment for $\exists A \beta$. Then $s*v$ satisfies $\psi_0\wedge \psi_1$. If $s$ makes $\theta$ true, then $s*v$ satisfies $\exists Y K$. Suppose $s(\theta)=0$. Then $s(U)=1$, hence $K$ is still satisfied by $s*v$.
+
+Altogether, we have $(\exists Y K) \approx (\exists A \beta$).\\
+
+
+For the inverse direction, suppose there is satisfiable $K\subseteq C$ such that $\exists Y K \approx \exists A \beta$.
+
+
+Clearly, the formula in $C_0$ must be in $K$. Then by formula $\psi_1$, either $y_i$ or  $g(\neg y_i)$ is not in $K$.
+
+Pick a truth assignment $e$ on $\{y_1,\cdots, y_k\}$ such that if $y_i\in K$ then $e(y_i)=1$, and $e(y_i)=0$  if else.
+
+We need to show $\forall x_1,\cdots,x_m(c_1\vee\cdots\vee c_n)$ is true.
+
+Consider any truth assignment $s$ on $\{x_1,\cdots, x_m\}$. Let $s'$ be the assignment defined by $s'(g(\neg x_i)=1$ iff $s(x_i)=0$. Then $e'*s'$ satisfies $\psi_0\wedge\psi_1$, where $e'$ is obtained from $e$ is the same way as $s'$.
+We claim that, $(e'*s')$ makes $g(c_i)$ true for some $i$. Otherwise, we could set $U$ to be false,  and get a truth assignment satisfying $K$ but bot satisfying $\beta$ (please note that $s'(\theta)=0$), contradict the equivalence.
+
+Consequently, $\Phi$ is true.
+ \end{proof}
+
+
+\begin{proof} Ad 4: (CLAUSE, $\approx$, LITERAL)\\
+
+Let $C=\{(\alpha_1 \vee L, \ldots, (\alpha_n \vee L), (\sigma_1 \vee \neg L), \ldots, (\sigma_r \vee \neg L), \pi_1, \ldots, \pi_t\}$ be a set of components, where $L$ does not occur in $\pi_j$. Furthermore, let $\beta=L$ be the target Literal. Then we have:\\
+$\exists K \subseteq C: K \in$ SAT and $K \approx L$ iff $\{\alpha_1 \vee L), \ldots, (\alpha_n \vee L)\} \approx L$
+iff $\alpha_n \wedge \ldots \wedge \alpha_n \in \overline{\mbox{SAT}}$. This shows that the problem is in coNP and because of the coNP-completeness of $\overline{\mbox{SAT}}$ that the configuration problem is coNP-complete.\\
+
+4.2: (CLAUSE, \AEQ, LITERAL)\\
+If the target formula is a literal, then the configuration problem can be reduced to the problem for \AEQ.
+We do not know whether the problem is in $\Sigma^P_2$, but
+we will show the $\Sigma^p_2$-hardness by an reduction to the satisfiability problem for
+$\Phi= \exists X \forall Y \phi$ where $\phi = \bigvee_{1 \leq i \leq r} \phi_i$ is a DNF-formula.\\
+For a new variable $z$ we associate to $\Phi$ a set of components
+$C =\{(\neg \phi_i \vee z): 1 \leq i \leq r\} \cup \{x_1, \neg x_1, \ldots, x_n, \neg x_n\}$, the helping variables
+$X= \{x_1, \ldots, x_n\}$ and the target formula $\beta=z$.
+Now we will show
+$$\Phi \mbox{ is true iff }  \exists K \subseteq C: (K \in \mbox{  SAT and } (\exists X K) \approx z)$$
+
+
+From right to left: Suppose, $K$ is satisfiable with $\exists X K \approx z$. Then $K$ contains some clauses with $z$ and eventually some $x_i$ and $\neg x_j$. Since $K$ is satisfiable no complementary pair $x_i$ and $\neg x_i$ is in $K$.
+Let $K= \{(\neg \phi_{i_1} \vee z), \ldots, (\neg \phi_{i_s} \vee z), x_1^{\epsilon_1}, \ldots, x_t^{\epsilon_t}\}.$
+Then we have
+$\exists X K \approx z$ \\
+$\Longrightarrow$
+$z \approx \exists x_{t+1} \ldots \exists x_n \bigwedge_{1 \leq j \leq s} (\neg \phi_{i_j} \vee z)[x_1/\epsilon_1, \ldots, x_t/\epsilon_t]$\\
+$\Longrightarrow$
+$\exists x_{t+1} \ldots \exists x_n \bigwedge_{1 \leq j \leq s} (\neg \phi_{i_j})[x_1/\epsilon_1, \ldots, x_t/\epsilon_t]\in
+\overline{\mbox{SAT}}$\\
+$\Longrightarrow$
+$\forall x_{t+1} \ldots \forall x_n \bigvee_{1 \leq j \leq s} \phi_{i_j}[x_1/\epsilon_1, \ldots, x_t/\epsilon_t]
+\in
+\mbox{TAUT}$\\
+$\Longrightarrow$
+$\forall x_{t+1} \ldots \forall x_n \forall Y \bigvee_{1 \leq j \leq s} \phi_{i_j}[x_1/\epsilon_1, \ldots, x_t/\epsilon_t]$
+is true\\
+$\Longrightarrow$
+$\exists x_1 \ldots \exists x_t \forall x_{t+1} \ldots \forall x_n \forall Y \bigvee_{1 \leq j \leq s} \phi_{i_j}$
+is true\\
+$\Longrightarrow$
+$\exists X \forall Y \bigvee_{1 \leq j \leq r} \phi_{j}$
+is true\\
+$\Longrightarrow$ $\exists X \forall Y \phi$ is true.\\
+
+From left to right:
+Suppose, $\Phi$ is true for the truth assignment $x_1= \epsilon_1, \ldots, x_n= \epsilon_n$ for the existential variables. For the satisfiable subset of components
+$K=\{ (\neg \phi_1 \vee z), \ldots, (\neg \phi_r \vee z), x_1^{\epsilon_1}, \ldots, x_n^{\epsilon_n}\}$.\\
+we obtain:\\
+$\exists X K \approx \bigwedge_{1 \leq j \leq r} (\neg \phi_j \vee z)[x_1/\epsilon_1, \ldots, x_n/\epsilon_n]
+\approx (\bigwedge_{1 \leq j \leq r} \neg \phi_j)[x_1/\epsilon_1, \ldots, x_n/\epsilon_n] \vee z
+\approx  \neg (\bigvee_{1 \leq j \leq r} \phi_j[x_1/\epsilon_1, \ldots, x_n/\epsilon_n]) \vee z$\\
+$\approx \neg (\exists X \forall Y \phi) \vee z$ $\approx z$\\
+
+
+
+\end{proof}
+
+\begin{proof}
+Ad 5: (CNF, $\approx$, CNF)\\
+For this configuration problem we have no completeness result. Clearly, the upper bound is $P^{NP[\text{log}\, n]}$.
+The $D^P$-hardness can bee seen by a reduction to the minimal unsatisfiability problem for CNF formulas, which is complete for this complexity class \cite{pawo}:\\
+Let $\alpha= \alpha_1 \wedge \ldots \wedge \alpha_n$ be a formula in CNF.  For $1 \leq i \leq n$ we introduce a renaming, which substitutes every variable $y$ in $\alpha$ with $y^i$. The renaming of the clause $\alpha_j$ is denoted as $\alpha^i_j$.
+For a new variable $x$ we associate to $\alpha$ the set of components
+$C_0 =\{(\alpha_1 \vee x) \wedge \ldots \wedge (\alpha_n \vee x)\}$ and for $1 \leq i \leq n$ we introduce the set of components
+$ C_i=\{\alpha^i_j : 1 \leq j \leq n, j\not = i\}$. Please note, that for $i \geq 1$ the set of components does not contain the $i^{th}$-renaming of the clause $\alpha_i$. Then for the target formula $\beta = x \wedge C_1 \wedge \ldots \wedge C_n$ it holds
+$\alpha$ is minimal unsatisfiable if and only if $\exists K \subset C_0 \cup \bigcup_{1 \leq i \leq n} C_i:
+K \in$ SAT and $K \approx \beta$.
+
+If $\alpha$ is minimal unsatisfiable then $\alpha $ is unsatisfiable and therefore $C_0 \approx x$. Since
+after the deletion of a clause in $\alpha$ the resulting formula is satisfiable, $K = C_0 \cup \bigcup_{1 \leq i \leq n} C_i$ is satisfiable and equivalent to $\beta$. For the other direction let $K$ be a solution. Since $K \models x$
+and $K$ is satisfiable, we see that $\alpha$ is  unsatisfiable. Moreover, because $C_i$ is part of the target
+formula after the deletion of a clause in $\alpha$ the formula is satisfiable for every $1 \leq i \leq n$. Hence,
+$\alpha$ is minimal unsatisfiable.\\
+
+5.2 We shall show that (CNF, \AEQ, CNF) and (CNF, \AEQB, CNF) are in $\Sigma^P_3$ and that the configuration problems are $\Sigma^p_3$-hard, even for target formulas given as terms.\\
+Since the problem of determining whether $F\equiv_V G$  is in $\Pi_2^P$ (for the complementary problem: we guess a clause $\gamma$ over $V$, check that $G\models \gamma$ but $F\not\models \gamma$, or $G\not\models\gamma$ but $F\models\gamma$).
+
+Thus, the  configuration problems are in $\Sigma_3^P$, because additionally we have to guess a satisfiable $K\subseteq C$.
+Next we shall show the hardness.
+
+Consider $\Phi:=\exists \vec{x}\forall\vec{y}\exists \vec{z} \varphi$ where $\varphi$ is a CNF formula. \\
+
+We assume w.l.o.g. that $\varphi$ contains a non-tautological clause over $\vec{z}$ (otherwise, we pick new variable $z'$ and consider $\exists\vec{x}\forall\vec{y}\exists\vec{z}\exists z'(\varphi\wedge z'$)).
+
+By this assumption, $\forall\vec{x}\exists\vec{y}\exists\vec{z}\neg \varphi$ is true.
+We assume that each clause contains a positive occurrence of a variable from $\vec{y}\cup\vec{z}$. If otherwise pick a new variable $u$, and consider $\exists \vec{x}\forall\vec{y}\forall u\exists \vec{z}\varphi^u$, where $\varphi^u$ is obtained from $\varphi$ by adding $u$ to clauses containing no positive literal from $\vec{y}\cup\vec{z}$. Clearly, $\Phi$ and the resulting formula has the same truth.
+
+By this assumption, $\forall\vec{x}\exists\vec{y}\exists\vec{z}\phi$ is true. (we will use this later).\\
+
+$\varphi$ can be written as $(c'_1\vee c''_1)\wedge\cdots\wedge (c'_n\vee c''_n)$ in which $c'_i$ is over $\vec{x}$, while $c''_i$ is over $\vec{y}\cup\vec{z}$.
+
+Pick new variables $w_1, \cdots, w_n,w$. Let
+
+Let $$\psi:= \left(\bigwedge_{i=1}^n (c'_i\rightarrow w_i)\right)\wedge
+\left(\bigwedge_{i=1}^n(\neg c'_i\wedge \neg c''_i\rightarrow \neg w_i)\right)$$
+
+Let $$C_0:=\{\psi\wedge \neg c'_1\wedge  (c''_1\rightarrow w_1) , \cdots, \psi\wedge\neg c'_n\wedge (c''_n\rightarrow w_n)\}$$
+
+$$C_1=\{c'_1, \cdots, c'_n, \}$$
+
+$$C_2=\{x_1,\neg x_1\cdots, x_n,\neg x_n\}$$
+
+$$C_3=\{(w\rightarrow (c'_1\vee c''_1)\wedge\cdots\wedge (c'_n\vee c''_n))\}$$
+
+Now let $$C:=C_0\cup C_1\cup C_2\cup C_3\cup\{w\}$$
+
+Let $\beta$ be $$ w_1\wedge\cdots\wedge w_n\wedge w$$
+
+Let $V:=\vec{y}\cup\{w_1,\cdots,w_n,\}\cup\{w\}$\\
+
+
+%Claim: Suppose $K\subseteq C$ satisfiable, $c_i\not \in K$ and $K\not\models c_i$, %then
+%$K\cup\{\neg c_i, \psi\wedge (c''_i\rightarrow w_i)\}$ is still satisfiable.
+
+
+(Lemma: $F\models_V G$ iff for for any truth assignment $t$ on $V$, if it can be extended to a satisfying truth assignment for $F$, it can be extended to an satisfying truth assignment for $G$.
+) \\
+ATTENTION: I think the lemma is not valid: It holds $\alpha \models_V \beta$ iff $\exists X \beta \models
+\exists \alpha$. Just the opposite direction.!!!!!!!!!!!!!!!!!!!
+But we need the lemma?????
+If that is the case, then we have to skip the result:\\
+
+
+
+
+We shall show $\Phi$ is true if and only if there is satisfiable $K\subseteq C$ s.t. $K\equiv_V \beta$\\
+
+
+
+ From right to left:
+
+Given a such $K\equiv_V \beta$.
+Clearly, $K\cap C_0$ is non-empty.\\
+
+
+
+It must be that $w\in K$.
+Let $t$ satisfy $K$.
+By our assumption we know $t\uparrow\vec{x}$ can be extended to $s$ which falsifies $\varphi$. Now we assign truth values to $w_i$ according to the tuth values $s(c'_i)$ and $s(c''_i)$ to make formulas $\psi$ and  $(c''_i\rightarrow w_i)$ to be true. There  must be some $w_i$ which is false. Then if we set $w$ to be false, $K$ is still be satisfied by $s$ (because clauses in $C_3$ are satisfied). This contradict the $V$-euivalence.\\
+
+It must be that $C_3\subseteq K$, i.e., $w\rightarrow (c'_1\vee c_1'')\wedge\cdots\wedge (c'_n\vee c''_n)$ is in $K$. Suppose it is not the case. Similar as above, there would be a satisfying truth assigment of $K$ which makes some $w_i$ false, contradicts the $V$-equivalence. \\
+
+
+Suppose $K\not\models c'_i$. Then $\psi\wedge\neg c'_i \wedge (c''_i\rightarrow w_i)$ must be in $K$.
+Otherwise, $K\cup\{\neg c'_i\}$ is consitent,  then there is a satisfying truth assignment $t$ for $K$ such that $t(c'_i)=0, t(w)=1, t(w_i)=0$. (In fact by our assumption, $t$ can be assumed to satisfiy $(c'_1\vee c''_1)\wedge\cdots\wedge (c'_n\vee c''_n)$ because every clause contains positive literal from $\vec{y}\cup\vec{z}$). This contradict the fact that $K\equiv_V\beta$.
+
+
+Now we can see for each $i$, either $K\models \neg c'_i$ or $K\models c'_i$.
+That is, for any two satisfying truth assignments $t_1, t_2$ of $K$, each $c'_i$ has the same truth under $t_1\uparrow \vec{x}$ and $t_2\uparrow\vec{x}$.  \\
+
+
+
+
+
+Now fix a truth assigment $e$ on $\vec{x}$ which can be extended to a satisfying truth assigment of $K$.
+
+Consider any truth assigment $s$ on $\vec{y}$. Since $s$ can be extended to satisfy $\beta$, it can be extended to a truth assigment $t$ which satisfies $K$. Please note we can assmue that $t\uparrow\vec{x}$ is $e$.
+Since $w$ and $w\rightarrow (c'_1\vee c''_1)\wedge\cdots\wedge (c'_n\vee c''_n)$ are in $K$. We can see $t$ satisfy $\varphi$.
+
+Consequently, for any truth assigment $s$ on $\vec{y}$, $e*s$ can be extended to a satisfying truth assigment of $\varphi$. Thus, $\Phi$ is true.
+
+
+\ \\
+
+From left to right.
+
+
+Suppose $\Phi=\exists\vec{x}\forall\vec{y}\exists\vec{z}\varphi$ is true.
+
+Let $e$ be a truth assignment on $\vec{x}$ such that $\forall\vec{y}\exists\vec{x}\varphi[x/e]$ is true
+
+
+Let $$K_0:=\{\psi\wedge \neg c'_i\wedge (c''_i\rightarrow w_i)\mid e(c'_i)=0, i=1,\cdots,n\}$$
+
+$$K_1:=\{c'_i\mid e(c'_i)=1, i=1,\cdots,n\}$$
+
+$$K_2:=\{x_i\mid e(x_i)=1, i=1,\cdots, n\}\cup\{\neg x_i\mid e(x_i)=0, i=1,\cdots,n\}$$
+
+$$K:=K_0\cup K_1\cup K_2\cup C_3\cup\{w\}$$
+
+Consider any truth assignment $s$ on $V$.
+
+Suppose $s$ can be extended to satisfy $K$. Say the extenson is $t$. Since $w\in K$, $(c'_1\vee c''_1)\wedge\cdots\wedge(c'_n\vee c'_n)$ be be true under $t$. By formulas in $K_0$, we can see each $w_i$ is true under $t$. That means $s$ make $\beta$ true. Thus, $K\models_V\beta$. \\
+
+Now suppose $s$ satisfies $\beta$. Since $\Phi$ is true, $e*(s\uparrow\vec{y})$ can  be extended to satisfy $\Phi$. Let $t$ be such an extension. Next we show $t$ can be extended to satisies $K$. Since $t$ makes $\varphi$ true, either $c'_i$ is true or $c''_i$ is true. We set each $w_i$ to be true. Then all clauses in $K_0$ are true. Set $w$ to be true. Then clauses in $C_3$ are true. Please note formulas in $K_1\cup K_2$ are already satisfied by $e$. Consequently, $s$ can be extended to satisfy $K$.
+Hence, $\beta\models_V K$.\\
+
+Altogether we obtain $K\equiv_V \beta$.
+\end{proof}
+
+
+\begin{corollary}
+The configuration problem (CNF, \AEQ, Term) is $\Sigma^P_3$-complete.
+\end{corollary}
+
+\section{Conclusion}
+For various classes of components and configuration problems we have shown completeness results. But for a few problems we know only the hardness and the upper bounds. In interesting question is how to deal with
+global knowledge. We have seen that global knowledge can be encoded, such that the enriched components
+can be used for solving the problems without additional formulas. For applications, when dealing only with exclusions 
+$\neg (N_1 \wedge N_2)$ for components $N_1$ and $N_2$ the idea has been used successfully. But with respect to search procedures, SAT-testing and equivalence testing the question arises whether separate 
+global knowledge leads to shorter running times.
+
+
+
+
+
+
+
+\bibliographystyle{plain}
+\bibliography{configuration}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

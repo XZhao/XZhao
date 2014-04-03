@@ -1,0 +1,231 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx}
+\usepackage{makeidx}
+\usepackage{amsmath}
+\usepackage{color} 
+\usepackage{amsfonts}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%oliver
+\usepackage[active]{srcltx}  %%oliver
+\usepackage{xr} %%oliver
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{stmaryrd}
+\usepackage{array}
+\usepackage{exscale}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\pbox}{\hbox to 6pt{\leaders\hrule width 6pt height 6pt\hfill}}
+
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newenvironment{proof}{\parindent=0pt{\bf Proof: }}{
+   \hspace*{\fill}\hbox to 6pt{\leaders\hrule width 6pt height 6pt\hfill}\par}
+
+\long\def\remove#1{}
+
+\pagestyle{plain}
+
+\begin{document}
+{\bf $\Sigma^P_2$-hardness of conf(HORN, $\exists$HORN):}\\
+
+Let $\Phi:=\exists X\forall Y (D_1\vee\cdots\vee D_n)$ be a closed quantified Boolean formula, where 
+
+$X=\{x_1,\cdots, x_k\}$, $Y=\{y_1,\cdots, y_m\}$ are disjoint, 
+
+$D_i=(L_{i,1}\wedge L_{i,2}\wedge L_{i,3})$, $i=1,\cdots, n$.
+
+\noindent For each $z\in X\cup Y$ we introduce a new variable $\pi(\neg z)$. For convenience let $\pi(z)=z$. In addition, we introduce a new variable $c_i$ for each $i=1,\cdots, n$. Define
+
+\begin{itemize}
+\item $\beta':=\bigwedge_{z\in X\cup Y} (\neg z\vee \neg \pi(\neg z))$
+
+\item $\alpha:=\left(\bigwedge_{i=1}^{n}\bigwedge_{j=1}^{3}(\pi(\neg L_{i,j})\rightarrow c_i)\right)\wedge(\neg c_1\vee\cdots\vee \neg c_n)$
+
+\item $\beta:=\beta'\wedge\alpha$
+
+\item $C:=\{x_1\wedge \beta', \pi(\neg x_1)\wedge\beta', \cdots, 
+x_k\wedge \beta', \pi(\neg x_k)\wedge\beta'\}$
+
+\item $E:=\{c_1,\cdots, c_n\}$
+\end{itemize}
+We will show that $\Phi$ is true if and only if there is $K\subseteq C$ such that $K$ is satifiable and $K\models\exists E\beta$.
+
+For the direction from left to right we suppose $\Phi$ is true. Let $t$ be a truth assignment on $X$ such that $(D_1\vee\cdots\vee D_n)[t]$ becomes tautological. Now define
+$$K:=\{x\wedge \beta'\mid x\in X, t(x)=1\}\cup\{\pi(\neg x)\wedge\beta'\mid x\in X, t(x)=0\}$$
+Clearly, $K$ is satisfiable. 
+
+Next we show $K\models \exists E \alpha$. Consider any truth assigment $s$ on $X\cup Y\cup \{\pi(\neg z)\mid z\in X\cup Y\}$ such that $s$ satisfies $K$. By the definition of $K$, we see that for any $x\in X$, $s(x)=1$ if and only if $s(\pi(\neg x))=0$. Thus, $s$ coincides with $t$ on $X$.
+
+{\bf Case 1.}  $s$ is normal on $Y$, that is, $s(y)=1$ if and only if $s(\pi(\neg y))=0$ for all $y\in Y$. 
+Since $(D_1\vee\cdots\vee D_n)[t]$ is tautological, there is  some $i\in\{1,\cdots, n\}$ such that $s(L_{i,1}\wedge L_{i,2}\wedge L_{i,3})=1$. Then $s(\pi(\neg L_{i,1}))=s(\pi(\neg L_{i,2}))=s(\pi(\neg L_{i,3}))=0$. Now we extends $s$ by setting $c_i=0$ and $c_j=1$ for all other $c_j$. Clearly, the new assignment satisfies $\alpha$. Hence $s\models \exists E\alpha$.  
+
+{\bf Case 2.}  $s$ is not normal on $Y$. We can change $s$ into a normal assignment $s'$ by changing $s(y)$ to 1 for all $y\in Y$ with $s(y)=s(\pi(\neg y))=0$. 
+By the argumant in Case 1 we have that $s'(\pi(\neg L_{i,1}))=s'(\pi(\neg L_{i,2}))=s'(\pi(\neg L_{i,3}))=0$ for some $i\leq n$. From the defintion of $s'$ we know that for every $y\in Y$ we have $s'(\pi(\neg y))=s(\pi(\neg y))$ and if $s'(y)=0$ then $s(y)=s'(y)=0$. Thus, $s(\pi(\neg L_{i,1}))=s(\pi(\neg L_{i,2}))=s(\pi(\neg L_{i,3}))=0$. Again extending $s$ by setting $c_i=0$ and $c_j=1$ for all other $j$, we have a new assignment which satisfies $\alpha$. Thus, $s\models\exists E\alpha$. 
+
+Altogether, we have
+$K\models\exists E\alpha$. Thus, $K\models\exists E\beta$. 
+
+
+For the inverse dirction suppose $K\models \exists E\beta$ for some satisfiable $K\subseteq C$. Please note that for each $x\in X$, at most one of $x\wedge \beta'$ and $\pi(\neg x)\wedge\beta'$ is in $K$ (otherwise $K$ would be unsatisfiable because of $\beta'$). 
+Further we can assume for each $x\in X$ that exact one of $x\wedge \beta'$ and $\pi(\neg x)\wedge\beta'$ is in $K$. Thus, $K$ determines uniquely a truth assinment $t$ on $X$ by $t(x)=1$ iff $x\wedge \beta'\in K$. We will show $(D_1\vee\cdots\vee D_n)[t]$ is a tautology. Consider any truth assigment $s$ on $X\cup Y$ such that $s$ coincides $t$ on $X$. Now extending $s$ to $s'$ by setting $s'(\pi(\neg z))=s(\neg z)$ for all $z\in X\cup Y$. Clearly $s'\models K$ by the definition of $t$. 
+Since $K\models\exists E\alpha$, $s'\models \exists E\alpha$. 
+Then $s'$ can be extended to an assignment $s''$ such that $s''\models \alpha$. Then $s''(c_i)=0$ for some $i\leq n$. 
+Then it must be that $s'(\pi(\neg L_{i,1})=s'(\pi(\neg L_{i,2})=s'(\pi(\neg L_{i,3}))=0$. Since $s'(\pi(\neg L_{i,j}))=s(\neg L_{i,j})$ by the defintion of $s'$, it follows that $s(L_{i,1}))=s( L_{i,2}))=s(\neg L_{i,3})=1$. Hence $s\models  (D_1\vee\cdots\vee D_n)$. Consequently, $(D_1\vee\cdots\vee D_n)[t]$ is a tautology, i.e., $\forall Y(D_1\vee\cdots\vee D_n)$ is true under $t$. Hence, $\Phi$ is true. The proof completes.\\
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\color{red}
+I Suppose in the first table (first page) there is a misprinting in the first row and the 4-th column, that is, $\alpha\models\exists \beta$ should be $\exists \alpha\models \beta$. 
+
+But by anyway for HORN formulas, $\exists \alpha\models \beta$ is solvable in Ptime, while $\alpha\models\exists \beta$ is coNP complete.\\
+\color{black}
+
+
+\noindent\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+ & Class $R$        & Class $T$      & $\alpha \models \beta$    & $\color{red}\exists\color{black}\alpha \models  \beta$ & \color{red}$\alpha\models \exists\beta$\color{black}  &$\exists \alpha \models \exists \beta$ \\ \hline
+1. & DHORN          & DHORN          & PTIME           & \color{red} PTIME\color{black}   &  \color{red} coNP-c\color{black}           &  coNP-c    \\ \hline
+2. & 2-Term         & Term           & PTIME           & PTIME  &             &  PTIME     \\ \hline
+3. & HORN           & HORN           & PTIME           & \color{red} PTIME\color{black}\textbf{•}    &     \color{red} coNP-c\color{black}       &  coNP-c    \\ \hline
+4. & CLAUSE         & LITERAL        & PTIME           & PTIME  &             &  PTIME     \\ \hline
+5. & CNF            & CLAUSE         & coNP-c          & coNP-c  &            &  coNP-c    \\ \hline
+6. & CNF            & CNF            & coNP-c            & \color{red} coNP-c\color{black}   &  \color{red} $\Pi_2^P$-c \color{black}         &  \color{red} $\Pi_2^P$-c \color{black}     \\ \hline
+\end{tabular}
+
+
+\ \ \\  \ \\ \
+
+
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ & {\em Class R} &  {\em Class T} & $\alpha \approx \beta$ & $\exists \alpha \approx \beta$ & 
+$\exists \alpha \approx \exists \beta$  \\ \hline
+1. & DHORN   & DHORN   & PTIME  & \color{red} coNP-c\color{black}   & coNP-c   \\ \hline
+2. & 2-Term  & Term    & PTIME  & PTIME  & PTIME    \\ \hline
+3. & HORN    & HORN    & PTIME  & \color{red} coNP-c\color{black}   & coNP-c   \\ \hline
+4. & CLAUSE  & LITERAL & coNP-c & coNP-c & --       \\ \hline
+5. & CNF     & CNF     & coNP-c & \color{red} $\Pi_2^P$-c \color{black}   & \color{red} $\Pi_2^P$-c \color{black}     \\ \hline
+
+\end{tabular}
+
+
+
+
+\ \ \\
+
+
+
+%Suppose two Horn formulas $\alpha, \beta$ and a set $X$ of variables.\\
+
+
+{\bf The problem $\exists X \alpha \models \beta$ can be solved in poly-time for HORN formulas.} 
+
+{\bf Proof:} We suppose $X\cap var(\beta)$ is empty. (Other waise we can rename $x\in X$ by a new variable $x'$ and consider $\exists X'\alpha'$ where $\alpha'$ is the resulting formula after renaming.
+
+Then we claim that $\exists X\alpha\models \beta$ if and only if $\alpha\models\beta$. 
+
+Suppose $\exists X\alpha\models \beta$. Consider any truth assingment $t$ on var$(\alpha)$ wich satisfying $\alpha$. Let $t^*$ be the restriction of $t$ on var$(\alpha)-X$. Then clearly $t^*$ satisfies $\exists X\alpha$. Therefore, $t^*$ satisfies $\beta$, so does $t$. 
+
+Suppose conversely $\alpha\models\beta$. Consider any truth assignment $s$ on var$(\alpha)-X$ satisfying $\exists X\alpha$. Then $s$ can be extended to a truth assignment $t$ defined on var$(\alpha)$ such that $t$ satisfies $\alpha$. Then $t$ satisfies $\beta$, hence $s$ satisifies $\beta$ since $X\cap var(\beta)$ is empty.\\ \\
+
+
+{\bf The problem $\alpha\models\exists X\beta$ is coNP-complete.}
+
+{\bf Proof:} We define a reduction from 3-unsat. Consider any 3-CNF formula $F:=C_1\wedge\cdots\wedge C_m$ with $C_i=(L_{i,1}\vee L_{i,2}\vee L_{i,3})$ over variables $x_1,\cdots, x_n$.
+
+For each clause $C_i$ we introduce a new variable $c_i$. For each $x_k$ we introduce a variable $\pi(\neg x_k)$ intended to mean $\neg x_k$. For convenience let $\pi(x)=x$. Let 
+
+\begin{itemize}
+\item $\alpha:=\bigwedge_{k=1}^{n} (\neg x_k\vee \neg \pi(\neg x)) $
+
+\item $\beta:=\left(\bigwedge_{i=1}^{m}\bigwedge_{j=1}^{3}\left(\pi(L_{i,j})\rightarrow c_i\right)\right)\wedge (\neg c_1\vee\cdots\vee\neg c_m)$
+
+\item $X:=\{c_1,\cdots,c_m\}$
+\end{itemize}
+
+Please check that $F$ is unsatisfiable if and only if $\alpha\models \exists X\beta$
+
+Suppose $F$ is unsat. Consider any truth assignment $t$ satisfying $\alpha$. We first consider the case that $t(x)=1-t(\pi(\neg x))$. That is, $t$ determine uniquely a truth assignment on $x_1,\cdots, x_n$. we call such $t$ a normal truth assigment. Since $F$ is unsat, there is some $i$ such that all of $\pi(L_{i,j})$, $j=1,2,3,$ are false under $t$, fro such kind $i$ we can set $c_i=0$. Therefore $\exists X\beta$ can be satisfied by $t$.
+
+Suppuse $t$ is not normal, i.e., for some $x$ we have $t(x)=t(\pi(\neg x))=0$, now define $t'$ by set $t'(x)=1$ for all such variable $x$. Now $t'$ is normal. Thus $t$ cannot satisfies all clause $\pi(L_{i,1})\vee \pi(L_{i,2}\vee \pi(L_{i,3})$
+
+Please note that $t$ can be obtained by conversely change thuth value to 0 for some variable $x$  with $t'(x)=1$. Thus $t$ falsify clauses which are falsified by $t'$. So, $t$ satifies $\exists X\beta$. \\
+
+Suppose $\alpha\models \exists X\beta$. It is easy to show$F$ is unsat. I omit the proof.\\ \\
+
+
+{\bf The problem $\exists X\alpha\approx\beta$ is coNP-complete for HORN formulas.}
+
+{\bf Proof:} We define a reduction from 3-unsat. Consider any 3-CNF formula $F:=C_1\wedge\cdots\wedge C_m$ with $C_i=(L_{i,1}\vee L_{i,2}\vee L_{i,3})$ over variables $x_1,\cdots, x_n$.
+
+For each clause $C_i$ we introduce a new variable $c_i$. For each $x_k$ we introduce a variable $\pi(\neg x_k)$ intended to mean $\neg x_k$. For convenience let $\pi(x)=x$. Let 
+
+\begin{itemize}
+\item $\beta:=\bigwedge_{k=1}^{n} (\neg x_k\vee \neg \pi(\neg x)) $
+
+\item $\alpha':= \left(\bigwedge_{i=1}^{m}\bigwedge_{j=1}^{3}\left(\pi(L_{i,j})\rightarrow c_i\right)\right)\wedge (\neg c_1\vee\cdots\vee\neg c_m)$
+
+\item $\alpha:=\beta\wedge \alpha'$
+
+\item $X:=\{c_1,\cdots,c_m\}$
+\end{itemize}
+
+(please note that here $\beta$ is the previous $\alpha$ in the above reduction, while $\alpha'$ is the previous $\beta$).
+
+Clearly $\exists X\alpha\models \beta$.
+
+Please check that $F$ is unsatisfiable if and only if $\beta\models\exists X\alpha$ if and only if $\beta\models \exists X\alpha'$.
+
+\ \\ \\
+
+{\bf The problem $\exists X\alpha\approx\beta$ is coNP-complete for DHORN formulas.}
+
+In the above reduction we introduce an additional variable $y$. Define 
+
+\begin{itemize}
+\item $\beta:=\bigwedge_{k=1}^{n} (y\vee \neg x_k\vee \neg \pi(\neg x))$
+
+\item $\alpha':= \left(\bigwedge_{i=1}^{m}\bigwedge_{j=1}^{3}\left(\pi(L_{i,j})\rightarrow c_i\right)\right)\wedge (y\vee \neg c_1\vee\cdots\vee\neg c_m)$
+
+\item $\alpha:=\beta\wedge \alpha'$
+
+\item $X:=\{c_1,\cdots,c_m\}$
+\end{itemize}
+Clealy $\alpha$ and $\beta$ are DHORN. 
+Please check that 
+
+$F$ is unsat if and only if $\exists X\alpha\approx\beta$\\ \\
+
+
+{\bf The problem $\exists X\alpha\approx \beta$ is $\Pi_2^P$-complete for CNF formulas. }
+
+{\bf Proof:} Consider any $\Phi=\forall Y\exists X \left(\bigwedge_{i=1}^m C_i\right)$, where each clause $C_i=(C'_i\vee C''_i)$ such that $C'_i$ is the universal part whereas $C''_i$ is the existential part. Introduce new variables $z_1,\cdots,z_m$. Define
+
+\begin{itemize}
+\item $\beta:=\bigwedge_{i=1}^m(C'_i\leftrightarrow z_i)$
+
+\item $\alpha':=\bigwedge_{i=1}^m(z_i\vee C''_i)$
+
+\item $\alpha:=\alpha'\wedge \beta$
+\end{itemize}
+
+Please note that $\beta$ can be easily transformed to a CNF formula with only slightly size increasing. 
+
+   
+Please check that 
+
+$\Phi$ is true if and only if $\beta\models \exists X\alpha'$\\
+
+Then clearly 
+
+$\Phi$ is true if and only if $\exists X\alpha\approx \beta$\\
+
+\end{document}
